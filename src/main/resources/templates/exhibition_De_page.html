@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
         #page_banner{
             width: 100%;
             height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../../../../../../Documents/카카오톡 받은 파일/page/page/content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
             background-size: 900px 200px;
         }
         #page_banner p{
@@ -93,6 +93,7 @@
         }
 
         #exh_detail{
+            white-space: pre-line; /*본문 줄띄 구현을 위해서 넣은 코드*/
             width: 100%;
             height: auto;
             margin: 80px 50px;
@@ -207,46 +208,47 @@
 
     <!-- 페이지 설명 배너 -->
     <div id="page_banner">
-        <p>전시회</p>
+        <p th:text="${exhibition.title}">전시회 제목</p>
     </div>
 
     <!-- 전시회 상세 -->
     <div id="detail_box">
         <!-- 전시 간략 설명 -->
         <div id="exh_info">
-            <img src="../content/503037_605192_4138.png">
+            <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
             <table>
                 <tr>
                     <td>이름</td>
-                    <td>전시회 이름</td>
+                    <td th:text="${exhibition.title}"></td>
                 </tr>
                 <tr>
-                    <td>날짜</td>
-                    <td>2024.00.00 ~ 2024.00.00</td>
-                </tr>
-                <tr>
-                    <td>주소</td>
-                    <td>ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇㅇㅇ</td>
-                </tr>
                 <tr>
                     <td>관람 시간</td>
-                    <td> 00:00 ~ 00:00</td>
+                    <td th:text="${exhibition.time}"></td>
                 </tr>
                 <tr>
-                    <td>가격</td>
-                    <td>00000원</td>
+                    <td>휴관일</td>
+                    <td th:text="${exhibition.rest}"></td>
                 </tr>
                 <tr>
-                    <td>전화번호</td>
-                    <td>000-0000-0000</td>
+                    <td>장르</td>
+                    <td th:text="${exhibition.genre}"></td>
                 </tr>
                 <tr>
-                    <td>예약 페이지</td>
-                    <td>네이버 예약 링크</td>
+                    <td>관람료</td>
+                    <td th:text="${exhibition.fee}"></td>
                 </tr>
                 <tr>
-                    <td>주차장 여부</td>
-                    <td>O</td>
+                    <td>장소</td>
+                    <td th:text="${exhibition.place}"></td>
+                </tr>
+                <tr>
+                    <td>연락처</td>
+                    <td th:text="${exhibition.contact}"></td>
+                </tr>
+                <tr>
+                    <td>전시회 홈페이지</td>
+                    <td><a th:href="${exhibition.url}">바로가기</a></td>
                 </tr>
             </table>
         </div>
@@ -259,11 +261,7 @@
         <hr style="width: 80%; margin-top: 30px;">
         <!-- 전시 상세 설명 -->
         <div id="exh_detail">
-            <img src="../content/dannie-jing-3GZlhROZIQg-unsplash.jpg"/>
-            <img src="../content/robin-schreiner-YKE4zTW5lic-unsplash.jpg"/>
-            <p>본 전시회는 어쩌구저쩌구 작가의 어쩌구를 전시한<br>
-                전시회로서 그의 작품들은 생동감과 열정이 느껴지는<br>
-                작품은 사람들의 저쩌구를 흔드는 것으로 유명합니다.</p>
+            <p th:text="${exhibition.text}"></p>
         </div>
 
         <hr style="width: 80%; margin-bottom: 70px;">
