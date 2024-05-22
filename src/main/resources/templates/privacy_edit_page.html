@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>개인정보 수정</title>
+    <style>
+        /* 헤더 */
+        #header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #black-text {
+            color: black;
+        }
+
+        .orange-text {
+            font-size: 20px;
+            font-weight: bold;
+            color:  #FD6F22;
+        }
+
+        .gray-text {
+            color: gray;
+        }
+
+        .box {
+            width: 600px;
+            height: 50px;
+            border: 2px solid gray
+        }
+
+        #blue-text {
+            color: blue;
+            font-size: 12px;
+        }
+
+        #edit-container {
+            margin-top: 10px;
+        }
+
+        .edit-button {
+            width: 70px;
+            height: 40px;
+            border: none;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        /* 회색 버튼 스타일 */
+        .gray-button {
+            background-color: gray;
+        }
+
+        .whitebox{
+            background-color: white;
+            width: auto;
+            height: 600px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        /* 푸터 */
+        .footer{
+            background-color: black;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id = "header">
+        <span> <h2 id = "black-text">개인정보 관리</h2></span>
+        <span class = "gray-text">회원 정보 수정</span>
+        <span class = "orange-text">보안 설정</span>
+    </div>
+
+    <hr>
+
+    <p>회원정보 수정</p>
+    <input type = "text" placeholder="변경할 닉네임으로 입력하시오.">
+    <div class="box" ></div>
+    <p id="blue-text">단, 닉네임을 최초로 한 번 수정하면, 30일 후에 다시 수정할 수 있습니다.</p>
+    <form>
+        <p>연락처</p>
+        <input type = "text" placeholder="변경할 전화번호를 입력하시오." name="phone" value="${user.phone}">
+        <div class="box" ></div>
+        <input type = "text" placeholder="변경할 이메일로 입력하시오." name="email" value="${user.email}">
+        <div class="box" ></div>
+
+        <p>설정한 아이디와 비밀번호</p>
+
+        <input type = "text" placeholder="변경할 비밀번호로 입력하시오." name="password" value="${user.password}">
+        <div class="box" ></div>
+
+        <div id="edit-container">
+            <button class="edit-button" type="submit">저장</button>
+            <button class="edit-button gray-button">취소</button>
+    </div>
+    </form>
+    <!---공백 -->
+    <div class = "whitebox"></div>
+    <!-- 푸터 -->
+    <div class="footer">
+        <p>이메일: abcda111@gmail.com</p>
+        <p>전화번호: 000-0000-0000</p>
+    </div>
+
+
+</body>
+</html>

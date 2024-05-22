@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>마이 페이지 화면</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+
+        }
+        /* 헤더 */
+        #header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #title{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        #page_list{
+            margin-left: 20px;
+        }
+        
+        #page_list>p{
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        /* 페이지 배너 */
+        #page_banner{
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-size: 900px 200px;
+        }
+        #page_banner p{
+            padding: 60px 80px;
+            color: white;
+            font-size: 40px;
+            font-family: 'Freesentation-9Black';
+        }
+      
+
+        /* 개인정보 */
+        #infor{
+            background-color: #FD6F22;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #person_info{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        #person_info>p{
+            font-family: 'Freesentation-9Black';
+            font-size: 25px;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+        
+        #person_info table{
+            margin:20px 0px;
+            width: 600px;
+            height: 200px;
+            border: 1px solid rgb(207, 207, 207);
+            text-align: center;
+            border-collapse:collapse;
+            
+        }
+
+        #odd_color{
+            background-color: #e9e9e9;
+            border-right: 1px solid white;
+        }
+
+        #table_line{
+            border-right: 1px solid rgb(207, 207, 207);
+        }
+        
+
+        /* 기능버튼 */
+        #buttons{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .Container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .small-button {
+            width: 150px;
+            height: 50px;
+            background-color: #0038FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+
+            margin: 0 30px; /* 버튼 사이의 공백 조절 */
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .small-button a{
+            color: white;
+        }
+
+        #edit-container {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        #edit-container p{
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        #edit-container a{
+            color: gray;
+            text-decoration: none;
+        }
+
+        .edit-button {
+            width: 200px;
+            height: 40px;
+            border: none;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: 0.5s;
+
+        
+            
+
+
+        }
+
+        /* 종료 버튼 스타일 */
+        .red-button {
+            background-color: red;
+        }
+
+        /* 푸터 */
+        .footer{
+            background-color: black;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 뒤로가기 버튼 -->
+    <!-- <button onclick="goBack()">뒤로가기</button> -->
+    <!-- 굳이 웹사이트에 있어야할까 싶어서 뻈습니다 -->
+
+    <!-- 헤더 -->
+
+    <div id="header">
+        <p id= "title">WETE</p>
+        <div id="page_list">
+            <a href="/home/test">취향 테스트</a>
+            <a href="/home/exhibition">전시회</a>
+            <a th:href="@{/home_auth/mypage}">마이 페이지</a>
+        </div>
+    </div>
+
+    <!-- 페이지 설명 배너 -->
+    <div id="page_banner">
+        <p>마이페이지</p>
+    </div>
+
+    <!-- 개인정보 -->
+    <div id="infor">
+        <p th:text="${nickname} + '님, 안녕하세요!'"></p>
+    </div>
+    
+    <div id="person_info">
+        <p>
+            내 기본정보
+        </p>
+
+        <table>
+            <tr>
+                <td id="table_line">닉네임</td>
+                <td><p th:text="${nickname}"></p></td>
+            </tr>
+            <tr id="odd_color">
+                <td id="odd_color">이메일</td>
+                <td><p th:text="${email}"></p></td>
+            </tr>
+            <tr>
+                <td id="table_line">전화번호</td>
+                <td><p th:text="${phone}"></p></td>
+            </tr>
+            <tr id="odd_color">
+                <td id="odd_color">주소</td>
+                <td><p th:text="${residence}"></p></td>
+            </tr>
+        </table>
+        
+
+    </div>
+    
+
+    
+
+    <!-- 항목들 -->
+    <div id="buttons">
+
+        <div class="Container">
+            <div class="small-button">
+                <a href="/home_auth/mypage/auth">수정</a>
+            </div>
+            <div class="small-button">
+                <span><a href="/home_auth/mypage/reviews">작성한 전시회 후기</a></span>
+            </div>
+    
+        </div>
+
+        <div id="edit-container">
+            <button class="edit-button red-button">로그아웃</button>
+            <p><a href="/home_auth/mypage/delete" class="edit-button red-button">회원탈퇴</a></p>
+        </div>
+
+    </div>
+    
+
+    
+    <!-- 푸터 -->
+    <div class="footer">
+        <p>이메일: abcda111@gmail.com</p>
+        <p>전화번호: 000-0000-0000</p>
+    </div>
+</body>
+</html>

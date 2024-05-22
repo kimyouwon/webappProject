@@ -1,0 +1,53 @@
+package edu.yonsei.project.dto;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
+
+public class UserDto {
+    @NotEmpty(message = "이름은 비워둘 수 없습니다.")
+    private String name; //사용자의 본명(이름)
+
+    @NotEmpty(message = "닉네임은 필수입니다.")
+    private String nickname; //사용자의 닉네임
+
+    @NotEmpty(message = "로그인 ID는 필수입니다.")
+    private String loginId; //사용자의 아이디
+
+    @NotEmpty(message = "비밀번호는 필수입니다.")
+    @Size(min = 8, message = "비밀번호는 최소 8자 이상이어야 합니다.")
+    private String password; //사용자의 패스워드
+
+    @Email(message = "유효한 이메일 주소를 입력해야 합니다.")
+    private String email; //사용자의 이메일
+    private String phone; //사용자의 전화번호
+
+    private Integer age;  // Integer 객체 사용
+
+    @Min(value = 0, message = "나이는 0 이상이어야 합니다.")
+    public Integer getAge() {
+        return age;
+    }
+    @Enumerated(EnumType.STRING)
+    private Gender gender; //사용자의 성별
+    public enum Gender {
+        MALE, FEMALE, OTHER
+    }
+    private java.util.Date birth; // 사용자의 생일
+
+    private String residence; //사용자의 거주지역
+    private String interestedArea; //사용자가 관심있어하는 지역
+
+    private String preference; //전시회 취향 테스트 결과
+
+
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 화면</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* 헤더 */
+        #header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #title{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #page_list{
+            margin-left: 20px;
+        }
+
+        #page_list>p{
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        /* 개인정보 */
+        #infor{
+            background-color: #FD6F22;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 기능버튼 */
+        .Container{
+            width: 500px;
+            height: 200px;
+            background-color: #3498db;
+            border-radius: 50px / 25px; /* 첫 번째 값은 수평 반지름, 두 번째 값은 수직 반지름 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            display: flex;
+        }
+        .small-button {
+            width: 150px;
+            height: 150px;
+            background-color: gray;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+
+            margin: 0 50px; /* 버튼 사이의 공백 조절 */
+            text-align: center;
+        }
+
+        #edit-container {
+            margin-top: 10px;
+        }
+
+        .edit-button {
+            width: 200px;
+            height: 40px;
+            border: none;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: 0.5s;
+
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+
+        }
+
+        /* 종료 버튼 스타일 */
+        .red-button {
+            background-color: red;
+        }
+
+        .whitebox{
+            background-color: white;
+            width: auto;
+            height: 550px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        /* 푸터 */
+        .footer{
+            background-color: black;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 뒤로가기 버튼 -->
+    <button onclick="goBack()">뒤로가기</button>
+
+    <!-- 헤더 -->
+
+    <div id="header">
+        <p>전시회 사이트</p>
+        <div id="page_list">
+            <p>취향 테스트</p>
+            <p>전시회</p>
+            <p id = "title">마이 페이지</p>
+        </div>
+    </div>
+    <!-- 페이지 설명 배너 -->
+    <div id="page_banner">
+        <p>마이페이지</p>
+    </div>
+
+    <!-- 개인정보 -->
+    <div id="infor">
+        <p>nickname님, 안녕하세요!</p>
+    </div>
+
+    <h2>
+        내 기본정보
+    </h2>
+
+    <p>닉네임: nickname</p>
+    <p>이메일: abcda111@gmail.com</p>
+    <p>전화번호: 000-0000-0000</p>
+
+    <!-- 항목들 -->
+    <div class="Container">
+        <div class="small-button">
+            <span>개인정보 수정</span>
+        </div>
+        <div class="small-button">
+            <span>작성한 전시회 후기</span>
+        </div>
+
+    </div>
+
+    <!---공백 -->
+    <div class = "whitebox"></div>
+
+    <div id="edit-container">
+        <button class="edit-button red-button">로그아웃</button>
+    </div>
+    <!-- 푸터 -->
+    <div class="footer">
+        <p>이메일: abcda111@gmail.com</p>
+        <p>전화번호: 000-0000-0000</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <style>
+        /* 헤더 */
+        #header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+
+        }
+
+        .orange-text {
+            font-size: 50px;
+            font-weight: bold;
+            color: #FD6F22;
+        }
+
+        #orange {
+            font-weight: bold;
+            color: #FD6F22;
+        }
+
+         .blank{
+            background-color: white;
+            width: auto;
+            height: 25px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .box {
+            width: 600px;
+            height: 50px;
+            border: 2px solid gray
+        }
+
+        #edit-container {
+            margin-top: 10px;
+        }
+
+        .blue-button {
+            position: absolute;
+            left: 630px;
+
+            width: 100px;
+            height: 50px;
+            border: none;
+            background-color: skyblue;
+            color: white;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        #edit-container {
+            margin-top: 10px;
+        }
+
+        .edit-button {
+            width: 492px;
+            height: 50px;
+            border: none;
+            background-color: #FD6F22;
+            color: white;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .orange-button {
+            position: absolute;
+            left: 40px;
+
+            width: 492px;
+            height: 50px;
+            border: none;
+            background-color: #FD6F22;
+            color: white;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .whitebox{
+            background-color: white;
+            width: auto;
+            height: 550px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        /* 푸터 */
+        .footer{
+            background-color: black;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id = "header">
+        <span class = "orange-text">일반 회원 가입</span>
+    </div>
+
+    <!---공백 -->
+    <div class = "blank"></div>
+
+    <form th:action="@{/home/register}" th:object="${user}" method="post">
+        <p>이름</p>
+        <input type = "text" name="name" placeholder="이름을 입력하시오">
+        <div class="box" ></div>
+
+        <p>닉네임</p>
+        <input type = "text" name="nickname" placeholder="닉네임을 입력하시오">
+        <div class="box" ></div>
+
+        <p>아이디</p>
+        <input type = "text" name="loginId" placeholder="아이디를 입력하시오">
+        <div class="box" ></div>
+
+        <p>비밀번호</p>
+        <input type = "text" name="password" placeholder="비밀번호를 입력하시오.">
+        <div class="box" ></div>
+
+        <!---공백 -->
+        <div class = "blank"></div>
+
+        <input type = "text" placeholder="비밀번호를 다시 입력하시오.">
+        <div class="box" ></div>
+
+        <p>주소</p>
+        <input type = "text" name="residence" placeholder="주소 입력">
+        <div class="box" ></div>
+
+        <p>생일</p>
+        <input type = "text" name="birth" placeholder="생일 입력">
+        <div class="box" ></div>
+
+        <p>나이</p>
+        <input type = "text" name="age" placeholder="나이 입력">
+        <div class="box" ></div>
+
+        <p>성별</p>
+        <input type = "text" name="gender" placeholder="성별 입력">
+        <div class="box" ></div>
+
+        <p>관심있는 지역</p>
+        <input type = "text" name="interestedArea" placeholder="관심있는지역 입력">
+        <div class="box" ></div>
+
+        <!---공백 -->
+        <div class = "blank"></div>
+
+        <p id = orange>연락처 입력</p>
+        <input type = "text" name="phone" placeholder="전화번호 입력">
+        <div class="box" ></div>
+
+
+        <!---공백 -->
+        <div class = "blank"></div>
+
+        <input type = "text" name="email" placeholder="이메일 입력">
+        <div class="box" ></div>
+        <!---공백 -->
+        <div class = "blank"></div>
+
+        <!---공백 -->
+        <div class = "blank"></div>
+
+        <input type="checkbox" id="myCheckbox" name="myCheckbox">
+        <label for="myCheckbox">동의 및 회원가입을 누르면 <a href = "로그인_회원가입_이용약관.html">사이트 이용약관</a>에 동의하게 됩니다.</label>
+
+        <div id="edit-container">
+            <button class="orange-button" type="submit"  value="Submit">가입하기</button>
+        </div>
+    </form>
+
+    <!---공백 -->
+    <div class = "whitebox"></div>
+
+    <!-- 푸터 -->
+    <div class="footer">
+        <p>이메일: abcda111@gmail.com</p>
+        <p>전화번호: 000-0000-0000</p>
+    </div>
+
+</body>
+</html>

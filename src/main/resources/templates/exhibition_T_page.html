@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>site_name</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* 헤더 */
+        #header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #title{
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #page_list{
+            margin-left: 20px;
+        }
+        
+        #page_list>p{
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        /* 페이지배너 */
+        #page_banner{
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-size: 900px 200px;
+        }
+        #page_banner p{
+            padding: 60px 80px;
+            color: white;
+            font-size: 5vh;
+        }
+
+        /* 전시 목록 */
+        #exh_list_box{
+            height: auto;
+            margin: 5%;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        #exh_list_box li{
+            display: inline;
+            margin-left: 40px;
+            font-size: 3vh;
+            font-weight: bold;
+        }
+
+        #exh_box_list{
+            margin-top: 50px;
+            padding-left: 50px;
+            text-align:start;
+        }
+
+
+        #exh_box{
+            display: inline-block;
+            width: 250px;
+            height: 450px;
+            margin: 10px 30px;
+        }
+        #exh_box>p{
+            margin: 7px;
+        }
+
+        #exh_box img{
+            display:inline-block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 푸터 */
+        #footer{
+            background-color: black;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+        <!-- 헤더 -->
+        <div id="header">
+            <p id="title">전시회 사이트</p>   
+            <div id="page_list">
+                <p>취향 테스트</p>
+                <p>전시회</p>
+                <p>마이 페이지</p>
+            </div>
+        </div>
+        <!-- 페이지 설명 배너 -->
+        <div id="page_banner">
+            <p>전시회</p>
+        </div>
+
+        <!-- 전시회 목록 -->
+        <div id="exh_list_box">
+            <ul>
+                <li>종류</li>
+                <li>지역</li>
+                <li>추천</li>
+            </ul>
+            <div id="exh_box_list">
+                <div id="exh_box"> 
+                    <img src="../content/b955aedd88d8788068516dbb7814cf93.jpg" />
+                    <p>전시회 이름</p>
+                    <p>날짜</p>
+                </div>
+                <div id="exh_box"> 
+                    <img src="../content/b955aedd88d8788068516dbb7814cf93.jpg" />
+                    <p>전시회 이름</p>
+                    <p>날짜</p>
+                </div>
+                <div id="exh_box"> 
+                    <img src="../content/b955aedd88d8788068516dbb7814cf93.jpg" />
+                    <p>전시회 이름</p>
+                    <p>날짜</p>
+                </div>
+                <div id="exh_box"> 
+                    <img src="../content/b955aedd88d8788068516dbb7814cf93.jpg" />
+                    <p>전시회 이름</p>
+                    <p>날짜</p>
+                </div>
+                <div id="exh_box"> 
+                    <img src="../content/b955aedd88d8788068516dbb7814cf93.jpg" />
+                    <p>전시회 이름</p>
+                    <p>날짜</p>
+                </div>
+                <div id="exh_box"> 
+                    <img src="../content/b955aedd88d8788068516dbb7814cf93.jpg" />
+                    <p>전시회 이름</p>
+                    <p>날짜</p>
+                </div><div id="exh_box"> 
+                    <img src="../content/b955aedd88d8788068516dbb7814cf93.jpg" />
+                    <p>전시회 이름</p>
+                    <p>날짜</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- 푸터 -->
+        <div id="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+    
+</body>
+</html>

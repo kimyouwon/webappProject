@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>내 후기들</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* 헤더 */
+        #header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #title{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        #page_list{
+            margin-left: 20px;
+        }
+        
+        #page_list>p{
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        /* 페이지 배너 */
+        #page_banner{
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-size: 900px 200px;
+        }
+        #page_banner p{
+            padding: 60px 80px;
+            color: white;
+            font-size: 5vh;
+        }
+
+        /* 내용부분 */
+        #sub_header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px;
+            flex-direction: column;
+            
+        }
+
+        #white{
+            width: auto;
+            height: auto;
+            margin: 50px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            flex-direction: column;
+         
+        }
+    
+
+        #edit-container {
+            margin-top: 10px;
+        }
+
+        .edit-button {
+            width: 70px;
+            height: 40px;
+            border: none;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        /* 회색 버튼 스타일 */
+        .gray-button {
+            background-color: gray;
+        }
+        #review_list{
+            height: auto;
+            margin: 40px 0px;
+
+        }
+
+        #review_box{
+            margin-bottom: 30px;
+            width: 700px;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        #box_top{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .star-rating {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .star {
+        appearance: none;
+        padding: 1px;
+        }
+
+        .star::after {
+        content: '☆';
+        color: #FD6F22;
+        font-size: 20px;
+        }
+
+        #review_title{
+            font-size: 16;
+            font-weight: bold;
+            margin: 5px 0px;
+        }
+
+        /* 푸터 */
+        .footer{
+            background-color: black;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <p id= "title">전시회 사이트</p>
+        <div id="page_list">
+            <p>취향 테스트</p>
+            <p>전시회</p>
+            <p id = "thispage">마이 페이지</p>
+        </div>
+    </div>
+
+    <!-- 페이지 설명 배너 -->
+    <div id="page_banner">
+        <p>마이페이지</p>
+    </div>
+
+    <div id = "sub_header">
+        <h2>📝nickname님의 전시회 후기 모음</h2>
+        
+    </div>
+
+    <hr style="margin: 0px 50px;">
+
+    <div id="white">
+
+        <div id="review_list">
+            <div id="review_box">
+                <div id="box_top">
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1">
+                        <input type="radio" class="star" value="2">
+                        <input type="radio" class="star" value="3">
+                        <input type="radio" class="star" value="4">
+                        <input type="radio" class="star" value="5">
+                    </div>
+                    <div style="display: flex;">
+                        <p style="filter:brightness(0%); font-size: 13px; margin-right: 10px;">✏️</p>
+                        <p style="filter:brightness(0%); font-size: 13px;">❌</p>
+                    </div> 
+                </div>
+                <p id="review_title">전시회 이름</p>
+                <p>리뷰1</p>
+            </div>
+            <div id="review_box">
+                <div id="box_top">
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1">
+                        <input type="radio" class="star" value="2">
+                        <input type="radio" class="star" value="3">
+                        <input type="radio" class="star" value="4">
+                        <input type="radio" class="star" value="5">
+                    </div>
+                    <div style="display: flex;">
+                        <p style="filter:brightness(0%); font-size: 13px; margin-right: 10px;">✏️</p>
+                        <p style="filter:brightness(0%); font-size: 13px;">❌</p>
+                    </div> 
+                </div>
+                <p id="review_title">전시회 이름</p>
+                <p>리뷰2</p>
+            </div>
+            <div id="review_box">
+                <div id="box_top">
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1">
+                        <input type="radio" class="star" value="2">
+                        <input type="radio" class="star" value="3">
+                        <input type="radio" class="star" value="4">
+                        <input type="radio" class="star" value="5">
+                    </div>
+                    <div style="display: flex;">
+                        <p style="filter:brightness(0%); font-size: 13px; margin-right: 10px;">✏️</p>
+                        <p style="filter:brightness(0%); font-size: 13px;">❌</p>
+                    </div> 
+                </div>
+                
+                <p id="review_title">전시회 이름</p>
+                <p>리뷰3</p>
+            </div>
+        </div>
+        
+    </div>
+    
+
+    <!-- 푸터 -->
+    <div class="footer">
+        <p>이메일: abcda111@gmail.com</p>
+        <p>전화번호: 000-0000-0000</p>
+    </div>
+
+<hr>
+
+</body>
+</html>
