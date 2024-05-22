@@ -35,7 +35,7 @@ public class TestController {
     //취향 테스트
     @GetMapping({"/home/test", "/home_auth/test"})
     public String showTestPage() {
-        return "test";
+        return "index";
     }
 
     //전시회 메인 페이지
