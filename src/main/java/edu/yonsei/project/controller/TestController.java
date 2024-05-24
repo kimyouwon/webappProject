@@ -38,11 +38,11 @@ public class TestController {
         return "index";
     }
 
-    //전시회 메인 페이지
+    /*//전시회 메인 페이지
     @GetMapping({"/home/exhibition","/home_auth/exhibition"})
     public String showExhibitionPage() {
         return "exhibition_T_page";
-    }
+    }*/
 
     //전시회 상세 페이지
     /*@GetMapping({"/home/exhibition/detail","/home_auth/exhibition/detail"})
