@@ -1,4 +1,4 @@
-package edu.yonsei.project;
+package edu.yonsei.project.controller;
 
 import edu.yonsei.project.dto.TeamDto;
 import edu.yonsei.project.entity.TeamEntity;

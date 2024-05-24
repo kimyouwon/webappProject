@@ -1,4 +1,4 @@
-package edu.yonsei.project;
+package edu.yonsei.project.controller;
 
 import edu.yonsei.project.service.AuthService;
 import jakarta.servlet.http.HttpSession;

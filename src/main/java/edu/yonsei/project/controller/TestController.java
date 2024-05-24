@@ -1,4 +1,4 @@
-package edu.yonsei.project;
+package edu.yonsei.project.controller;
 
 import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.service.UserService;
@@ -45,10 +45,10 @@ public class TestController {
     }
 
     //전시회 상세 페이지
-    @GetMapping({"/home/exhibition/detail","/home_auth/exhibition/detail"})
+    /*@GetMapping({"/home/exhibition/detail","/home_auth/exhibition/detail"})
     public String showExhibitionDetailPage() {
         return "exhibition_De_page";
-    }
+    }*/
 
     //마이페이지 수정 전 디테일 페이지
     @GetMapping("home_auth/mypage/auth/edit_detail")
