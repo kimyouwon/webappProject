@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>site_name</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+        }
+        /* 헤더 */
+        #header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #title{
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #page_list{
+            margin-left: 20px;
+        }
+        
+        #page_list>p{
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        /* 페이지배너 */
+        #page_banner{
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-size: 900px 200px;
+        }
+        #page_banner p{
+            padding: 60px 80px;
+            color: white;
+            font-family: 'Freesentation-9Black';
+            font-size: 40px
+        }
+
+        /* 전시 목록 */
+        #exh_list_box{
+            height: auto;
+            margin: 5%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #exh_list_box li{
+            display: inline;
+            margin-left: 40px;
+            font-size: 3vh;
+            font-weight: bold;
+        }
+
+        #exh_box_list{
+            margin-top: 50px;
+            padding-left: 50px;
+            text-align:start;
+        }
+
+
+        #exh_box{
+            display: inline-block;
+            width: 250px;
+            height: 450px;
+            margin: 10px 30px;
+            
+        }
+        #exh_box>p{
+            margin: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+
+        #exh_box img{
+            display:inline-block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 푸터 */
+        #footer{
+            background-color: black;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/exh_menu_list.css">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#exh_menu_list ul.sub").hide();
+            $("#exh_menu_list ul.menu li > a").click(function(event){
+                event.preventDefault();
+                var $thisSubMenu = $(this).next("ul.sub");
+                $("#exh_menu_list ul.sub").not($thisSubMenu).slideUp("fast");
+                $thisSubMenu.slideToggle("fast");
+            });
+            $("#exh_menu_list ul.sub").click(function(event){
+                event.stopPropagation();
+            });
+            $(document).click(function(event) {
+                if (!$(event.target).closest("#exh_menu_list").length) {
+                    $("#exh_menu_list ul.sub").slideUp("fast");
+                }
+            });
+        });
+    </script>
+</head>
+<body link="black" vlink="black" alink="black" style="text-decoration:none">
+        <!-- 헤더 -->
+        <div id="header">
+            <p id="title">WETE</p>   
+            <div id="page_list">
+                <a href="https://exhibition-test.netlify.app/" target="_blank" style="text-decoration-line:none;
+                 color: #FD6F22;">취향 테스트</a>
+                <p>전시회</p>
+                <p>마이 페이지</p>
+            </div>
+        </div>
+        <!-- 페이지 설명 배너 -->
+        <div id="page_banner">
+            <p>전시회</p>
+        </div>
+
+        <!-- 전시회 종류별 메뉴 -->
+        <div id="exh_menu_list">
+            <ul class="menu">
+                <li><a href="#">종류</a>
+                    <ul class="sub">
+                        <li><a href="#">무료 전시회</a></li>
+                        <li><a href="#">마감임박 전시회</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">추천</a>
+                    <ul class="sub">
+                        <li><a href="#">원화/실물 전시회</a></li>
+                        <li><a href="#">미디어아트 전시회</a></li>
+                        <li><a href="#">몰입형 체험 전시회</a></li>
+                        <li><a href="#">뮤지엄</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 전시회 목록 -->
+        <div id="exh_list_box">
+            <div id="exh_box_list">
+                <div id="exh_box" th:each="exhibition : ${exhibitions}">
+                    <a th:href="@{'/exhibition/' + ${exhibition.id}}">
+                         <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
+                         <p th:text="${exhibition.title}">전시회 이름</p>
+                         <p th:text="${exhibition.date}">날짜</p>
+                    </a>
+                </div>
+            </div>    
+        </div>
+
+        <!-- 푸터 -->
+        <div id="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+</body>
+</html>

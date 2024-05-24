@@ -1,0 +1,11 @@
+#error{
+    background-color: white;
+    width: 80%;
+    text-align: center;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+p{
+    font-size: 16px;
+}

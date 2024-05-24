@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 화면</title>
+    <style>
+
+        /* 상세 */
+        #detail_box{
+            width: 100%;
+            height: auto;
+            display: fix;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #exh_info{
+            margin-top: 100px;
+            display: flex;
+
+            position: absolute;
+            top: 10px; /* 위에서 10px 떨어진 위치 */
+            left: 10px; /* 왼쪽에서 10px 떨어진 위치 */
+        }
+
+        #exh_info img{
+            width: 200px;
+            height: 300px;
+        }
+
+        #orange-text{
+            color: #FD6F22;
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        #exh_info2{
+            width: 350px;
+            height: 190px;
+        }
+
+
+        .box {
+            width: 600px;
+            height: 50px;
+            border: 2px solid gray
+        }
+
+        .edit-container {
+            margin-top: 10px;
+        }
+
+        .edit-button {
+            width: 492px;
+            height: 50px;
+            border: none;
+            background-color: #FD6F22;
+            color: white;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .blue-button {
+            position: absolute;
+            left: 40px;
+
+            width: 492px;
+            height: 50px;
+            border: none;
+            background-color: skyblue;
+            color: white;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .blank{
+            background-color: white;
+            width: auto;
+            height: 55px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        #information{
+            margin-left: 40px;
+
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: left;
+            justify-content: left;
+        }
+
+        .page_list{
+            margin-left: 50px;
+        }
+
+        .page_list>p{
+            display: inline-block;
+            margin-left: 100px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id = "orange-text">로그인 페이지</h1>
+
+    <div id="detail_box">
+        <div id="exh_info">
+            <img src="마스코트%20캐릭터.png">
+        </div>
+        <div id = "exh_info2"> </div>
+        <div>
+            <h2>===</h2>
+        </div>
+        <form action="/home/login" method="post">
+            <p>아이디</p>
+            <input type = "text" name="loginId" placeholder="이이디를 입력하세요.">
+            <div class="box" ></div>
+
+            <p>비밀번호</p>
+            <input type = "text" name="password" placeholder="비밀번호 입력하세요.">
+            <div class="box" ></div>
+
+<!--
+        <input type="checkbox" id="myCheckbox" name="myCheckbox">
+        <label for="myCheckbox">로그인 유지</label>
+-->
+            <div class="edit-container">
+                <input type="checkbox" id="myCheckbox" name="myCheckbox">
+                <label for="myCheckbox">로그인 유지</label>
+
+                <button type="submit" class="edit-button">로그인</button>
+            </div>
+            <div><p th:text="${error}"></p></div>
+        </form>
+        <p>----------------------------------------또는------------------------------------------------</p>
+
+        <div class="edit-container">
+            <button class="blue-button">간편 로그인</button>
+        </div>
+
+        <!---공백 -->
+        <div class = "blank"></div>
+
+        <div id="information">
+            <a href="로그인_아이디 찾기.html" style="text-decoration:none" ><p>아이디 찾기</p></a>
+            <div class="page_list">
+                <a href="로그인_비밀번호 찾기.html" style="text-decoration:none" ><p>비밀번호 찾기</p></a>
+
+            </div>
+            <div class="page_list">
+                <a href="로그인_회원가입.html" style="text-decoration:none" ><p>회원 가입하기</p></a>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
