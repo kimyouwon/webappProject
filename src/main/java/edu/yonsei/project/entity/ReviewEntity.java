@@ -24,8 +24,9 @@ public class ReviewEntity {
     private int rating; // 평점
 
     @Column(nullable = false)
-    private Long userId; // 사용자 ID
+    private String userId; // 사용자 ID
 
     @Column(nullable = false)
-    private Long postId; // 게시글 ID
+    private Long exhibitionId; // 사용자 ID
+
 }

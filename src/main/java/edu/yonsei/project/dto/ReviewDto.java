@@ -10,9 +10,10 @@ import lombok.*;
 @Getter
 @Setter
 public class ReviewDto {
-    private Long id; //고유 ID
+    private Long id;        //고유 ID
 
     private String content; // 후기 내용
-    private int rating; // 평점
-    private Long userId; // 사용자 ID
+    private int rating;     // 평점
+    private String userId;  // 사용자 ID
+    private Long exhibitionId;    // 전시회 ID
 }

@@ -91,7 +91,7 @@ public class TestController {
         }
     }
 
-    //마이페이지 다녀온 전시회 목록 확인
+    //본인이 작성한 후기 모음집
     @GetMapping("/home_auth/mypage/reviews")
     public String showMypageReviews() {
         return "mypage_reviews";

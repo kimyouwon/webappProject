@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>내 후기들</title>
@@ -98,7 +98,7 @@
 
         }
 
-        #review_box{
+        .review_box{
             margin-bottom: 30px;
             width: 700px;
             border: 1px solid rgb(193, 193, 193);
@@ -165,8 +165,7 @@
     </div>
 
     <div id = "sub_header">
-        <h2>📝nickname님의 전시회 후기 모음</h2>
-        
+        <p th:text="${nickname} + '님의 전시회 후기 모음'"></p> <!-- 원래 h2인데 p로 바꿨어요-->
     </div>
 
     <hr style="margin: 0px 50px;">
@@ -188,10 +187,10 @@
                         <p style="filter:brightness(0%); font-size: 13px;">❌</p>
                     </div> 
                 </div>
-                <p id="review_title">전시회 이름</p>
+                <p class="review_title">전시회 이름</p>
                 <p>리뷰1</p>
             </div>
-            <div id="review_box">
+            <div class="review_box">
                 <div id="box_top">
                     <div class="star-rating">
                         <input type="radio" class="star" value="1">
@@ -208,7 +207,7 @@
                 <p id="review_title">전시회 이름</p>
                 <p>리뷰2</p>
             </div>
-            <div id="review_box">
+            <div class="review_box">
                 <div id="box_top">
                     <div class="star-rating">
                         <input type="radio" class="star" value="1">
@@ -222,7 +221,6 @@
                         <p style="filter:brightness(0%); font-size: 13px;">❌</p>
                     </div> 
                 </div>
-                
                 <p id="review_title">전시회 이름</p>
                 <p>리뷰3</p>
             </div>
