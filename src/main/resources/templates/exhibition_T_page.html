@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>site_name</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
+
         *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
             margin: 0;
             padding: 0;
         }
@@ -38,13 +50,14 @@
         #page_banner{
             width: 100%;
             height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../../../../../../Documents/카카오톡 받은 파일/page/page/content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
             background-size: 900px 200px;
         }
         #page_banner p{
             padding: 60px 80px;
             color: white;
-            font-size: 5vh;
+            font-family: 'Freesentation-9Black';
+            font-size: 40px
         }
 
         /* 전시 목록 */
@@ -53,6 +66,7 @@
             margin: 5%;
             display: flex;
             flex-direction: column;
+          
             
         }
 
@@ -75,9 +89,14 @@
             width: 250px;
             height: 450px;
             margin: 10px 30px;
+            
         }
         #exh_box>p{
             margin: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
         }
 
         #exh_box img{
@@ -100,14 +119,14 @@
 
     </style>
 </head>
-<body>
+<body link="black" vlink="black" alink="black" style="text-decoration:none">
         <!-- 헤더 -->
         <div id="header">
-            <p id="title">전시회 사이트</p>   
+            <p id="title">WETE</p>   
             <div id="page_list">
-                <a href="/home/test">취향 테스트</a>
-                <a href="/exhibition">전시회</a>
-                <a th:href="@{/home_auth/mypage}">마이 페이지</a>
+                <p>취향 테스트</p>
+                <p>전시회</p>
+                <p>마이 페이지</p>
             </div>
         </div>
         <!-- 페이지 설명 배너 -->
@@ -130,8 +149,7 @@
                          <p th:text="${exhibition.date}">날짜</p>
                     </a>
                 </div>
-            </div>
-            
+            </div>    
         </div>
 
         <!-- 푸터 -->

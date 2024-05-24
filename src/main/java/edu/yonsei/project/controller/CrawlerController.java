@@ -38,7 +38,7 @@ public class CrawlerController {
     }
 
     //전시회 목록 가져오기
-    @GetMapping("/exhibitions")
+    @GetMapping("/exhibition")
     public String getActiveExhibitions(Model model) {
         List<CrawledData> allExhibitions = crawledDataRepository.findAll();
         Date currentDate = new Date();
