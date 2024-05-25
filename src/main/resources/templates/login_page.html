@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <title>로그인 화면</title>
@@ -138,7 +138,7 @@
     <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
     <ul id="page_list">
         <li><a href="/home/test">취향 테스트</a></li>
-        <li><a href="/exhibitions">전시회</a></li>
+        <li><a href="/exhibition">전시회</a></li>
         <li><a href="/home/login">로그인</a></li>
         <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
     </ul>
