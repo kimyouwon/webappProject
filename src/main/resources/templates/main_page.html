@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>site_name</title>
+    <title>WETE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
         @font-face {
@@ -272,8 +272,8 @@
         }
 
         #review_content img{
-            width: 270px;
-            height: 400px;
+            width: 170px;
+            height: 200px;
         }
 
         #review_list{
@@ -284,24 +284,12 @@
             justify-content: center;
         }
 
-        #content{
-            width: 250px;
-            height: 300px;
-            border: 1px solid gray;
-            border-radius: 10%;
-            background-color: white;
-            margin: 10px;
-            display: inline-block;
-            align-items: center;
-            justify-content: center;
-
-        }
-
-        #rv_box{
+        #rv_cont{
             display: flex;
             flex-direction: column;
             margin-top: 40px;
             align-items: center;
+            justify-content: center;
         }
 
 
@@ -330,6 +318,17 @@
             margin-top:10px;
         }
 
+        #review_box{
+            display:flex;
+            border: 1px solid gray;
+            padding: 30px;
+            border-radius:10px;
+
+        }
+
+        #review_box *{
+            margin:10px
+        }
 
 
         /* 푸터 */
@@ -436,9 +435,9 @@
     <p id="exh_review">전시회 후기</p>
     <div id="review_content">
         <div id="review_list">
-            <img src="/img/97092_78784_548.jpg">
-            <div id="content">
-                <div id="rv_box">
+            <div id="review_box">
+                <img src="/img/97092_78784_548.jpg">
+                <div id="rv_cont">
                     <div class="star-rating">
                         <input type="radio" class="star" value="1">
                         <input type="radio" class="star" value="2">
@@ -449,7 +448,9 @@
                     <hr id="und_line"/>
                     <p>후기후기후기후기</p>
                 </div>
+
             </div>
+
             <div id="content">
                 <div id="rv_box">
                     <div class="star-rating">
