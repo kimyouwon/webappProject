@@ -15,7 +15,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 
 
-
         *{
             text-decoration: none;
             font-family: "Noto Sans KR", sans-serif;
@@ -30,7 +29,7 @@
         #header{
             position: relative;
             width: auto;
-            height: 50px;
+            height: 90px;
             background-color: #FD6F22;
             color: white;
             display: flex;
@@ -40,9 +39,9 @@
         }
 
         #title{
-            font-size: 20px;
-            font-weight: bold;
+            filter: invert(85%) sepia(100%) saturate(0%) hue-rotate(213deg) brightness(110%) contrast(101%);
         }
+
 
         #page_list{
             margin-left: 20px;
@@ -139,7 +138,7 @@
         #banner span:nth-child(5) {animation-delay: 0.25s;}
         #banner span:nth-child(6) {animation-delay: 0.30s;}
 
-        #circle{
+       #circle{
             position: relative;
             background-color: white;
             width: 400px;
@@ -148,11 +147,9 @@
         }
 
         #dog{
-            position: relative;
+            position: re
             width: 350px;
             height: 400px;
-            left: -300px;
-
         }
 
 
@@ -175,7 +172,7 @@
         }
 
         .fade-wrap{
-            background-image: url("./content/ricardo-gomez-angel-B4zK-epGgW0-unsplash.jpg");
+            background-image: url("./img/ricardo-gomez-angel-B4zK-epGgW0-unsplash.jpg");
             background-size: 950PX 400PX;
             width: 60%;
         }
@@ -249,7 +246,7 @@
         /* 후기란 */
         #review{
             width: auto;
-            background-color: antiquewhite;
+            background-color: white;
             height: auto;
             display: flex;
             flex-direction: column;
@@ -355,13 +352,13 @@
 <body>
 <!-- 헤더 -->
 <div id="header">
-    <p id="title">wete</p>
+    <a href="/home"><img id='title' src="./img/logo.png" style="width: 140px;"/></a>
     <ul id="page_list">
         <li><a href="/home/test">취향 테스트</a></li>
         <li><a href="/exhibition">전시회</a></li>
         <li><a href="/home/login">로그인</a></li>
         <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-</div>
+    </ul>
 </div>
 
 <!-- 메인 배너 -->
@@ -373,8 +370,8 @@
     <span>E</span>
     <span>T</span>
     <span>E</span>
-    <!-- <div id="circle"></div>
-    <img id='dog' src="./content/멈머(최종).png"/> -->
+    <!-- <div id="circle"></div> -->
+    <img id='dog' src="./img/멈머(최종).png"/>
 </div>
 
 <!-- 사이트 설명 부분 -->
@@ -400,7 +397,7 @@
     <P>전시회</P>
     <div id="poster_list">
         <div id="poster">
-            <img src="./content/b955aedd88d8788068516dbb7814cf93.jpg" />
+            <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
             <p>전시회 이름</p>
             <p>날짜</p>
         </div>
