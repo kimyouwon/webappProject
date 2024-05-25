@@ -66,7 +66,9 @@ public class CrawlerController {
 
     //전시회 상세페이지
     @GetMapping("/exhibition/{id}")
+    //@GetMapping("/exhibition")
     public String getExhibitionDetail(@PathVariable Long id, Model model) {
+    //public String getExhibitionDetail(@RequestParam("id") Long id, Model model) {
         Optional<CrawledData> exhibition = crawledDataRepository.findById(id);
         if (exhibition.isPresent()) {
             model.addAttribute("exhibition", exhibition.get());

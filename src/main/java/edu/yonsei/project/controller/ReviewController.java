@@ -33,7 +33,6 @@ public class ReviewController {
             // 사용자 ID가 세션에 없으면 로그인 페이지로 리다이렉트
             return "redirect:/login";
         }
-
         review.setUserId(userId);
         reviewService.saveReview(review);
         return "redirect:/review";
