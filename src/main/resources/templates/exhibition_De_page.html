@@ -78,6 +78,7 @@
         #exh_info img{
             width: 300px;
             height: 400px;
+            object-position: center;
         }
 
         /* 테이블 */
@@ -216,9 +217,9 @@
     <div id="header">
         <p id="title">WETE</p>   
         <div id="page_list">
-            <a href="/home/test">취향 테스트</a>
-            <a href="/exhibition">전시회</a>
-            <a th:href="@{/home_auth/mypage}">마이 페이지</a>
+            <p>취향 테스트</p>
+            <p>전시회</p>
+            <p>마이 페이지</p>
         </div>
     </div>
 
@@ -305,8 +306,8 @@
             </div>
         </div>
         <div id="review_list">
-            <div id="review_box" th:each="review : ${reviews}">
-                <p th:text="${user_id}"></p>
+            <div id="review_box">
+                <p>닉네임</p>
                 <div class="star-rating">
                     <input type="radio" class="star" value="1">
                     <input type="radio" class="star" value="2">
@@ -316,8 +317,28 @@
                 </div>
                 <p>리뷰리뷰리뷰리뷰리뷰리뷰</p>
             </div>
-
-
+            <div id="review_box">
+                <p>닉네임</p>
+                <div class="star-rating">
+                    <input type="radio" class="star" value="1">
+                    <input type="radio" class="star" value="2">
+                    <input type="radio" class="star" value="3">
+                    <input type="radio" class="star" value="4">
+                    <input type="radio" class="star" value="5">
+                </div>
+                <p>리뷰리뷰리뷰리뷰리뷰리뷰</p>
+            </div>
+            <div id="review_box">
+                <p>닉네임</p>
+                <div class="star-rating">
+                    <input type="radio" class="star" value="1">
+                    <input type="radio" class="star" value="2">
+                    <input type="radio" class="star" value="3">
+                    <input type="radio" class="star" value="4">
+                    <input type="radio" class="star" value="5">
+                </div>
+                <p>리뷰리뷰리뷰리뷰리뷰리뷰</p>
+            </div>
         </div>
         
 
