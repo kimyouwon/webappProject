@@ -23,6 +23,8 @@
             font-style: normal;
             margin: 0;
             padding: 0;
+
+
         }
 
         /* 헤더 */
@@ -91,11 +93,13 @@
         /* 배너 */
         #banner{
             background-color: #FD6F22;
-
-            height: 630px;
+            width:100%;
+            height: 640px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
         /* 살짝 네온 효과 */
@@ -106,8 +110,8 @@
 
         /* 옆으로 쭉우우욱 */
         @keyframes flow{
-            from{transform: translateX(100%);}
-            to{transform: translateX(-100%);}
+            from{transform: translateX(0%);}
+            to{transform: translateX(-50%);}
         }
 
         @keyframes slideIn{
@@ -121,35 +125,62 @@
             60%{transform: translateY(-5px);}
         }
 
+        .text-line{
+            font-family: "Shrikhand", serif;
+            animation: flow 100s linear infinite;
+            color:white;
+            position:absolute;
+            bottom:40px;
+            font-size:30px;
+            white-space: nowrap;
+
+        }
+
         #banner span{
+            position:relative;
             font-family: "Shrikhand", serif;
             font-weight: 400;
             font-style: normal;
-            font-size: 90px;
+            font-size: 170px;
             color: #0028B7;
-            -webkit-text-stroke: 3px white;
+            right:300px;
+            bottom:200px;
+            -webkit-text-stroke: 4px white;
             animation: wave 1.5s ease-in-out infinite;
+
+
 
         }
         #banner span:nth-child(1) {animation-delay: 0.1s;}
         #banner span:nth-child(2) {animation-delay: 0.10s;}
-        #banner span:nth-child(3) {animation-delay: 0.15s;}
-        #banner span:nth-child(4) {animation-delay: 0.20s;}
-        #banner span:nth-child(5) {animation-delay: 0.25s;}
         #banner span:nth-child(6) {animation-delay: 0.30s;}
+        #banner span:nth-child(8) {animation-delay: 0.40s;}
 
        #circle{
-            position: relative;
+            position: absolute;
             background-color: white;
             width: 400px;
             height: 400px;
             border-radius: 100%;
+
         }
 
         #dog{
-            position: re
-            width: 350px;
-            height: 400px;
+            position: absolute;
+            width: 400px;
+            height: 450px;
+        }
+        #dog1{
+            position: absolute;
+            left:300px;
+            width: 400px;
+            height: 450px;
+        }
+        #dog2{
+            position: absolute;
+            width: 400px;
+            height: 450px;
+            right:300px;
         }
 
 
@@ -166,7 +197,7 @@
         #test_box{
             width: 100%;
             background-color: #0028B7;
-            height: 400px;
+            height: 300px;
             display: inline-flex;
             /* white-space: nowrap; */
         }
@@ -174,7 +205,7 @@
         .fade-wrap{
             background-image: url("./img/ricardo-gomez-angel-B4zK-epGgW0-unsplash.jpg");
             background-size: 950PX 400PX;
-            width: 60%;
+            width: 65%;
         }
 
         .fade-wrap {
@@ -210,7 +241,7 @@
             height: auto;
             align-items: center;
             padding-top: 10px;
-            padding-bottom: 30px;
+            padding-bottom: 40px;
             /* padding: 10px; */
         }
 
@@ -219,12 +250,19 @@
             text-align: center;
             font-size: 4.5vh;
             font-weight: 600;;
-            padding-top: 70px;
-            padding-bottom: 50px;
+            padding-top: 40px;
+            padding-bottom: 40px;
         }
 
         #poster_list{
             text-align: center;
+        }
+
+        #more{
+            font-size:13px;
+            color:gray;
+            text-align: right;
+            margin-right:20%;
         }
 
         #poster{
@@ -239,8 +277,9 @@
 
         #poster img{
             display:inline-block;
-            width: 100%;
-            height: auto;
+            width: 300px;
+            height: 400px;
+            object-position: center;
         }
 
         /* 후기란 */
@@ -264,38 +303,31 @@
         }
 
         #review_content{
-            width: 95%;
-            height: auto;
+            width: auto;
+            height: 100%;
             display: inline-block;
             text-align: center;
-
+            margin-bottom: 40px;
         }
 
-        #review_content img{
-            width: 170px;
-            height: 200px;
-        }
 
         #review_list{
-            width: auto;
+            width: 100%;
             height: 75%;
             display: inline-block;
-            align-items: center;
-            justify-content: center;
+            text-align:center;
         }
 
-        #rv_cont{
-            display: flex;
-            flex-direction: column;
-            margin-top: 40px;
-            align-items: center;
-            justify-content: center;
+        #rv_cont p{
+            font-size:20px;
+            font-weight: 600;
         }
+
 
 
 
         .star-rating {
-        display: flex;
+            display: flex;
         }
 
         .star {
@@ -319,10 +351,16 @@
         }
 
         #review_box{
-            display:flex;
+            width:250px;
             border: 1px solid gray;
             padding: 30px;
             border-radius:10px;
+            margin:20px;
+            display: inline-block;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
 
         }
 
@@ -353,7 +391,7 @@
 <div id="header">
     <a href="/home"><img id='title' src="/img/logo.png" style="width: 140px;"/></a>
     <ul id="page_list">
-        <li><a href="/home/test">취향 테스트</a></li>
+        <li><a href="/home/test">취향테스트</a></li>
         <li><a href="/exhibition">전시회</a></li>
         <li><a href="/home/login">로그인</a></li>
         <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
@@ -365,12 +403,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <div id="circle"></div>
+    <img id="dog" src="/img/멈머(최종).png"/>
     <span>W</span>
     <span>E</span>
     <span>T</span>
     <span>E</span>
-    <!-- <div id="circle"></div> -->
-    <img id='dog' src="/img/멈머(최종).png"/>
+    <p></p>
+
+    <div class="text-line">
+        wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+        wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+        wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+        wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+        wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+        wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+    </div>
+
 </div>
 
 <!-- 사이트 설명 부분 -->
@@ -381,26 +430,21 @@
 <!-- 취향 테스트 -->
 <div id="test_box">
     <div class="fade-wrap" style="display: flex; flex-direction: column;"></div>
-    <div style="display: flex; flex-direction: column;
+    <a href="/home/test">
+        <div style="display: flex; flex-direction: column;
         align-items: top;
-        padding-top: 50px;
-        padding-left: 6% ;">
-        <p id="test_text">나의 전시회 취향을<br>확인하러!</p>
-        <button style="margin-top: 40px;">화살표</button>
-    </div>
+        padding-top: 50px;">
+            <p id="test_text">지금 당장<br>나의 전시회 취향<br>을 확인하러!</p>
+        </div>
+    </a>
 
 </div>
 
 <!-- 전시회 목록 -->
 <div id="exh_list">
-    <P>전시회</P>
+    <p>전시회</p>
     <div id="poster_list">
         <div id="poster">
-            <img src="/static/img/b955aedd88d8788068516dbb7814cf93.jpg" />
-            <p>전시회 이름</p>
-            <p>날짜</p>
-        </div>
-        <div id="poster">
             <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
             <p>전시회 이름</p>
             <p>날짜</p>
@@ -425,7 +469,14 @@
             <p>전시회 이름</p>
             <p>날짜</p>
         </div>
+        <div id="poster">
+            <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
+            <p>전시회 이름</p>
+            <p>날짜</p>
+        </div>
+        <a href="/exhibition"><p id="more">더보기 ></p></a>
     </div>
+
 </div>
 
 <hr style="margin: 0px 80px;">
@@ -434,50 +485,56 @@
 <div id="review">
     <p id="exh_review">전시회 후기</p>
     <div id="review_content">
-        <div id="review_list">
-            <div id="review_box">
-                <img src="/img/97092_78784_548.jpg">
-                <div id="rv_cont">
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1">
-                        <input type="radio" class="star" value="2">
-                        <input type="radio" class="star" value="3">
-                        <input type="radio" class="star" value="4">
-                        <input type="radio" class="star" value="5">
-                    </div>
-                    <hr id="und_line"/>
-                    <p>후기후기후기후기</p>
-                </div>
-
-            </div>
-
-            <div id="content">
-                <div id="rv_box">
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1">
-                        <input type="radio" class="star" value="2">
-                        <input type="radio" class="star" value="3">
-                        <input type="radio" class="star" value="4">
-                        <input type="radio" class="star" value="5">
-                    </div>
-                    <hr id="und_line"/>
-                    <p>후기후기후기후기</p>
+        <div id="review_box">
+            <div id="rv_cont">
+                <p>전시회 이름</p>
+                <div class="star-rating">
+                    <input type="radio" class="star" value="1">
+                    <input type="radio" class="star" value="2">
+                    <input type="radio" class="star" value="3">
+                    <input type="radio" class="star" value="4">
+                    <input type="radio" class="star" value="5">
                 </div>
             </div>
-            <div id="content">
-                <div id="rv_box">
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1">
-                        <input type="radio" class="star" value="2">
-                        <input type="radio" class="star" value="3">
-                        <input type="radio" class="star" value="4">
-                        <input type="radio" class="star" value="5">
-                    </div>
-                    <hr id="und_line"/>
-                    <p>후기후기후기후기</p>
-                </div>
-            </div>
+            <hr id="und_line"/>
+            <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                후기후기</p>
         </div>
+
+        <div id="review_box">
+                <div id="rv_cont">
+                    <p>전시회 이름</p>
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1">
+                        <input type="radio" class="star" value="2">
+                        <input type="radio" class="star" value="3">
+                        <input type="radio" class="star" value="4">
+                        <input type="radio" class="star" value="5">
+                    </div>
+                </div>
+                <hr id="und_line"/>
+                <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기</p>
+            </div>
+        <div id="review_box">
+                <div id="rv_cont">
+                    <p>전시회 이름</p>
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1">
+                        <input type="radio" class="star" value="2">
+                        <input type="radio" class="star" value="3">
+                        <input type="radio" class="star" value="4">
+                        <input type="radio" class="star" value="5">
+                    </div>
+                </div>
+                <hr id="und_line"/>
+                <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기</p>
+        </div>
+
     </div>
 
 </div>
