@@ -27,6 +27,9 @@ public class ReviewEntity {
     private String userId; // 사용자 ID
 
     @Column(nullable = false)
+    private String userNickname; // 사용자 ID
+
+    @Column(nullable = false)
     private Long exhibitionId; // 사용자 ID
 
 }

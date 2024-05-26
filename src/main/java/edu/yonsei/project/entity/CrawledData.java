@@ -1,4 +1,4 @@
-package edu.yonsei.project.model;
+package edu.yonsei.project.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package edu.yonsei.project.service;
 
-import edu.yonsei.project.model.CrawledData;
+import edu.yonsei.project.entity.CrawledData;
 import edu.yonsei.project.repository.CrawledDataRepository;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;

@@ -38,18 +38,6 @@ public class TestController {
         return "index";
     }
 
-    /*//전시회 메인 페이지
-    @GetMapping({"/home/exhibition","/home_auth/exhibition"})
-    public String showExhibitionPage() {
-        return "exhibition_T_page";
-    }*/
-
-    //전시회 상세 페이지
-    /*@GetMapping({"/home/exhibition/detail","/home_auth/exhibition/detail"})
-    public String showExhibitionDetailPage() {
-        return "exhibition_De_page";
-    }*/
-
     //마이페이지 수정 전 디테일 페이지
     @GetMapping("home_auth/mypage/auth/edit_detail")
     public String showMypageEditDetail() {
@@ -81,7 +69,7 @@ public class TestController {
         /*if (loginId == null || !loginId.equals(user.getLoginId())) {
             model.addAttribute("error", "세션 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
             return "redirect:/home/login";
-        }*/
+        }*/ //이 코드 넣으니깐 계속 login 페이지로만 가짐
         try {
             userService.updateUser(loginId, user); // 사용자 정보 업데이트
             return "redirect:/home_auth/mypage"; // 업데이트 후 마이페이지로 리디렉션

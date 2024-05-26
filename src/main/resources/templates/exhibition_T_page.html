@@ -179,9 +179,9 @@
         <div id="exh_list_box">
             <div id="exh_box_list">
                 <div id="exh_box" th:each="exhibition : ${exhibitions}">
-                    <!--<a th:href="@{'/exhibition/' + ${exhibition.id}}">-->
-                    <a th:href="@{/exhibition/{id}(id=${exhibition.id})}">
-                         <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
+                    <a th:href="@{'/exhibition/' + ${exhibition.id}}">
+                    <!--<a th:href="@{/exhibition/{id}(id=${exhibition.id})}">-->
+                        <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
                          <p th:text="${exhibition.title}">전시회 이름</p>
                          <p th:text="${exhibition.date}">날짜</p>
                     </a>
