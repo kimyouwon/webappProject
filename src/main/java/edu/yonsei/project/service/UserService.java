@@ -20,6 +20,7 @@ public class UserService {
         return userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new Exception("User not found with loginId: " + loginId));
     }
+    @Transactional(readOnly = true)
     public String getNickname(String loginId) {
         return userRepository.findByLoginId(loginId)
                 .map(UserEntity::getNickname)  // UserEntity에서 닉네임 추출

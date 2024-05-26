@@ -17,4 +17,5 @@ public class ReviewDto {
     private String userId;  // 사용자 ID
     private String userNickname; //사용자 닉네임
     private Long exhibitionId;    // 전시회 ID
+    private String exhibitionName;    // 전시회 이름
 }
