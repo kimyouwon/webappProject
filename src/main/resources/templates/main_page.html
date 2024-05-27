@@ -450,7 +450,7 @@
 
 <!-- 전시회 목록 -->
 <div id="exh_list_box">
-    <p id="exh_review">전시회 목록</p>
+    <p id="exh_review">전시회</p>
     <div id="poster_list">
         <div id="poster" th:each="exhibition, stat : ${exhibitions}" th:if="${stat.index < 6}">
             <a th:href="@{'/exhibition/' + ${exhibition.id}}">
