@@ -286,23 +286,25 @@
         <hr style="width: 80%; margin-bottom: 70px;">
 
         <!-- 전시 후기 -->
-        <div id= "review">
+        <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
+        <!-- 리뷰 작성란 -->
+        <div id="review">
             <div id="review_edit">
                 <p>평점</p>
                 <div class="star-rating">
-                    <input type="radio" class="star" value="1">
-                    <input type="radio" class="star" value="2">
-                    <input type="radio" class="star" value="3">
-                    <input type="radio" class="star" value="4">
-                    <input type="radio" class="star" value="5">
+                    <select class="star" name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select><br/>
                 </div>
                 <p>후기</p>
                 <div id="edit">
-                    <textarea id="review_text"></textarea>
-                    <button>작성</button>
+                    <textarea id="review_text" name="content"></textarea>
+                    <button type="submit">작성</button>
                 </div>
-                
-
             </div>
         </div>
     </form>
