@@ -1,6 +1,9 @@
 package edu.yonsei.project.dto;
 
+import edu.yonsei.project.entity.CommentEntity;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,4 +21,7 @@ public class ReviewDto {
     private String userNickname; //사용자 닉네임
     private Long exhibitionId;    // 전시회 ID
     private String exhibitionName;    // 전시회 이름
+
+    private List<CommentEntity> comments; // 댓글 리스트
+    private long likeCount;            // 좋아요 개수
 }

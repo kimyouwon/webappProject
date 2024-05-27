@@ -93,7 +93,7 @@ public class CrawlerController {
         }
     }*/ //왜 인지 제 컴퓨터에서는 안돌아가네요... (by.유원)
 
-    @GetMapping("/exhibition/{id}")
+    /*@GetMapping("/exhibition/{id}")
     public String getExhibitionDetail(@PathVariable("id") Long id, Model model) {
         try {
             Optional<CrawledData> exhibition = crawledDataRepository.findById(id);
@@ -117,10 +117,10 @@ public class CrawlerController {
             model.addAttribute("errorMessage", "An error occurred while fetching the exhibition details");
             return "error";  // 예외가 발생했을 경우 보여줄 오류 페이지
         }
-    } //돌아가는 코드, review 띄우는 걸 시도해보기 위해 잠깐 주석처리
+    }*/ //돌아가는 코드, review 띄우는 걸 시도해보기 위해 잠깐 주석처리
 
 
-    @PostMapping("/exhibition/{id}")
+    /*@PostMapping("/exhibition/{id}")
     public String createReview(@PathVariable("id") Long id, Model model, @ModelAttribute ReviewEntity review, HttpSession session) {
         //전시회 Id, 이름을 불러오기 위한 someting...
         Optional<CrawledData> exhibitionOpt = crawledDataRepository.findById(id);
@@ -136,7 +136,7 @@ public class CrawlerController {
         String userId = (String) session.getAttribute("loginId");
         // 사용자 ID가 세션에 없으면 로그인 페이지로 리다이렉트
         if (userId == null) {
-            return "redirect:/login";
+            return "redirect:/home/login";
         }
         // UserService를 사용하여 닉네임 가져오기
         String userNickname = userService.getNickname(userId);
@@ -151,5 +151,5 @@ public class CrawlerController {
 
         reviewService.saveReview(review);
         return "redirect:/exhibition/" + id;
-    }
+    }*/ //되는 코드 : ExhibitionController에 옮겨둠
 }

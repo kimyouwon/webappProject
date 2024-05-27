@@ -2,6 +2,8 @@ package edu.yonsei.project.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -35,5 +37,8 @@ public class ReviewEntity {
     @Column(nullable = true)
     private String exhibitionName; // 전시회 이름
 
+    @OneToMany(mappedBy = "review")
+    private List<CommentEntity> comments; // 댓글 리스트
 
+    private long likeCount; // 좋아요 개수
 }
