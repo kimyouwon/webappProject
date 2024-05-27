@@ -28,8 +28,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'mysql:mysql-connector-java:8.0.32'
-    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
-    implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -39,6 +39,11 @@ dependencies {
     testImplementation 'org.testcontainers:mysql'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
+
+    // Tomcat 10.x 명시적으로 추가
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat:3.2.5'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.20'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-websocket:10.1.20'
 }
 
 tasks.named('test') {
