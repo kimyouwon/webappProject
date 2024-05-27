@@ -263,6 +263,8 @@
             color:gray;
             text-align: right;
             margin-right:20%;
+            margin-bottom:40px;
+
         }
 
         #poster{
@@ -273,6 +275,10 @@
         }
         #poster>p{
             margin: 7px;
+        }
+
+        #poster a{
+            color:black;
         }
 
         #poster img{
@@ -301,6 +307,7 @@
             font-weight: 450;
             padding-top: 70px;
             padding-bottom: 50px;
+            text-align:center;
         }
 
         #review_content{
@@ -434,7 +441,7 @@
     <a href="/home/test">
         <div style="display: flex; flex-direction: column;
         align-items: top;
-        padding-top: 50px;">
+        padding-top: 50px; padding-left:50px;">
             <p id="test_text">지금 당장<br>나의 전시회 취향<br>을 확인하러!</p>
         </div>
     </a>
@@ -443,6 +450,7 @@
 
 <!-- 전시회 목록 -->
 <div id="exh_list_box">
+    <p id="exh_review">전시회 목록</p>
     <div id="poster_list">
         <div id="poster" th:each="exhibition, stat : ${exhibitions}" th:if="${stat.index < 6}">
             <a th:href="@{'/exhibition/' + ${exhibition.id}}">
