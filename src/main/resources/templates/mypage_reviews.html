@@ -2,11 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>내 후기들</title>
+    <title>WETE</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
         *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
             margin: 0;
             padding: 0;
+            text-decoration: none;
+
         }
         /* 헤더 */
         #header{
@@ -20,17 +34,23 @@
         }
 
         #title{
-            font-size: 20px;
-            font-weight: bold;
+            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
         }
 
         #page_list{
             margin-left: 20px;
         }
 
-        #page_list>p{
-            display: inline-block;
-            margin-left: 10px;
+        #page_list{
+            display: flex;
+            flex-direction: row;
+            list-style:none;
+            margin-left: 20px;
+        }
+
+        #page_list a{
+            color: #FD6F22;
+            margin-right: 10px;
         }
 
         /* 페이지 배너 */
@@ -127,10 +147,9 @@
         font-size: 20px;
         }
 
-        #review_title{
+        .review_title{
             font-size: 16;
-            font-weight: bold;
-            margin: 5px 0px;
+            font-weight: 600;
         }
 
         /* 커서 포인터 스타일 */
@@ -228,14 +247,17 @@
     </script>
 </head>
 <body>
-<div id="header">
-    <p id="title">전시회 사이트</p>
-    <div id="page_list">
-        <a href="/home/test">취향 테스트</a>
-        <a href="/exhibition">전시회</a>
-        <a th:href="@{/home_auth/mypage}">마이페이지</a>
+    <!-- 헤더 -->
+    <div id="header">
+        <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
+        <ul id="page_list">
+            <li><a href="/home/test">취향테스트</a></li>
+            <li><a href="/exhibition">전시회</a></li>
+            <li><a th:href="@{/logout}">로그아웃</a></li>
+            <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
+        </ul>
     </div>
-</div>
+
 
 <!-- 페이지 설명 배너 -->
 <div id="page_banner">
@@ -252,19 +274,20 @@
     <div id="review_list">
         <div th:each="review : ${reviews}" class="review_box" th:id="'review-box-' + ${review.id}">
             <div id="box_top">
-                <div class="star-rating">
-                    <input type="radio" class="star" value="1" th:attr="checked=${review.rating == 1}">
-                    <input type="radio" class="star" value="2" th:attr="checked=${review.rating == 2}">
-                    <input type="radio" class="star" value="3" th:attr="checked=${review.rating == 3}">
-                    <input type="radio" class="star" value="4" th:attr="checked=${review.rating == 4}">
-                    <input type="radio" class="star" value="5" th:attr="checked=${review.rating == 5}">
-                </div>
+                <p class="review_title" th:text="${review.exhibitionName}">전시회 이름</p>
                 <div style="display: flex;">
                     <button class="clickable" style="font-size: 13px; margin-right: 10px;" onclick="editReview([[${review.id}]])">✏️</button>
                     <button class="clickable" style="font-size: 13px;" onclick="confirmDelete([[${review.id}]])">❌</button>
                 </div>
             </div>
-            <p class="review_title" th:text="${review.exhibitionName}">전시회 이름</p>
+            <div class="star-rating">
+                <input type="radio" class="star" value="1" th:attr="checked=${review.rating == 1}">
+                <input type="radio" class="star" value="2" th:attr="checked=${review.rating == 2}">
+                <input type="radio" class="star" value="3" th:attr="checked=${review.rating == 3}">
+                <input type="radio" class="star" value="4" th:attr="checked=${review.rating == 4}">
+                <input type="radio" class="star" value="5" th:attr="checked=${review.rating == 5}">
+            </div>
+            <br>
             <p class="review-content" th:text="${review.content}">리뷰 내용</p>
         </div>
     </div>

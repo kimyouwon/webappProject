@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>site_name</title>
+    <title>WETE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
         @font-face {
@@ -168,11 +168,13 @@
         font-size: 20px;
         }
 
-        #review_text{
-            width: 75%;
-            height: 100px;
-            outline: none;
-            resize: none;
+
+        .rv-box{
+
+            border: 1px solid rgb(193, 193, 193);
+            border-radius:10px;
+            padding: 10px 30px;
+            font-size:15px;
         }
 
         #edit{
@@ -230,7 +232,7 @@
 <div id="header">
     <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
     <ul id="page_list">
-        <li><a href="/home/test">취향 테스트</a></li>
+        <li><a href="/home/test">취향테스트</a></li>
         <li><a href="/exhibition">전시회</a></li>
         <li><a href="/home/login">로그인</a></li>
         <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
@@ -325,17 +327,21 @@
 
     <!-- 리뷰 목록 -->
     <div id="review_list">
-        <h2>Reviews</h2>
+        <h2>리뷰</h2>
         <div id="review_box">
             <th:block th:each="review : ${reviews}">
                 <li>
-                    <p>Content: <span th:text="${review.content}"></span></p>
-                    <p>Rating: <span th:text="${review.rating}"></span></p>
-                    <p>User ID: <span th:text="${review.userId}"></span></p>
-                    <p>Likes: <span th:text="${review.likeCount}"></span></p>
-                    <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
-                        <button type="submit">Like</button>
-                    </form>
+                    <div class="rv-box">
+                        <div style="font-size:19px;"><span style="font-weight:600;" th:text="${review.userId}"></span></div>
+                        <div>별점: <span th:text="${review.rating}"></span></div>
+                        <div>내용: <span th:text="${review.content}"></span></div>
+                        <div>👍 <span th:text="${review.likeCount}"></span>
+                            <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
+                            <button type="submit">up</button>
+                            </form>
+                        </div>
+
+                    </div>
                     <h3>Comments</h3>
                     <ul>
                         <th:block th:each="comment : ${review.comments}">
