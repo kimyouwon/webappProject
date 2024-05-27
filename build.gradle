@@ -34,6 +34,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
 
 	//추가 - 다인님꺼
 	implementation 'org.springframework.boot:spring-boot-starter'

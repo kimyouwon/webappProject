@@ -128,6 +128,12 @@ public class ExhibitionController {
 
     @PostMapping("/exhibition/{id}/review")
     public String createReview(@PathVariable("id") Long id, @ModelAttribute ReviewEntity review, HttpSession session) {
+        // 세션에서 사용자 정보 가져오기
+        String userId = (String) session.getAttribute("loginId");
+        if (userId == null) {
+            return "redirect:/home/login";
+        }
+
         // 전시회 Id, 이름을 불러오기 위한 부분
         Optional<CrawledData> exhibitionOpt = crawledDataRepository.findById(id);
 
@@ -137,12 +143,6 @@ public class ExhibitionController {
         }
 
         CrawledData exhibition = exhibitionOpt.get();
-
-        // 세션에서 사용자 정보 가져오기
-        String userId = (String) session.getAttribute("loginId");
-        if (userId == null) {
-            return "redirect:/home/login";
-        }
 
         // 사용자 닉네임 가져오기
         String userNickname = userService.getNickname(userId);
