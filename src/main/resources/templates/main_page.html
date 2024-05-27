@@ -133,6 +133,7 @@
             bottom:40px;
             font-size:30px;
             white-space: nowrap;
+            bottom:20px;
 
         }
 
@@ -143,7 +144,7 @@
             font-style: normal;
             font-size: 170px;
             color: #0028B7;
-            right:300px;
+            right:200px;
             bottom:200px;
             -webkit-text-stroke: 4px white;
             animation: wave 1.5s ease-in-out infinite;
@@ -151,18 +152,48 @@
 
 
         }
-        #banner span:nth-child(1) {animation-delay: 0.1s;}
-        #banner span:nth-child(2) {animation-delay: 0.10s;}
-        #banner span:nth-child(6) {animation-delay: 0.30s;}
-        #banner span:nth-child(8) {animation-delay: 0.40s;}
+        #banner span:nth-of-type(1) {animation-delay: 0.1s;}
+        #banner span:nth-of-type(2) {animation-delay: 0.5s;}
+        #banner span:nth-of-type(3) {animation-delay: 0.1s;}
+        #banner span:nth-of-type(4) {animation-delay: 0.5s;}
+
+       #main_text{
+            display:flex;
+            flex-direction:column;
+       }
+
+       #main_text p{
+            position:relative;
+            font-family: "Shrikhand", serif;
+            font-style: normal;
+            font-size: 100px;
+            color: #0028B7;
+            -webkit-text-stroke: 2px white;
+            white-space: nowrap;
+            left: 190px;
+            top:170px;
+       }
+
+       #main_text > p:nth-of-type(1) {
+       }
+       #main_text > p:nth-of-type(2) {
+            position:relative;
+            left: 130px;
+            top:110px;
+       }
+       #main_text > p:nth-of-type(3) {
+            left: 80px;
+            top:50px;
+       }
 
        #circle{
             position: absolute;
             background-color: white;
-            width: 400px;
-            height: 400px;
+            width: 320px;
+            height: 320px;
             border-radius: 100%;
-
+            margin-left:140px;
+            margin-bottom:50px;
         }
 
         #dog{
@@ -170,17 +201,23 @@
             width: 400px;
             height: 450px;
         }
-        #dog1{
-            position: absolute;
-            left:300px;
-            width: 400px;
-            height: 450px;
+
+        .eye1 {
+            position: relative;
+            width: 33px;
+            height: 60px;
+            bottom:110px;
+            left:447px;
+            object-fit: cover;
         }
-        #dog2{
-            position: absolute;
-            width: 400px;
-            height: 450px;
-            right:300px;
+
+        .eye2 {
+            position: relative;
+            width: 33px;
+            height: 60px;
+            bottom:113px;
+            left:463px;
+            object-fit: cover;
         }
 
 
@@ -412,12 +449,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <div id="circle"></div>
-    <img id="dog" src="/img/멈머(최종).png"/>
+    <img id="dog" src="/img/dogdog.png"/>
+    <img class="eye1" src="/img/dogeye1.png"/>
+    <img class="eye2" src="/img/dogeye2.png"/>
     <span>W</span>
     <span>E</span>
     <span>T</span>
     <span>E</span>
-    <p></p>
+    <div id="main_text">
+        <p>GO! Go!</p>
+        <p>GO! Go!</p>
+        <p>GO! Go!</p>
+    </div>
+
 
     <div class="text-line">
         wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
@@ -557,6 +601,34 @@
     targetElements.forEach((element) => {
       observer.observe(element);
     });
+
+    //눈 돌아가는 거
+        const eye1 = document.querySelector('.eye1');
+        const eye2 = document.querySelector('.eye2');
+
+        let x = 0;
+        let y = 0;
+        let followX = 0;
+        let followY = 0;
+        const speed = 1;
+
+        function animate() {
+            x += (followX - x) * speed;
+            y += (followY - y) * speed;
+            eye1.style.transform = `translate(${-x}px, ${-y}px)`;
+            eye2.style.transform = `translate(${-x}px, ${-y}px)`;
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            const mouseX = Math.max(-100, Math.min(100, window.innerWidth / 2 - e.clientX));
+            const mouseY = Math.max(-100, Math.min(100, window.innerHeight / 2 - e.clientY));
+
+            followX = (4 * mouseX) / 100;
+            followY = (8 * mouseY) / 100;
+        });
+
+        animate();
 </script>
 
 </body>

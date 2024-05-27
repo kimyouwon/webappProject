@@ -10,4 +10,5 @@ public interface LikeRepository extends JpaRepository<LikeEntity, Long> {
     long countByReview(ReviewEntity review);
     boolean existsByReviewAndUserId(ReviewEntity review, String userId);
     LikeEntity findByReviewAndUserId(ReviewEntity review, String userId);
+
 }

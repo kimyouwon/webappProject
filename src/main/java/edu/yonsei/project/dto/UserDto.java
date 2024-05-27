@@ -1,7 +1,5 @@
 package edu.yonsei.project.dto;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -37,15 +35,8 @@ public class UserDto {
     public Integer getAge() {
         return age;
     }
-    @Enumerated(EnumType.STRING)
-    private Gender gender; //사용자의 성별
-    public enum Gender {
-        MALE, FEMALE, OTHER
-    }
-    private java.util.Date birth; // 사용자의 생일
 
-    private String residence; //사용자의 거주지역
-    private String interestedArea; //사용자가 관심있어하는 지역
+    private java.util.Date birth; // 사용자의 생일
 
     private String preference; //전시회 취향 테스트 결과
 

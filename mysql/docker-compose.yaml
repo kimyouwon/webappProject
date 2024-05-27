@@ -1,7 +1,7 @@
 version: "3"
 services:
   db:
-    image: mysql:8.3.0
+    image: mysql:8.0.32
     restart: always
     command:
       - --lower_case_table_names=1
@@ -16,4 +16,4 @@ services:
       - MYSQL_ROOT_PASSWORD=root1234!!
       - TZ=Asia/Seoul
     volumes:
-      - C:\Utitlity\MYSQL:/var/lib/mysql
+      - C:\Utility\MYSQL:/var/lib/mysql

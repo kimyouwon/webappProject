@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LogoutController {
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
+    /*public String logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
@@ -24,5 +24,9 @@ public class LogoutController {
         response.addCookie(cookie);
 
         return "redirect:/home/login?logout";
+    }*/
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/home/login?logout=true";
     }
 }

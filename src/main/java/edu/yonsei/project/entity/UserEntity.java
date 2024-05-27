@@ -1,6 +1,5 @@
 package edu.yonsei.project.entity;
 
-import edu.yonsei.project.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,15 +26,8 @@ public class UserEntity {
     private String email; //사용자의 이메일
     private String phone; //사용자의 전화번호
     private Integer age; //사용자의 나이
-    @Enumerated(EnumType.STRING)
-    private UserDto.Gender gender; //사용자의 성별
-    public enum Gender {
-        MALE, FEMALE, OTHER
-    }
-    private java.util.Date birth; // 사용자의 생일
 
-    private String residence; //사용자의 거주지역
-    private String interestedArea; //사용자가 관심있어하는 지역
+    private java.util.Date birth; // 사용자의 생일
 
     private String preference; //전시회 취향 테스트 결과
 

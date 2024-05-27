@@ -14,6 +14,7 @@
         }
 
         *{
+            text-decoration: none;
             font-family: "Noto Sans KR", sans-serif;
             font-optical-sizing: auto;
             font-weight: 400;
@@ -34,17 +35,23 @@
         }
 
         #title{
-            font-size: 20px;
-            font-weight: bold;
+            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
         }
 
         #page_list{
             margin-left: 20px;
         }
-        
-        #page_list>p{
-            display: inline-block;
-            margin-left: 10px;
+
+        #page_list{
+            display: flex;
+            flex-direction: row;
+            list-style:none;
+            margin-left: 20px;
+        }
+
+        #page_list a{
+            color: #FD6F22;
+            margin-right: 10px;
         }
 
         /* 페이지배너 */
@@ -72,29 +79,35 @@
 
         #exh_info{
             margin-top: 100px;
-            display: flex;
+            display: inline-block;
+            text-align: center;
+            height:auto;
+
         }
 
         #exh_info img{
             width: 300px;
             height: 400px;
             object-position: center;
+            display: inline-block;
+
         }
 
         /* 테이블 */
         #exh_info table{
-            margin-top: 20px;
-            margin-left: 100px;
-            width: 400px;
-            height: 350px;
-            border: 1px solid rgb(207, 207, 207);
+            width: 500px;
+            height:auto;
             text-align: center;
             border-collapse:collapse;
+            display: inline-block;
+            margin:0px 30px;
+
         }
         
 
         #exh_info th,td{
             border: 1px solid rgb(207, 207, 207);
+            padding:5px;
         }
 
         #detail_box ul{
@@ -215,12 +228,13 @@
 <body link="black" vlink="black" alink="black">
 <!-- 헤더 -->
 <div id="header">
-    <p id="title">WETE</p>
-    <div id="page_list">
-        <a href="/home/test">취향 테스트</a>
-        <a href="/exhibition">전시회</a>
-        <a th:href="@{/home_auth/mypage}">마이 페이지</a>
-    </div>
+    <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
+    <ul id="page_list">
+        <li><a href="/home/test">취향 테스트</a></li>
+        <li><a href="/exhibition">전시회</a></li>
+        <li><a href="/home/login">로그인</a></li>
+        <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
+    </ul>
 </div>
 
     <!-- 페이지 설명 배너 -->
