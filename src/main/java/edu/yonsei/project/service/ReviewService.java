@@ -18,5 +18,8 @@ public class ReviewService {
     public ReviewEntity saveReview(ReviewEntity review) {
         return reviewRepository.save(review);
     }
+    public List<ReviewEntity> findByUserId(String userId) {
+        return reviewRepository.findByUserId(userId);
+    }
 
 }
