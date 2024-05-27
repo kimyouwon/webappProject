@@ -1,9 +1,10 @@
 #exh_menu_list {
     font-family: 'arial';
     text-align: center;
+    width: 40%;
 }
 #exh_menu_list ul {
-    width: 80%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }
@@ -18,7 +19,7 @@
     position: relative;
     list-style-type: none;
     font-size: 28px;
-    width: 20%;
+    width: 50%;
     box-sizing: border-box;
 }
 
@@ -50,7 +51,7 @@
 }
 
 #exh_menu_list ul.menu li .sub a {
-    width: 500%;
+    width: 200%;
     padding: 10px;
     background: #ccc;
     white-space: nowrap;
@@ -71,11 +72,11 @@
 
 @media (max-width: 768px) {
     #exh_menu_list ul.menu {
-        flex-direction: column;
+        flex-wrap: wrap;
     }
 
     #exh_menu_list ul.menu li {
-        width: 20%;
+        width: 100%;
         font-size: 24px;
     }
 
