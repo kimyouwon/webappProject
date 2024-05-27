@@ -10,8 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CrawlerService {
@@ -19,9 +23,11 @@ public class CrawlerService {
     @Autowired
     private CrawledDataRepository crawledDataRepository;
 
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+
     public void crawlAndSaveData() {
         System.setProperty("webdriver.chrome.whitelistedIps", "");
-        System.setProperty("webdriver.chrome.driver", "C:\\Spring\\springboot-project\\project\\driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Spring\\springboot-project\\webappProject\\driver\\chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
         options.setAcceptInsecureCerts(true);
@@ -120,5 +126,59 @@ public class CrawlerService {
         }
 
         return resultBuilder.toString();
+    }
+
+    //전시회 목록 가져오는 메소드
+    public List<CrawledData> getActiveExhibitions() {
+        List<CrawledData> allExhibitions = crawledDataRepository.findAll();
+        Date currentDate = new Date();
+
+        return allExhibitions.stream()
+                .filter(exhibition -> {
+                    try {
+                        String[] dates = exhibition.getDate().split("~");
+                        if (dates.length != 2) {
+                            return true;  // 날짜 형식이 올바르지 않으면 포함
+                        }
+                        Date endDate = dateFormat.parse(dates[1].trim());
+                        return !currentDate.after(endDate);  // 현재 날짜가 종료일 이후가 아니면 포함
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return true;  // 날짜 파싱 오류가 있으면 포함
+                    }
+                })
+                .collect(Collectors.toList());
+    }
+
+    //무료 전시회만 추출하는 메소드
+    public List<CrawledData> getFreeExhibitions() {
+        List<CrawledData> activeExhibitions = getActiveExhibitions();
+        return activeExhibitions.stream()
+                .filter(exhibition -> exhibition.getFee().contains("무료"))
+                .collect(Collectors.toList());
+    }
+
+    //마감 임박 전시회만 추출하는 메소드
+    public List<CrawledData> getDeadlineExhibitions() {
+        List<CrawledData> activeExhibitions = getActiveExhibitions();
+        Date currentDate = new Date();
+
+        return activeExhibitions.stream()
+                .filter(exhibition -> {
+                    try {
+                        String[] dates = exhibition.getDate().split("~");
+                        if (dates.length != 2) {
+                            return false;  // 날짜 형식이 올바르지 않으면 제외
+                        }
+                        Date endDate = dateFormat.parse(dates[1].trim());
+                        long diffInMillies = endDate.getTime() - currentDate.getTime();
+                        long diffInDays = diffInMillies / (1000 * 60 * 60 * 24);
+                        return diffInDays <= 7;  // 종료일이 7일 이내인 경우 포함
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return false;  // 날짜 파싱 오류가 있으면 제외
+                    }
+                })
+                .collect(Collectors.toList());
     }
 }

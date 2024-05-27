@@ -282,6 +282,7 @@
             object-position: center;
         }
 
+
         /* 후기란 */
         #review{
             width: auto;
@@ -441,41 +442,21 @@
 </div>
 
 <!-- 전시회 목록 -->
-<div id="exh_list">
-    <p>전시회</p>
+<div id="exh_list_box">
     <div id="poster_list">
-        <div id="poster">
-            <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
-            <p>전시회 이름</p>
-            <p>날짜</p>
+        <div id="poster" th:each="exhibition, stat : ${exhibitions}" th:if="${stat.index < 6}">
+            <a th:href="@{'/exhibition/' + ${exhibition.id}}">
+                <!--<a th:href="@{/exhibition/{id}(id=${exhibition.id})}">-->
+                <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
+                <p th:text="${exhibition.title}">전시회 이름</p>
+                <p th:text="${exhibition.date}">날짜</p>
+            </a>
         </div>
-        <div id="poster">
-            <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
-            <p>전시회 이름</p>
-            <p>날짜</p>
-        </div>
-        <div id="poster">
-            <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
-            <p>전시회 이름</p>
-            <p>날짜</p>
-        </div>
-        <div id="poster">
-            <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
-            <p>전시회 이름</p>
-            <p>날짜</p>
-        </div>
-        <div id="poster">
-            <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
-            <p>전시회 이름</p>
-            <p>날짜</p>
-        </div>
-        <div id="poster">
-            <img src="/img/b955aedd88d8788068516dbb7814cf93.jpg" />
-            <p>전시회 이름</p>
-            <p>날짜</p>
-        </div>
-        <a href="/exhibition"><p id="more">더보기 ></p></a>
     </div>
+    <a href="/exhibition"><p id="more">더보기 ></p></a>
+</div>
+
+
 
 </div>
 
