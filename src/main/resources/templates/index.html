@@ -40,6 +40,14 @@
         <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
+        <div id="header">
+            <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
+            <ul id="page_list">
+                <li><a href="/exhibition">전시회</a></li>
+                <li><a href="/home/login">로그인</a></li>
+                <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
+            </ul>
+        </div>
         <div class="container">
             <section id="main" class="mx-auto my-5 px-3 py-5">
                 <h1>나의 전시회 취향은 무엇일까?</h1>
