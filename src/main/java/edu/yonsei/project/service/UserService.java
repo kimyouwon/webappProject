@@ -5,8 +5,9 @@ import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -15,11 +16,21 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    @Transactional(readOnly = true)
+    public Optional<UserEntity> getUserByLoginId(String loginId) {
+        return userRepository.findByLoginId(loginId);
+    }
+
+    public boolean checkPassword(String inputPassword, String storedPassword) {
+        // 여기서 저장된 비밀번호와 입력된 비밀번호를 비교하는 로직을 구현합니다.
+        // 예를 들어, 해시된 비밀번호를 비교하는 경우 해시 비교 로직을 여기에 작성합니다.
+        return inputPassword.equals(storedPassword);
+    }
+
+    /*@Transactional(readOnly = true)
     public UserEntity getUserByLoginId(String loginId) throws Exception {
         return userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new Exception("User not found with loginId: " + loginId));
-    }
+    }*/
     @Transactional(readOnly = true)
     public String getNickname(String loginId) {
         return userRepository.findByLoginId(loginId)
@@ -37,10 +48,7 @@ public class UserService {
                 .email(userDto.getEmail())
                 .phone(userDto.getPhone())
                 .age(userDto.getAge())
-                .gender(userDto.getGender())
                 .birth(userDto.getBirth())
-                .residence(userDto.getResidence())
-                .interestedArea(userDto.getInterestedArea())
                 .preference(userDto.getPreference())
                 .build();
 
@@ -55,7 +63,6 @@ public class UserService {
         if (updatedUser.getEmail() != null) user.setEmail(updatedUser.getEmail());
         if (updatedUser.getPhone() != null) user.setPhone(updatedUser.getPhone());
         if (updatedUser.getNickname() != null) user.setNickname(updatedUser.getNickname());
-        if (updatedUser.getResidence() != null) user.setResidence(updatedUser.getResidence());
         if (updatedUser.getPassword() != null) user.setPassword(updatedUser.getPassword());
         // 다른 필드도 마찬가지로 업데이트
 

@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Controller
 @RequiredArgsConstructor
-public class UserController {
+public class RegisterController {
     private final UserService userService;
 
     @GetMapping("/home/register")

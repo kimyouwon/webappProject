@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.yonsei.project.service.CrawlerService;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -70,7 +71,12 @@ public class TestController {
             return "redirect:/home/login"; // 로그인 안 되어 있으면 로그인 페이지로 리디렉션
         }
         try {
-            UserEntity user = userService.getUserByLoginId(loginId);
+            Optional<UserEntity> userOpt = userService.getUserByLoginId(loginId);
+            if (!userOpt.isPresent()) {
+                model.addAttribute("error", "사용자를 찾을 수 없습니다.");
+                return "errorPage"; // 사용자가 없을 경우 에러 페이지로 이동
+            }
+            UserEntity user = userOpt.get();
             model.addAttribute("user", user);
             return "mypage_edit";
         } catch (Exception e) {
@@ -106,10 +112,16 @@ public class TestController {
         String userId = (String) session.getAttribute("loginId");
         if (userId != null) {
             try {
-                UserEntity user = userService.getUserByLoginId(userId);
-                model.addAttribute("nickname", user.getNickname());  // 닉네임을 모델에 추가
+                Optional<UserEntity> userOpt = userService.getUserByLoginId(userId);
+                if (!userOpt.isPresent()) {
+                    model.addAttribute("error", "사용자를 찾을 수 없습니다.");
+                    return "errorPage"; // 사용자를 찾을 수 없는 경우 에러 페이지로 이동
+                }
 
-                List<ReviewEntity> reviews = reviewService.findByUserId(userId);
+                UserEntity user = userOpt.get();
+                model.addAttribute("nickname", user.getNickname()); // 닉네임을 모델에 추가
+
+                List<ReviewEntity> reviews = reviewService.findByUserId(user.getLoginId());
                 model.addAttribute("reviews", reviews);
 
                 return "mypage_reviews";
@@ -129,11 +141,16 @@ public class TestController {
 
         if (loginId != null) {
             try {
-                UserEntity user = userService.getUserByLoginId(loginId);
-                model.addAttribute("nickname", user.getNickname());  // 닉네임을 모델에 추가
+                Optional<UserEntity> userOpt = userService.getUserByLoginId(loginId);
+                if (!userOpt.isPresent()) {
+                    model.addAttribute("error", "사용자를 찾을 수 없습니다.");
+                    return "errorPage"; // 사용자를 찾을 수 없는 경우 에러 페이지로 이동
+                }
+
+                UserEntity user = userOpt.get();
+                model.addAttribute("nickname", user.getNickname()); // 닉네임을 모델에 추가
                 model.addAttribute("email", user.getEmail());
                 model.addAttribute("phone", user.getPhone());
-                model.addAttribute("residence", user.getResidence());
                 return "mypage";
             } catch (Exception e) {
                 model.addAttribute("error", e.getMessage());
