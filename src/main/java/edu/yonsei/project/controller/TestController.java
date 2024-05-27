@@ -1,5 +1,6 @@
 package edu.yonsei.project.controller;
 
+import edu.yonsei.project.entity.CrawledData;
 import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.service.UserService;
 
@@ -8,21 +9,31 @@ import lombok.RequiredArgsConstructor;
 
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import edu.yonsei.project.service.CrawlerService;
+
+import java.util.List;
 
 
 @Controller
 @RequiredArgsConstructor
 public class TestController {
 
+    @Autowired
+    private CrawlerService crawlerService;
+
     private final UserService userService;
 
     //메인 페이지
     @GetMapping("/home")
-    public String showHomePage() {
+    public String showHomePage(Model model) {
+        List<CrawledData> activeExhibitions = crawlerService.getActiveExhibitions();
+        model.addAttribute("exhibitions", activeExhibitions);
         return "main_page";
     }
 

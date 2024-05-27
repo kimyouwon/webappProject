@@ -78,6 +78,7 @@
         #exh_info img{
             width: 300px;
             height: 400px;
+            object-position: center;
         }
 
         /* 테이블 */
@@ -222,54 +223,86 @@
     </div>
 </div>
 
-<!-- 페이지 설명 배너 -->
-<div id="page_banner">
-    <p th:text="${exhibition.title}">전시회 제목</p>
-</div>
-
-<!-- 전시회 상세 -->
-<div id="detail_box">
-    <!-- 전시 간략 설명 -->
-    <div id="exh_info">
-        <img th:src="${exhibition.image}" alt="Exhibition Image">
-        <table>
-            <!-- 전시 정보 -->
-        </table>
+    <!-- 페이지 설명 배너 -->
+    <div id="page_banner">
+        <p th:text="${exhibition.title}">전시회 제목</p>
     </div>
 
-    <ul>
-        <li><a href="#exh_detail" style="text-decoration:none">전시회 상세설명</a></li>
-        <li><a href="#review" style="text-decoration:none">전시 후기</a></li>
-    </ul>
+    <!-- 전시회 상세 -->
+    <div id="detail_box">
+        <!-- 전시 간략 설명 -->
+        <div id="exh_info">
+            <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
+            <table>
+                <tr>
+                    <td>전시 제목</td>
+                    <td th:text="${exhibition.title}"></td>
+                </tr>
+                <tr>
+                    <td>전시 기간</td>
+                    <td th:text="${exhibition.date}"></td>
+                </tr>
+                <tr>
+                    <td>관람시간</td>
+                    <td th:text="${exhibition.time}"></td>
+                </tr>
+                <tr>
+                    <td>휴관일</td>
+                    <td th:text="${exhibition.rest}"></td>
+                </tr>
+                <tr>
+                    <td>장르</td>
+                    <td th:text="${exhibition.genre}"></td>
+                </tr>
+                <tr>
+                    <td>관람료</td>
+                    <td th:text="${exhibition.fee}"></td>
+                </tr>
+                <tr>
+                    <td>장소</td>
+                    <td th:text="${exhibition.place}"></td>
+                </tr>
+                <tr>
+                    <td>연락처</td>
+                    <td th:text="${exhibition.contact}"></td>
+                </tr>
+                <tr>
+                    <td id='column' colspan='2' style="background-color: rgb(193, 193, 193);;"><a th:href="${exhibition.url}">전시회 페이지</a></td>
+                </tr>
+            </table>
+        </div>
 
-    <hr style="width: 80%; margin-top: 30px;">
-    <!-- 전시 상세 설명 -->
-    <div id="exh_detail">
-        <p th:text="${exhibition.text}"></p>
-    </div>
+        <ul>
+            <li><a href="#exh_detail" style="text-decoration:none">전시회 상세설명</a></li>
+            <li><a href="#review" style="text-decoration:none" >전시 후기</a></li>
+        </ul>
+        
+        <hr style="width: 80%; margin-top: 30px;">
+        <!-- 전시 상세 설명 -->
+        <div id="exh_detail">
+            <p th:text="${exhibition.text}"></p>
+        </div>
 
-    <hr style="width: 80%; margin-bottom: 70px;">
+        <hr style="width: 80%; margin-bottom: 70px;">
 
-    <!-- 전시 후기 -->
-    <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
-        <!-- 리뷰 작성란 -->
-        <div id="review">
+        <!-- 전시 후기 -->
+        <div id= "review">
             <div id="review_edit">
                 <p>평점</p>
                 <div class="star-rating">
-                    <select class="star" name="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select><br/>
+                    <input type="radio" class="star" value="1">
+                    <input type="radio" class="star" value="2">
+                    <input type="radio" class="star" value="3">
+                    <input type="radio" class="star" value="4">
+                    <input type="radio" class="star" value="5">
                 </div>
                 <p>후기</p>
                 <div id="edit">
-                    <textarea id="review_text" name="content"></textarea>
-                    <button type="submit">작성</button>
+                    <textarea id="review_text"></textarea>
+                    <button>작성</button>
                 </div>
+                
+
             </div>
         </div>
     </form>
@@ -307,10 +340,12 @@
 
 </div>
 
-<!-- 푸터 -->
-<div id="footer">
-    <p>이메일: abcda111@gmail.com</p>
-    <p>전화번호: 000-0000-0000</p>
-</div>
+    
+        <!-- 푸터 -->
+        <div id="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+    
 </body>
 </html>

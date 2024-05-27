@@ -54,31 +54,27 @@ public class CrawlerController {
 
     //전시회 목록 가져오기
     @GetMapping("/exhibition")
-    public String getActiveExhibitions(Model model) {
-        List<CrawledData> allExhibitions = crawledDataRepository.findAll();
-        Date currentDate = new Date();
-
-        //기간이 끝나지 않은 전시회만 보여주기
-        List<CrawledData> activeExhibitions = allExhibitions.stream()
-                .filter(exhibition -> {
-                    try {
-                        String[] dates = exhibition.getDate().split("~");
-                        if (dates.length != 2) {
-                            return true;  // 날짜 형식이 올바르지 않으면 포함
-                        }
-                        Date endDate = dateFormat.parse(dates[1].trim());
-                        return !currentDate.after(endDate);  // 현재 날짜가 종료일 이후가 아니면 포함
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        return true;  // 날짜 파싱 오류(ex-기간 없는 상설전)가 있으면 포함
-                    }
-                })
-                .collect(Collectors.toList());
-
+    public String getExhibitions(Model model) {
+        List<CrawledData> activeExhibitions = crawlerService.getActiveExhibitions();
         model.addAttribute("exhibitions", activeExhibitions);
         return "exhibition_T_page";
     }
 
+    //무료 전시회 목록
+    @GetMapping("/free-exhibition")
+    public String getFreeExhibitions(Model model) {
+        List<CrawledData> freeExhibitions = crawlerService.getFreeExhibitions();
+        model.addAttribute("exhibitions", freeExhibitions);
+        return "exhibition_T_page";
+    }
+
+    //마감 임박 전시회 목록
+    @GetMapping("/deadline-exhibition")
+    public String getDeadlineExhibitions(Model model) {
+        List<CrawledData> deadlineExhibitions = crawlerService.getDeadlineExhibitions();
+        model.addAttribute("exhibitions", deadlineExhibitions);
+        return "exhibition_T_page";
+    }
     //전시회 상세페이지
     /*@GetMapping("/exhibition/{id}")
     //@GetMapping("/exhibition")

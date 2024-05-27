@@ -107,8 +107,9 @@
 
         #exh_box img{
             display:inline-block;
-            width: 100%;
-            height: auto;
+            width: 250px;
+            height: 350px;
+            object-position: center;
         }
 
         /* 푸터 */
@@ -128,15 +129,25 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $("#exh_menu_list ul.sub").hide();
+
             $("#exh_menu_list ul.menu li > a").click(function(event){
-                event.preventDefault();
                 var $thisSubMenu = $(this).next("ul.sub");
-                $("#exh_menu_list ul.sub").not($thisSubMenu).slideUp("fast");
-                $thisSubMenu.slideToggle("fast");
+
+                // 만약 서브메뉴가 존재하면 기본 동작을 막고 토글 동작 수행
+                if ($thisSubMenu.length > 0) {
+                    event.preventDefault();
+                    $("#exh_menu_list ul.sub").not($thisSubMenu).slideUp("fast");
+                    $thisSubMenu.slideToggle("fast");
+                } else {
+                    // 서브메뉴가 없는 경우 기본 동작을 허용하여 링크 이동
+                    return;
+                }
             });
+
             $("#exh_menu_list ul.sub").click(function(event){
                 event.stopPropagation();
             });
+
             $(document).click(function(event) {
                 if (!$(event.target).closest("#exh_menu_list").length) {
                     $("#exh_menu_list ul.sub").slideUp("fast");
@@ -166,8 +177,9 @@
             <ul class="menu">
                 <li><a href="#">종류</a>
                     <ul class="sub">
-                        <li><a href="#">무료 전시회</a></li>
-                        <li><a href="#">마감임박 전시회</a></li>
+                        <li><a th:href="@{/exhibition}">전체 전시회</a></li>
+                        <li><a th:href="@{/free-exhibition}">무료 전시회</a></li>
+                        <li><a th:href="@{/deadline-exhibition}">마감임박 전시회</a></li>
                     </ul>
                 </li>
                 <li><a href="#">추천</a>
@@ -180,6 +192,7 @@
                 </li>
             </ul>
         </div>
+
 
         <!-- 전시회 목록 -->
         <div id="exh_list_box">
