@@ -287,9 +287,6 @@
                     <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
                         <button type="submit">Like</button>
                     </form>
-                    <form th:action="@{/review/{reviewId}/unlike(reviewId=${review.id})}" method="post">
-                        <button type="submit">Unlike</button>
-                    </form>
                     <h3>Comments</h3>
                     <ul>
                         <th:block th:each="comment : ${review.comments}">

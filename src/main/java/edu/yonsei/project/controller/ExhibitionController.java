@@ -126,25 +126,6 @@ public class ExhibitionController {
         return "redirect:/exhibition/" + reviewOpt.get().getExhibitionId();
     }
 
-    @PostMapping("/review/{reviewId}/unlike")
-    public String removeLike(@PathVariable("reviewId") Long reviewId, HttpSession session, Model model) {
-        String userId = (String) session.getAttribute("loginId");
-        if (userId == null) {
-            return "redirect:/home/login";  // 로그인 페이지로 리다이렉트
-        }
-
-        Optional<ReviewEntity> reviewOpt = reviewRepository.findById(reviewId);
-        if (reviewOpt.isPresent()) {
-            ReviewEntity review = reviewOpt.get();
-            boolean isLiked = likeService.isReviewLikedByUser(review, userId);
-            if (isLiked) {
-                likeService.removeLike(review, userId);
-            }
-        }
-
-        return "redirect:/exhibition/" + reviewOpt.get().getExhibitionId();
-    }
-
     @PostMapping("/exhibition/{id}/review")
     public String createReview(@PathVariable("id") Long id, @ModelAttribute ReviewEntity review, HttpSession session) {
         // 전시회 Id, 이름을 불러오기 위한 부분
