@@ -1,274 +1,254 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>WETE</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-        @font-face {
-            font-family: 'Freesentation-9Black';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-            font-weight: 800;
-            font-style: normal;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <title>WETE</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+            @font-face {
+                font-family: 'Freesentation-9Black';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+                font-weight: 800;
+                font-style: normal;
+            }
 
-        *{
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-            text-decoration: none;
+            *{
+                font-family: "Noto Sans KR", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+                text-decoration: none;
 
-        }
-        /* 헤더 */
-        #header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: #FD6F22;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            }
+            /* 헤더 */
+            #header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: #FD6F22;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        #title{
-            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-        }
+            #title{
+                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+            }
 
-        #page_list{
-            margin-left: 20px;
-        }
+            #page_list{
+                margin-left: 20px;
+            }
 
-        #page_list{
-            display: flex;
-            flex-direction: row;
-            list-style:none;
-            margin-left: 20px;
-        }
+            #page_list{
+                display: flex;
+                flex-direction: row;
+                list-style:none;
+                margin-left: 20px;
+            }
 
-        #page_list a{
-            color: #FD6F22;
-            margin-right: 10px;
-        }
-        /* 페이지 배너 */
-        #page_banner{
-            width: 100%;
-            height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-            background-size: 900px 200px;
-        }
-        #page_banner p{
-            padding: 60px 80px;
-            color: white;
-            font-size: 5vh;
-        }
+            #page_list a{
+                color: #FD6F22;
+                margin-right: 10px;
+            }
+            /* 페이지 배너 */
+            #page_banner{
+                width: 100%;
+                height: 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+                background-size: 900px 200px;
+            }
+            #page_banner p{
+                padding: 60px 80px;
+                color: white;
+                font-size: 5vh;
+            }
 
-        /* 선 스타일 */
-        .separator {
-            width: 100%; /* 선의 너비를 전체 너비로 설정 */
-            border-bottom: 1px solid black; /* 아래쪽 테두리를 그려 선을 표현 */
-            margin: 10px 0; /* 위아래 여백 설정 */
-        }
+            /* 선 스타일 */
+            .separator {
+                width: 100%; /* 선의 너비를 전체 너비로 설정 */
+                border-bottom: 1px solid black; /* 아래쪽 테두리를 그려 선을 표현 */
+                margin: 10px 0; /* 위아래 여백 설정 */
+            }
 
-        #black-text {
-            color: black;
-        }
+            #black-text {
+                color: black;
+            }
 
-        .orange-text {
-            font-size: 13px;
-            font-weight: bold;
-            color:  #FD6F22;
-        }
+            .orange-text {
+                font-size: 13px;
+                font-weight: bold;
+                color:  #FD6F22;
+            }
 
-        .gray-text {
-            color: gray;
-            font-size: 13px;
-        }
+            .gray-text {
+                color: gray;
+                font-size: 13px;
+            }
 
-        /* 헤더 */
-        #sub_header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 30px;
-            flex-direction: column;
-            
-        }
+            /* 헤더 */
+            #sub_header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 30px;
+                flex-direction: column;
 
-        #white{
-            width: auto;
-            height: auto;
-            margin: 50px;
-            /* background-color: rgb(145, 145, 185); */
-            display: flex;
-            align-items: center;
-            justify-items: center;
-            flex-direction: column;
-         
-        }
+            }
 
-         #box{
-            width: 1000px;
-            height: 10px;
-            margin-bottom: 30px;
-            border: 1px solid rgb(193, 193, 193);
-            padding: 30px 50px;
+            #white{
+                width: auto;
+                height: auto;
+                margin: 50px;
+                /* background-color: rgb(145, 145, 185); */
+                display: flex;
+                align-items: center;
+                justify-items: center;
+                flex-direction: column;
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+            }
 
-        /* 테이블 */
-        #white table{
-            margin-top: 20px;
-            margin-bottom: 40px;
-            width: 500px;
-            height: 350px;
-            border: 1px solid rgb(207, 207, 207);
-            text-align: center;
-        }
+            #box{
+               width: 1000px;
+               height: 10px;
+               margin-bottom: 30px;
+               border: 1px solid rgb(193, 193, 193);
+               padding: 30px 50px;
 
-        #column{
-            background-color: #0028B7;
-            color: white;
-        }
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               justify-content: center;
+            }
 
-        #odd_color{
-            background-color: #e9e9e9;
-        }
+            /* 테이블 */
+            #white table{
+                margin-top: 20px;
+                margin-bottom: 40px;
+                width: 500px;
+                height: 350px;
+                border: 1px solid rgb(207, 207, 207);
+                text-align: center;
+            }
 
-        #table_line{
-            border-right: 1px solid rgb(207, 207, 207);
-        }
+            #column{
+                background-color: #0028B7;
+                color: white;
+            }
 
-        
+            #odd_color{
+                background-color: #e9e9e9;
+            }
 
-        /* 수정버튼 */
-        
-         #edit-container {
-            margin: 10px 0px;
-        }
+            #table_line{
+                border-right: 1px solid rgb(207, 207, 207);
+            }
 
-        .edit-button {
-            width: 100px;
-            height: 40px;
-            border: none;
-            border-radius: 7px;
-            background-color: #FD6F22;
-            color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            cursor: pointer;
-            transition: 0.5s;
-        }
+            /* 수정버튼 */
+             #edit-container {
+                margin: 10px 0px;
+            }
 
-        /* 회색 버튼 스타일 */
-        .gray-button {
-            background-color: gray;
-        }
+            .edit-button {
+                width: 100px;
+                height: 40px;
+                border: none;
+                border-radius: 7px;
+                background-color: #FD6F22;
+                color: white;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                cursor: pointer;
+                transition: 0.5s;
+            }
 
-    
+            /* 회색 버튼 스타일 */
+            .gray-button {
+                background-color: gray;
+            }
 
-        /* 푸터 */
-        .footer{
-            background-color: black;
-            width: auto;
-            height: 120px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            /* 푸터 */
+            .footer{
+                background-color: black;
+                width: auto;
+                height: 120px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
 
-            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
-        }
+                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 헤더 -->
+        <div th:replace="header :: header"></div>
 
-
-
-    </style>
-</head>
-<body>
-    <!-- 헤더 -->
-    <div id="header">
-        <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-        <ul id="page_list">
-            <li><a href="/home/test">취향테스트</a></li>
-            <li><a href="/exhibition">전시회</a></li>
-            <li><a th:href="@{/logout}">로그아웃</a></li>
-            <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-        </ul>
-    </div>
-
-
-<!-- 페이지 설명 배너 -->
-    <div id="page_banner">
-        <p>마이페이지</p>
-    </div>
-
-
-    <div id = "sub_header">
-        <span> <h2 id = "black-text">개인정보 관리</h2></span>
-        <span class = "orange-text">회원 정보 수정</span>
-        <span class = "gray-text">보안 설정</span>
-    </div>
-
-    <hr style="margin: 0px 50px;">
-
-    <div id="white">
-        <table>
-            <tr>
-                <td id='column' colspan='2'>현재 회원정보</td>
-            </tr>
-            <tr>
-                <td id="table_line">닉네임</td>
-                <td>nickname</td>
-            </tr>
-            <tr id="odd_color">
-                <td>전화번호</td>
-                <td>010-0000-0000</td>
-            </tr>
-            <tr>
-                <td id="table_line">이메일</td>
-                <td>abcda111@gmail.com</td>
-            </tr>
-            <tr id="odd_color">
-                <td>주소</td>
-                <td> ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇㅇ</td>
-            </tr>
-            <tr>
-                <td id='column' colspan='2'>현재 설정된 아이디와 비밀번호</td>
-            </tr>
-            <tr>
-                <td id="table_line">아이디</td>
-                <td>id</td>
-            </tr>
-            <tr id="odd_color">
-                <td>비밀번호</td>
-                <td>password</td>
-            </tr>
-        </table>
-
-        <div id="edit-container">
-            <button class="edit-button">정보 수정하기</button>
-            <button class="edit-button gray-button">취소</button>
+        <!-- 페이지 설명 배너 -->
+        <div id="page_banner">
+            <p>마이페이지</p>
         </div>
 
-    </div>
-    
 
-    
-    <!-- 푸터 -->
-    <div class="footer">
-        <p>이메일: abcda111@gmail.com</p>
-        <p>전화번호: 000-0000-0000</p>
-    </div>
+        <div id = "sub_header">
+            <span> <h2 id = "black-text">개인정보 관리</h2></span>
+            <span class = "orange-text">회원 정보 수정</span>
+            <span class = "gray-text">보안 설정</span>
+        </div>
 
-</body>
+        <hr style="margin: 0px 50px;">
+
+        <div id="white">
+            <table>
+                <tr>
+                    <td id='column' colspan='2'>현재 회원정보</td>
+                </tr>
+                <tr>
+                    <td id="table_line">닉네임</td>
+                    <td>nickname</td>
+                </tr>
+                <tr id="odd_color">
+                    <td>전화번호</td>
+                    <td>010-0000-0000</td>
+                </tr>
+                <tr>
+                    <td id="table_line">이메일</td>
+                    <td>abcda111@gmail.com</td>
+                </tr>
+                <tr id="odd_color">
+                    <td>주소</td>
+                    <td> ㅇㅇㅇ ㅇㅇㅇ ㅇㅇㅇㅇ</td>
+                </tr>
+                <tr>
+                    <td id='column' colspan='2'>현재 설정된 아이디와 비밀번호</td>
+                </tr>
+                <tr>
+                    <td id="table_line">아이디</td>
+                    <td>id</td>
+                </tr>
+                <tr id="odd_color">
+                    <td>비밀번호</td>
+                    <td>password</td>
+                </tr>
+            </table>
+
+            <div id="edit-container">
+                <button class="edit-button">정보 수정하기</button>
+                <button class="edit-button gray-button">취소</button>
+            </div>
+        </div>
+
+        <!-- 푸터 -->
+        <div class="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+
+    </body>
 </html>

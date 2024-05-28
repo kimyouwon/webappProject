@@ -1,302 +1,293 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>WETE</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-        @font-face {
-            font-family: 'Freesentation-9Black';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-            font-weight: 800;
-            font-style: normal;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <title>WETE</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+            @font-face {
+                font-family: 'Freesentation-9Black';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+                font-weight: 800;
+                font-style: normal;
+            }
 
-        *{
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-            text-decoration: none;
+            *{
+                font-family: "Noto Sans KR", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+                text-decoration: none;
 
-        }
-        /* 헤더 */
-        #header{
-            position: relative;
-            width: auto;
-            height: 50px;
+            }
+            /* 헤더 */
+            #header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: #FD6F22;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #title{
+                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+            }
+
+            #page_list{
+                margin-left: 20px;
+            }
+
+            #page_list{
+                display: flex;
+                flex-direction: row;
+                list-style:none;
+                margin-left: 20px;
+            }
+
+            #page_list a{
+                color: #FD6F22;
+                margin-right: 10px;
+            }
+
+            /* 페이지 배너 */
+            #page_banner{
+                width: 100%;
+                height: 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+                background-size: 900px 200px;
+            }
+            #page_banner p{
+                padding: 60px 80px;
+                color: white;
+                font-size: 5vh;
+            }
+
+            /* 내용부분 */
+            #sub_header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 30px;
+                flex-direction: column;
+
+            }
+
+            #white{
+                width: auto;
+                height: auto;
+                margin: 50px;
+                display: flex;
+                align-items: center;
+                justify-items: center;
+                flex-direction: column;
+
+            }
+
+
+            #edit-container {
+                margin-top: 10px;
+            }
+
+            .edit-button {
+                width: 70px;
+                height: 40px;
+                border: none;
+                border-radius: 7px;
+                background-color: #FD6F22;
+                color: white;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                cursor: pointer;
+                transition: 0.5s;
+            }
+
+            /* 회색 버튼 스타일 */
+            .gray-button {
+                background-color: gray;
+            }
+            #review_list{
+                height: auto;
+                margin: 40px 0px;
+
+            }
+
+            .review_box{
+                margin-bottom: 30px;
+                width: 700px;
+                border: 1px solid rgb(193, 193, 193);
+                border-radius: 10px;
+                padding: 30px;
+            }
+
+            #box_top{
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .star-rating {
+                display: flex;
+                margin-bottom: 10px;
+            }
+
+            .star {
+            appearance: none;
+            padding: 1px;
+            }
+
+            .star::after {
+            content: '☆';
             color: #FD6F22;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            font-size: 20px;
+            }
 
-        #title{
-            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-        }
+            .review_title{
+                font-size: 16;
+                font-weight: 600;
+            }
 
-        #page_list{
-            margin-left: 20px;
-        }
+            /* 커서 포인터 스타일 */
+            .clickable {
+                cursor: pointer;
+                background: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
 
-        #page_list{
-            display: flex;
-            flex-direction: row;
-            list-style:none;
-            margin-left: 20px;
-        }
+            /* 푸터 */
+            .footer{
+                background-color: black;
+                width: auto;
+                height: 120px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
 
-        #page_list a{
-            color: #FD6F22;
-            margin-right: 10px;
-        }
+                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+            }
+        </style>
+        <script>
+            function editReview(reviewId) {
+                const reviewBox = document.getElementById('review-box-' + reviewId);
+                const content = reviewBox.querySelector('.review-content').innerText;
+                reviewBox.innerHTML = `
+                    <textarea class="edit-content">${content}</textarea>
+                    <button onclick="saveReview(${reviewId})">저장</button>
+                    <button onclick="cancelEdit(${reviewId}, '${content}')">취소</button>
+                `;
+            }
 
-        /* 페이지 배너 */
-        #page_banner{
-            width: 100%;
-            height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-            background-size: 900px 200px;
-        }
-        #page_banner p{
-            padding: 60px 80px;
-            color: white;
-            font-size: 5vh;
-        }
+            function saveReview(reviewId) {
+                const reviewBox = document.getElementById('review-box-' + reviewId);
+                const content = reviewBox.querySelector('.edit-content').value;
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/review/' + reviewId + '/edit', true);
+                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        location.reload();
+                    }
+                };
+                xhr.send(JSON.stringify({ content: content }));
+            }
 
-        /* 내용부분 */
-        #sub_header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 30px;
-            flex-direction: column;
-
-        }
-
-        #white{
-            width: auto;
-            height: auto;
-            margin: 50px;
-            display: flex;
-            align-items: center;
-            justify-items: center;
-            flex-direction: column;
-
-        }
-
-
-        #edit-container {
-            margin-top: 10px;
-        }
-
-        .edit-button {
-            width: 70px;
-            height: 40px;
-            border: none;
-            border-radius: 7px;
-            background-color: #FD6F22;
-            color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            cursor: pointer;
-            transition: 0.5s;
-        }
-
-        /* 회색 버튼 스타일 */
-        .gray-button {
-            background-color: gray;
-        }
-        #review_list{
-            height: auto;
-            margin: 40px 0px;
-
-        }
-
-        .review_box{
-            margin-bottom: 30px;
-            width: 700px;
-            border: 1px solid rgb(193, 193, 193);
-            border-radius: 10px;
-            padding: 30px;
-        }
-
-        #box_top{
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .star-rating {
-            display: flex;
-            margin-bottom: 10px;
-        }
-
-        .star {
-        appearance: none;
-        padding: 1px;
-        }
-
-        .star::after {
-        content: '☆';
-        color: #FD6F22;
-        font-size: 20px;
-        }
-
-        .review_title{
-            font-size: 16;
-            font-weight: 600;
-        }
-
-        /* 커서 포인터 스타일 */
-        .clickable {
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* 푸터 */
-        .footer{
-            background-color: black;
-            width: auto;
-            height: 120px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
-        }
-    </style>
-    <script>
-        function editReview(reviewId) {
-            const reviewBox = document.getElementById('review-box-' + reviewId);
-            const content = reviewBox.querySelector('.review-content').innerText;
-            reviewBox.innerHTML = `
-                <textarea class="edit-content">${content}</textarea>
-                <button onclick="saveReview(${reviewId})">저장</button>
-                <button onclick="cancelEdit(${reviewId}, '${content}')">취소</button>
-            `;
-        }
-
-        function saveReview(reviewId) {
-            const reviewBox = document.getElementById('review-box-' + reviewId);
-            const content = reviewBox.querySelector('.edit-content').value;
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/review/' + reviewId + '/edit', true);
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    location.reload();
-                }
-            };
-            xhr.send(JSON.stringify({ content: content }));
-        }
-
-        function cancelEdit(reviewId, content) {
-            const reviewBox = document.getElementById('review-box-' + reviewId);
-            reviewBox.innerHTML = `
-                <div id="box_top">
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1">
-                        <input type="radio" class="star" value="2">
-                        <input type="radio" class="star" value="3">
-                        <input type="radio" class="star" value="4">
-                        <input type="radio" class="star" value="5">
+            function cancelEdit(reviewId, content) {
+                const reviewBox = document.getElementById('review-box-' + reviewId);
+                reviewBox.innerHTML = `
+                    <div id="box_top">
+                        <div class="star-rating">
+                            <input type="radio" class="star" value="1">
+                            <input type="radio" class="star" value="2">
+                            <input type="radio" class="star" value="3">
+                            <input type="radio" class="star" value="4">
+                            <input type="radio" class="star" value="5">
+                        </div>
+                        <div style="display: flex;">
+                            <button class="clickable" style="font-size: 13px; margin-right: 10px;" onclick="editReview(${reviewId})">✏️</button>
+                            <button class="clickable" style="font-size: 13px;" onclick="confirmDelete(${reviewId})">❌</button>
+                        </div>
                     </div>
-                    <div style="display: flex;">
-                        <button class="clickable" style="font-size: 13px; margin-right: 10px;" onclick="editReview(${reviewId})">✏️</button>
-                        <button class="clickable" style="font-size: 13px;" onclick="confirmDelete(${reviewId})">❌</button>
-                    </div>
-                </div>
-                <p class="review_title">전시회 이름</p>
-                <p class="review-content">${content}</p>
-            `;
-        }
+                    <p class="review_title">전시회 이름</p>
+                    <p class="review-content">${content}</p>
+                `;
+            }
 
-        function confirmDelete(reviewId) {
-            const reviewBox = document.getElementById('review-box-' + reviewId);
-            reviewBox.innerHTML = `
-                <p>정말 삭제하시겠습니까?</p>
-                <button onclick="deleteReview(${reviewId})">삭제</button>
-                <button onclick="cancelDelete(${reviewId})">취소</button>
-            `;
-        }
+            function confirmDelete(reviewId) {
+                const reviewBox = document.getElementById('review-box-' + reviewId);
+                reviewBox.innerHTML = `
+                    <p>정말 삭제하시겠습니까?</p>
+                    <button onclick="deleteReview(${reviewId})">삭제</button>
+                    <button onclick="cancelDelete(${reviewId})">취소</button>
+                `;
+            }
 
-        function cancelDelete(reviewId) {
-            location.reload();
-        }
+            function cancelDelete(reviewId) {
+                location.reload();
+            }
 
-        function deleteReview(reviewId) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('DELETE', '/review/' + reviewId, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    location.reload();
-                }
-            };
-            xhr.send();
-        }
-    </script>
-</head>
-<body>
-    <!-- 헤더 -->
-    <div id="header">
-        <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-        <ul id="page_list">
-            <li><a href="/home/test">취향테스트</a></li>
-            <li><a href="/exhibition">전시회</a></li>
-            <li><a th:href="@{/logout}">로그아웃</a></li>
-            <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-        </ul>
-    </div>
+            function deleteReview(reviewId) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('DELETE', '/review/' + reviewId, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        location.reload();
+                    }
+                };
+                xhr.send();
+            }
+        </script>
+    </head>
+    <body>
+        <!-- 헤더 -->
+        <div th:replace="header :: header"></div>
 
-
-<!-- 페이지 설명 배너 -->
-<div id="page_banner">
-    <p>마이페이지</p>
-</div>
-
-<div id="sub_header">
-    <p th:text="${nickname} + '님의 전시회 후기 모음'"></p> <!-- 원래 h2인데 p로 바꿨어요-->
-</div>
-
-<hr style="margin: 0px 50px;">
-
-<div id="white">
-    <div id="review_list">
-        <div th:each="review : ${reviews}" class="review_box" th:id="'review-box-' + ${review.id}">
-            <div id="box_top">
-                <p class="review_title" th:text="${review.exhibitionName}">전시회 이름</p>
-                <div style="display: flex;">
-                    <button class="clickable" style="font-size: 13px; margin-right: 10px;" onclick="editReview([[${review.id}]])">✏️</button>
-                    <button class="clickable" style="font-size: 13px;" onclick="confirmDelete([[${review.id}]])">❌</button>
-                </div>
-            </div>
-            <div class="star-rating">
-                <input type="radio" class="star" value="1" th:attr="checked=${review.rating == 1}">
-                <input type="radio" class="star" value="2" th:attr="checked=${review.rating == 2}">
-                <input type="radio" class="star" value="3" th:attr="checked=${review.rating == 3}">
-                <input type="radio" class="star" value="4" th:attr="checked=${review.rating == 4}">
-                <input type="radio" class="star" value="5" th:attr="checked=${review.rating == 5}">
-            </div>
-            <br>
-            <p class="review-content" th:text="${review.content}">리뷰 내용</p>
+        <!-- 페이지 설명 배너 -->
+        <div id="page_banner">
+            <p>마이페이지</p>
         </div>
-    </div>
-</div>
 
-<!-- 푸터 -->
-<div class="footer">
-    <p>이메일: abcda111@gmail.com</p>
-    <p>전화번호: 000-0000-0000</p>
-</div>
-</body>
+        <div id="sub_header">
+            <p th:text="${nickname} + '님의 전시회 후기 모음'"></p> <!-- 원래 h2인데 p로 바꿨어요-->
+        </div>
+
+        <hr style="margin: 0px 50px;">
+
+        <div id="white">
+            <div id="review_list">
+                <div th:each="review : ${reviews}" class="review_box" th:id="'review-box-' + ${review.id}">
+                    <div id="box_top">
+                        <p class="review_title" th:text="${review.exhibitionName}">전시회 이름</p>
+                        <div style="display: flex;">
+                            <button class="clickable" style="font-size: 13px; margin-right: 10px;" onclick="editReview([[${review.id}]])">✏️</button>
+                            <button class="clickable" style="font-size: 13px;" onclick="confirmDelete([[${review.id}]])">❌</button>
+                        </div>
+                    </div>
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1" th:attr="checked=${review.rating == 1}">
+                        <input type="radio" class="star" value="2" th:attr="checked=${review.rating == 2}">
+                        <input type="radio" class="star" value="3" th:attr="checked=${review.rating == 3}">
+                        <input type="radio" class="star" value="4" th:attr="checked=${review.rating == 4}">
+                        <input type="radio" class="star" value="5" th:attr="checked=${review.rating == 5}">
+                    </div>
+                    <br>
+                    <p class="review-content" th:text="${review.content}">리뷰 내용</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 푸터 -->
+        <div class="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+    </body>
 </html>
