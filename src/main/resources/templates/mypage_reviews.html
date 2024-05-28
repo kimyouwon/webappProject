@@ -132,20 +132,19 @@
             }
 
             .star-rating {
-                display: flex;
-                margin-bottom: 10px;
-            }
+            display: flex;
+            margin-bottom: 10px;
+        }
 
-            .star {
-            appearance: none;
-            padding: 1px;
-            }
-
-            .star::after {
-            content: '☆';
-            color: #FD6F22;
+        .star {
             font-size: 20px;
-            }
+            color: #FD6F22;
+            cursor: pointer;
+        }
+
+        .filled {
+            content: '★';
+        }
 
             .review_title{
                 font-size: 16;
@@ -198,16 +197,20 @@
                     <div id="box_top">
                         <p class="review_title" th:text="${review.exhibitionName}">전시회 이름</p>
                         <div style="display: flex;">
-                            <button class="clickable" style="font-size: 13px; margin-right: 10px;" onclick="editReview([[${review.id}]])">✏️</button>
-                            <button class="clickable" style="font-size: 13px;" onclick="confirmDelete([[${review.id}]])">❌</button>
+                            <form th:action="@{/review/edit/{id}(id=${review.id})}" method="get">
+                                <button type="submit" class="edit-button">✏️</button>
+                            </form>
+                            <form th:action="@{/review/delete/{id}(id=${review.id})}" method="post">
+                                <button type="submit" class="edit-button">❌</button>
+                            </form>
                         </div>
                     </div>
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1" th:attr="checked=${review.rating == 1}">
-                        <input type="radio" class="star" value="2" th:attr="checked=${review.rating == 2}">
-                        <input type="radio" class="star" value="3" th:attr="checked=${review.rating == 3}">
-                        <input type="radio" class="star" value="4" th:attr="checked=${review.rating == 4}">
-                        <input type="radio" class="star" value="5" th:attr="checked=${review.rating == 5}">
+                    <div class="star-rating" th:data-rating="${review.rating}">
+                        <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
                     </div>
                     <br>
                     <p class="review-content" th:text="${review.content}">리뷰 내용</p>
@@ -217,5 +220,21 @@
 
         <!-- 푸터 -->
         <div th:replace="footer :: footer"></div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const starRatings = document.querySelectorAll('.star-rating');
+                starRatings.forEach(rating => {
+                    const ratingValue = rating.getAttribute('data-rating');
+                    const stars = rating.querySelectorAll('.star');
+                    stars.forEach((star, index) => {
+                        if (index < ratingValue) {
+                            star.textContent = '★';
+                        } else {
+                            star.textContent = '☆';
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
