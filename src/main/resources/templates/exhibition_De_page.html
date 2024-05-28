@@ -152,21 +152,13 @@
                 padding: 30px 50px;
             }
 
-            .star-rating {
-            display: flex;
-            margin-bottom: 20px;
-            }
+
 
             .star {
-            appearance: none;
-            padding: 1px;
+            padding: 2px 5px;
+            margin:5px 10px;
             }
 
-            .star::after {
-            content: '☆';
-            color: #FD6F22;
-            font-size: 20px;
-            }
 
 
             .rv-box{
@@ -211,16 +203,23 @@
                 padding: 30px 50px;
             }
 
+            #review_text{
+                width:80%
+            }
+
             /* 푸터 */
             #footer{
                 background-color: black;
                 width: auto;
-                height: 120px;
+                height: 100px;
                 color: white;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+                font-size:13px;
+                padding:10px;
             }
         </style>
     </head>
@@ -295,16 +294,17 @@
             <!-- 리뷰 작성란 -->
             <div id="review">
                 <div id="review_edit">
-                    <p>평점</p>
-                    <div class="star-rating">
-                        <select class="star" name="rating">
+                    <div style="display:flex; align-items: center; margin-bottom:10px;">
+                        <p>평점</p>
+                        <select class="star"  name="rating">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                        </select><br/>
+                        </select>
                     </div>
+
                     <p>후기</p>
                     <div id="edit">
                         <textarea id="review_text" name="content"></textarea>
@@ -321,10 +321,15 @@
                 <th:block th:each="review : ${reviews}">
                     <li>
                         <div class="rv-box">
-                            <div style="font-size:19px;"><span style="font-weight:600;" th:text="${review.userId}"></span></div>
-                            <div>별점: <span th:text="${review.rating}"></span></div>
-                            <div>내용: <span th:text="${review.content}"></span></div>
-                            <div>👍 <span th:text="${review.likeCount}"></span>
+                            <div style="display:flex; align-items: center;">
+                                <div style="font-size:19px;"><span style="font-weight:600;" th:text="${review.userId}"></span></div>
+                                <div style="margin-left:15px">평점: <span th:text="${review.rating}"></span></div>
+                            </div>
+                            <hr style="width: 100%; margin:8px 0px;">
+
+                            <div><span th:text="${review.content}"></span></div>
+
+                            <div style="display:flex; align-items: center; margin-top:10px;">👍 <span th:text="${review.likeCount}"></span>
                                 <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
                                 <button type="submit">up</button>
                                 </form>
@@ -349,10 +354,7 @@
             </div>
         </div>
     </div>
-            <!-- 푸터 -->
-            <div id="footer">
-                <p>이메일: abcda111@gmail.com</p>
-                <p>전화번호: 000-0000-0000</p>
-            </div>
+    <!-- 푸터 -->
+    <div th:replace="footer :: footer"></div>
     </body>
 </html>

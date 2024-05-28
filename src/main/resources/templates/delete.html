@@ -174,23 +174,22 @@
             }
 
             /* 푸터 */
-            .footer{
+            #footer{
                 background-color: black;
                 width: auto;
-                height: 120px;
+                height: 100px;
                 color: white;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+                font-size:13px;
+                padding:10px;
             }
         </style>
     </head>
     <body>
-        <!-- 뒤로가기 버튼 -->
-        <!-- <button onclick="goBack()">뒤로가기</button> -->
-        <!-- 굳이 웹사이트에 있어야할까 싶어서 뻈습니다 -->
 
         <!-- 헤더 -->
         <div th:replace="header :: header"></div>
@@ -224,10 +223,7 @@
         </div>
     </div>
 
-    <!-- 푸터 -->
-    <div class="footer">
-        <p>이메일: abcda111@gmail.com</p>
-        <p>전화번호: 000-0000-0000</p>
-    </div>
+        <!-- 푸터 -->
+        <div th:replace="footer :: footer"></div>
 </body>
 </html>
