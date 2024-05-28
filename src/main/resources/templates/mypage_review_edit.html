@@ -5,46 +5,67 @@
     <title>리뷰 수정</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-        @font-face {
-            font-family: 'Freesentation-9Black';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-            font-weight: 800;
-            font-style: normal;
-        }
+            @font-face {
+                font-family: 'Freesentation-9Black';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+                font-weight: 800;
+                font-style: normal;
+            }
 
-        * {
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-            text-decoration: none;
-        }
+            *{
+                font-family: "Noto Sans KR", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+                text-decoration: none;
 
-        #header {
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: #FD6F22;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            }
+            /* 헤더 */
+            #header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: #FD6F22;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        #title {
-            font-size: 20px;
-            font-weight: bold;
-        }
+            #title{
+                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+            }
 
-        #page_list {
-            margin-left: 20px;
-        }
+            #page_list{
+                margin-left: 20px;
+            }
 
-        #page_list > p {
-            display: inline-block;
-            margin-left: 10px;
-        }
+            #page_list{
+                display: flex;
+                flex-direction: row;
+                list-style:none;
+                margin-left: 20px;
+            }
+
+            #page_list a{
+                color: #FD6F22;
+                margin-right: 10px;
+            }
+
+            /* 페이지 배너 */
+            #page_banner{
+                width: 100%;
+                height: 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+                background-size: 900px 200px;
+            }
+            #page_banner p{
+                padding: 60px 80px;
+                color: white;
+                font-size: 5vh;
+            }
+
 
         #edit_form {
             padding: 20px;
@@ -65,24 +86,41 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        /* 푸터 */
+            #footer{
+                background-color: black;
+                width: auto;
+                height: 100px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+                font-size:13px;
+                padding:10px;
+            }
+
     </style>
 </head>
 <body>
-<div id="header">
-    <p id="title">리뷰 수정</p>
-    <div id="page_list">
-        <a href="/home/test">취향 테스트</a>
-        <a href="/exhibition">전시회</a>
-        <a th:href="@{/home_auth/mypage}">마이 페이지</a>
+    <!-- 헤더 -->
+    <div th:replace="header :: header"></div>
+    <!-- 페이지 설명 배너 -->
+    <div id="page_banner">
+        <p>마이페이지</p>
     </div>
-</div>
-<!--html수정하실 때 여기만 살려주세요-->
-<div id="edit_form">
-    <form th:action="@{/review/edit/{id}(id=${review.id})}" method="post">
-        <input type="hidden" th:value="${review.id}" name="id"/>
-        <textarea class="input-field" name="content" th:text="${review.content}"></textarea>
-        <button type="submit" class="submit-button">수정 완료</button>
-    </form>
-</div>
+
+    <!--html수정하실 때 여기만 살려주세요-->
+    <div id="edit_form">
+        <form th:action="@{/review/edit/{id}(id=${review.id})}" method="post">
+            <input type="hidden" th:value="${review.id}" name="id"/>
+            <textarea class="input-field" name="content" th:text="${review.content}"></textarea>
+            <button type="submit" class="submit-button">수정 완료</button>
+        </form>
+    </div>
+    <!-- 푸터 -->
+    <div th:replace="footer :: footer"></div>
 </body>
 </html>
