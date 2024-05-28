@@ -1,250 +1,231 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>마이 페이지 화면</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-        @font-face {
-            font-family: 'Freesentation-9Black';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-            font-weight: 800;
-            font-style: normal;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <title>마이 페이지 화면</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+            @font-face {
+                font-family: 'Freesentation-9Black';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+                font-weight: 800;
+                font-style: normal;
+            }
 
-        *{
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-            text-decoration: none;
+            *{
+                font-family: "Noto Sans KR", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+                text-decoration: none;
 
-        }
-        /* 헤더 */
-        #header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: #FD6F22;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            }
+            /* 헤더 */
+            #header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: #FD6F22;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        #title{
-            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-        }
+            #title{
+                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+            }
 
-        #page_list{
-            margin-left: 20px;
-        }
+            #page_list{
+                margin-left: 20px;
+            }
 
-        #page_list{
-            display: flex;
-            flex-direction: row;
-            list-style:none;
-            margin-left: 20px;
-        }
+            #page_list{
+                display: flex;
+                flex-direction: row;
+                list-style:none;
+                margin-left: 20px;
+            }
 
-        #page_list a{
-            color: #FD6F22;
-            margin-right: 10px;
-        }
-
-        
-        /* 페이지 배너 */
-        #page_banner{
-            width: 100%;
-            height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-            background-size: 900px 200px;
-        }
-        #page_banner p{
-            padding: 60px 80px;
-            color: white;
-            font-size: 40px;
-            font-family: 'Freesentation-9Black';
-        }
-      
-
-        /* 개인정보 */
-
-        #sub_header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 30px;
-            flex-direction: column;
-        }
-        
-        #infor{
-            background-color: #FD6F22;
-            width: auto;
-            height: 120px;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #leave_text{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        #box{
-            width: 50%;
-            border: 2px solid gray;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            margin: 30px;
-        }
-
-        .input_leave{
-            width: 30%;
-            height: 40px;
-            border-width: 1;
-            margin: 30px;
-            padding: 10px;
-        }
+            #page_list a{
+                color: #FD6F22;
+                margin-right: 10px;
+            }
 
 
+            /* 페이지 배너 */
+            #page_banner{
+                width: 100%;
+                height: 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+                background-size: 900px 200px;
+            }
+            #page_banner p{
+                padding: 60px 80px;
+                color: white;
+                font-size: 40px;
+                font-family: 'Freesentation-9Black';
+            }
 
-        /* 기능버튼 */
-        #buttons{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .Container{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        
-        #edit-container {
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
-        #edit-container p{
-            margin-top: 10px;
-            text-align: center;
-        }
-        
-        #edit-container a{
-            color: white;
-            text-decoration: none;
-        }
 
-        .edit-button {
-            width: 170px;
-            height: 40px;
-            border: none;
-            border-radius: 7px;
-            color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            cursor: pointer;
-            transition: 0.5s;
-            margin-right: 20px;
-        }
+            /* 개인정보 */
 
-        /* 종료 버튼 스타일 */
-        .red-button {
-            background-color: red;
-        }
-        
-        .blue-button{
-            background-color: blue;
-        }
+            #sub_header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 30px;
+                flex-direction: column;
+            }
 
-        /* 푸터 */
-        .footer{
-            background-color: black;
-            width: auto;
-            height: 120px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            #infor{
+                background-color: #FD6F22;
+                width: auto;
+                height: 120px;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
-        }
-    </style>
+            #leave_text{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 30px;
+            }
 
-</head>
-<body>
-    <!-- 뒤로가기 버튼 -->
-    <!-- <button onclick="goBack()">뒤로가기</button> -->
-    <!-- 굳이 웹사이트에 있어야할까 싶어서 뻈습니다 -->
+            #box{
+                width: 50%;
+                border: 2px solid gray;
+                border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 30px;
+                margin: 30px;
+            }
 
-    <!-- 헤더 -->
-    <div id="header">
-        <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-        <ul id="page_list">
-            <li><a href="/home/test">취향테스트</a></li>
-            <li><a href="/exhibition">전시회</a></li>
-            <li><a th:href="@{/logout}">로그아웃</a></li>
-            <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-        </ul>
-    </div>
+            .input_leave{
+                width: 30%;
+                height: 40px;
+                border-width: 1;
+                margin: 30px;
+                padding: 10px;
+            }
 
-    <!-- 페이지 설명 배너 -->
-    <div id="page_banner">
-        <p>마이페이지</p>
-    </div>
-    
-    <div id = "sub_header">
-        <h2>회원탈퇴</h2>
-    </div>
 
-    <hr style="margin: 0px 50px;">
 
-    <div id="leave_text">
-        <div id="box">
-            <h3>정말로 회원 탈퇴를 하시겠습니까?</h3>
-            <p>탈퇴하시는 경우 아래에 '탈퇴하겠습니다' 적어주시길 바랍니다.</p>
+            /* 기능버튼 */
+            #buttons{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .Container{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+
+            #edit-container {
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            #edit-container p{
+                margin-top: 10px;
+                text-align: center;
+            }
+
+            #edit-container a{
+                color: white;
+                text-decoration: none;
+            }
+
+            .edit-button {
+                width: 170px;
+                height: 40px;
+                border: none;
+                border-radius: 7px;
+                color: white;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                cursor: pointer;
+                transition: 0.5s;
+                margin-right: 20px;
+            }
+
+            /* 종료 버튼 스타일 */
+            .red-button {
+                background-color: red;
+            }
+
+            .blue-button{
+                background-color: blue;
+            }
+
+            /* 푸터 */
+            .footer{
+                background-color: black;
+                width: auto;
+                height: 120px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 뒤로가기 버튼 -->
+        <!-- <button onclick="goBack()">뒤로가기</button> -->
+        <!-- 굳이 웹사이트에 있어야할까 싶어서 뻈습니다 -->
+
+        <!-- 헤더 -->
+        <div th:replace="header :: header"></div>
+
+        <!-- 페이지 설명 배너 -->
+        <div id="page_banner">
+            <p>마이페이지</p>
         </div>
 
-        <input class="input_leave" type = "text">
-        
-    </div>
-    
-
-    
-
-    <!-- 항목들 -->
-    <div id="buttons">
-
-        <div id="edit-container">
-            <button class="edit-button red-button"><a href="">확인</a></button>
-            <button class="edit-button blue-button"><a href="">취소</a></button>
+        <div id = "sub_header">
+            <h2>회원탈퇴</h2>
         </div>
 
-    </div>
-    
+        <hr style="margin: 0px 50px;">
 
-    
-    <!-- 푸터 -->
-    <div class="footer">
-        <p>이메일: abcda111@gmail.com</p>
-        <p>전화번호: 000-0000-0000</p>
-    </div>
-</body>
+        <div id="leave_text">
+            <div id="box">
+                <h3>정말로 회원 탈퇴를 하시겠습니까?</h3>
+                <p>탈퇴하시는 경우 아래에 '탈퇴하겠습니다' 적어주시길 바랍니다.</p>
+            </div>
+            <input class="input_leave" type = "text">
+        </div>
+
+        <!-- 항목들 -->
+        <div id="buttons">
+            <div id="edit-container">
+                <button class="edit-button red-button"><a href="">확인</a></button>
+                <button class="edit-button blue-button"><a href="">취소</a></button>
+            </div>
+        </div>
+
+        <!-- 푸터 -->
+        <div class="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+    </body>
 </html>
