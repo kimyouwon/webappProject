@@ -109,32 +109,7 @@ public class TestController {
     public String showMypageReviews() {
         return "mypage_reviews";
     }*/
-    @GetMapping("/home_auth/mypage/reviews")
-    public String showMypageReviews(HttpSession session, Model model) {
-        String userId = (String) session.getAttribute("loginId");
-        if (userId != null) {
-            try {
-                Optional<UserEntity> userOpt = userService.getUserByLoginId(userId);
-                if (!userOpt.isPresent()) {
-                    model.addAttribute("error", "사용자를 찾을 수 없습니다.");
-                    return "errorPage"; // 사용자를 찾을 수 없는 경우 에러 페이지로 이동
-                }
 
-                UserEntity user = userOpt.get();
-                model.addAttribute("nickname", user.getNickname()); // 닉네임을 모델에 추가
-
-                List<ReviewEntity> reviews = reviewService.findByUserId(user.getLoginId());
-                model.addAttribute("reviews", reviews);
-
-                return "mypage_reviews";
-            } catch (Exception e) {
-                model.addAttribute("error", e.getMessage());
-                return "errorPage";
-            }
-        } else {
-            return "redirect:/home/login"; // 세션에 loginId가 없다면 로그인 페이지로 리다이렉트
-        }
-    }
 
     //마이페이지
     @GetMapping("/home_auth/mypage")

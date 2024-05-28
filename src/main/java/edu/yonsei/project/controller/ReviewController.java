@@ -1,7 +1,10 @@
 package edu.yonsei.project.controller;
 
 import edu.yonsei.project.entity.ReviewEntity;
-import edu.yonsei.project.repository.ReviewRepository;
+import edu.yonsei.project.entity.UserEntity;
+import edu.yonsei.project.service.ReviewService;
+import edu.yonsei.project.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,46 +12,58 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
+import java.util.Optional;
+
 @Controller
-@RequestMapping("/review")
+@RequiredArgsConstructor
 public class ReviewController {
 
     @Autowired
-    private ReviewRepository reviewRepository;
+    private ReviewService reviewService;
 
-    @PostMapping("/{reviewId}/edit")
-    public String editReview(@PathVariable("reviewId") Long reviewId,
-                             @RequestParam("content") String content,
-                             HttpSession session, Model model) {
-        String userId = (String) session.getAttribute("loginId");
-        if (userId == null) {
-            return "redirect:/home/login";  // 로그인 페이지로 리다이렉트
-        }
+    private final UserService userService;
 
-        ReviewEntity review = reviewRepository.findById(reviewId).orElse(null);
-        if (review != null && review.getUserId().equals(userId)) {
-            review.setContent(content);
-            reviewRepository.save(review);
-        }
+    //마이페이지에서 작성한 전시회 후기 보여줌.
+   @GetMapping("/home_auth/mypage/reviews")
+   public String showMypageReviews(HttpSession session, Model model) {
+       String userId = (String) session.getAttribute("loginId");
+       if (userId != null) {
+           try {
+               Optional<UserEntity> userOpt = userService.getUserByLoginId(userId);
+               if (!userOpt.isPresent()) {
+                   model.addAttribute("error", "사용자를 찾을 수 없습니다.");
+                   return "errorPage"; // 사용자를 찾을 수 없는 경우 에러 페이지로 이동
+               }
 
-        return "redirect:/home_auth/mypage";
+               UserEntity user = userOpt.get();
+               model.addAttribute("nickname", user.getNickname()); // 닉네임을 모델에 추가
+
+               List<ReviewEntity> reviews = reviewService.findByUserId(user.getLoginId());
+               model.addAttribute("reviews", reviews);
+
+               return "mypage_reviews";
+           } catch (Exception e) {
+               model.addAttribute("error", e.getMessage());
+               return "errorPage";
+           }
+       } else {
+           return "redirect:/home/login"; // 세션에 loginId가 없다면 로그인 페이지로 리다이렉트
+       }
+   }
+
+    //리뷰 수정 페이지
+    @GetMapping("/review/edit/{id}")
+    public String editReview(@PathVariable("id") Long id, Model model) {
+        ReviewEntity review = reviewService.getReviewById(id);
+        model.addAttribute("review", review);
+        return "mypage_review_edit"; // 리뷰 수정 페이지로 이동
     }
 
-    @DeleteMapping("/{reviewId}")
-    @ResponseBody
-    public String deleteReview(@PathVariable("reviewId") Long reviewId,
-                               HttpSession session) {
-        String userId = (String) session.getAttribute("loginId");
-        if (userId == null) {
-            return "redirect:/home/login";  // 로그인 페이지로 리다이렉트
-        }
-
-        ReviewEntity review = reviewRepository.findById(reviewId).orElse(null);
-        if (review != null && review.getUserId().equals(userId)) {
-            reviewRepository.delete(review);
-            return "Success";
-        }
-
-        return "Failure";
+    //리뷰 수정 로직 처리.
+    @PostMapping("/review/edit/{id}")
+    public String updateReview(@PathVariable("id") Long id, @RequestParam String content) {
+        reviewService.updateReview(id, content);
+        return "redirect:/mypage_reviews"; // 리뷰 목록 페이지로 리다이렉트
     }
 }

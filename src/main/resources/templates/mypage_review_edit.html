@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰 수정</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        * {
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        #header {
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #page_list {
+            margin-left: 20px;
+        }
+
+        #page_list > p {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        #edit_form {
+            padding: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .submit-button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <p id="title">리뷰 수정</p>
+    <div id="page_list">
+        <a href="/home/test">취향 테스트</a>
+        <a href="/exhibition">전시회</a>
+        <a th:href="@{/home_auth/mypage}">마이 페이지</a>
+    </div>
+</div>
+<!--html수정하실 때 여기만 살려주세요-->
+<div id="edit_form">
+    <form th:action="@{/review/edit/{id}(id=${review.id})}" method="post">
+        <input type="hidden" th:value="${review.id}" name="id"/>
+        <textarea class="input-field" name="content" th:text="${review.content}"></textarea>
+        <button type="submit" class="submit-button">수정 완료</button>
+    </form>
+</div>
+</body>
+</html>

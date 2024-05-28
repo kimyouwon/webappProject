@@ -27,7 +27,7 @@ public class CrawlerService {
 
     public void crawlAndSaveData() {
         System.setProperty("webdriver.chrome.whitelistedIps", "");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Spring\\springboot-project\\webappProject\\driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Spring\\springboot-project\\project\\driver\\chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
         options.setAcceptInsecureCerts(true);
