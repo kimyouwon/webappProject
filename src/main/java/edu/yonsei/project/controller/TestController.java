@@ -46,7 +46,9 @@ public class TestController {
 
     //로그인된 메인 페이지
     @GetMapping("/home_auth")
-    public String showHomeAuthPage() {
+    public String showHomeAuthPage(Model model) {
+        List<CrawledData> activeExhibitions = crawlerService.getActiveExhibitions();
+        model.addAttribute("exhibitions", activeExhibitions);
         return "main_page_auth";
     }
 
