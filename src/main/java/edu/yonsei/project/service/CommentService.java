@@ -18,6 +18,10 @@ public class CommentService {
         return commentRepository.findByReview(review);
     }
 
+    public List<CommentEntity> getCommentsByUserId(String userId) {
+        return commentRepository.findByUserId(userId);
+    }
+
     public CommentEntity addComment(CommentEntity comment) {
         return commentRepository.save(comment);
     }
