@@ -62,7 +62,7 @@
             font-size: 5vh;
         }
 
-        /* 중헤더 */
+        /* 내용부분 */
         #sub_header {
             position: relative;
             width: auto;
@@ -74,12 +74,7 @@
             margin: 30px;
             flex-direction: column;
         }
-        .gray-text {
-            color: gray;
-            font-size: 13px;
-        }
 
-        /* 비밀번호 입력 */
         #white {
             width: auto;
             height: auto;
@@ -90,67 +85,52 @@
             flex-direction: column;
         }
 
-        .password {
-            width: 40%;
-            height: 40px;
-            border-width: 1;
-            margin: 30px;
-            padding: 10px;
+        #review_list {
+            height: auto;
+            margin: 40px 0px;
         }
 
-        #box {
-            width: 600px;
-            height: 50px;
-            border: 2px solid gray;
+        .review_box, .comment_box {
+            margin-bottom: 30px;
+            width: 700px;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 30px;
         }
 
-        #edit-container {
-            margin-top: 10px;
-        }
-
-        .edit-button {
-            width: 70px;
-            height: 40px;
-            border: none;
-            border-radius: 7px;
-            background-color: #FD6F22;
-            color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            cursor: pointer;
-            transition: 0.5s;
-        }
-
-        /* 회색 버튼 스타일 */
-        .gray-button {
-            background-color: gray;
-        }
-
-        .whitebox {
-            background-color: white;
-            width: auto;
-            height: 600px;
-            color: white;
+        #box_top {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            justify-content: space-between;
         }
 
-        /* 에러 메시지 박스 */
-        .error-box {
-            background-color: #ffdddd;
-            color: red;
-            border: 1px solid red;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 20px;
+        .star-rating {
             display: flex;
-            align-items: center;
+            margin-bottom: 10px;
         }
 
-        .error-box .exclamation {
+        .star {
+            appearance: none;
+            padding: 1px;
+        }
+
+        .star::after {
+            content: '☆';
+            color: #FD6F22;
             font-size: 20px;
-            margin-right: 10px;
+        }
+
+        .review_title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* 커서 포인터 스타일 */
+        .clickable {
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
         }
 
         /* 푸터 */
@@ -179,28 +159,33 @@
 </div>
 
 <div id="sub_header">
-    <span><h2>개인정보 관리</h2></span>
-    <span class="gray-text">비밀번호 인증</span>
+    <p th:text="${nickname} + '님의 댓글 모음'"></p>
 </div>
 
 <hr style="margin: 0px 50px;">
-<form th:action="@{/home_auth/mypage/auth/verify}" method="post">
-    <div id="white">
-        <div th:if="${error}" class="error-box">
-            <span class="exclamation">❗</span>
-            <p th:text="${error}"></p>
-        </div>
-        <h2>보안을 위해 비밀번호를 한 번 더 입력해주세요.</h2>
-        <input type="password" class="password" placeholder="비밀번호 입력" name="password" required>
 
-        <div id="edit-container">
-            <button class="edit-button" type="submit">확인</button>
-            <button class="edit-button gray-button" type="button" onclick="window.history.back()">취소</button>
+<div id="white">
+    <div id="review_list">
+        <div th:each="comment : ${comments}" class="comment_box" th:id="'comment-box-' + ${comment.id}">
+            <div id="box_top">
+                <p class="review_title" th:text="${comment.review.exhibitionName}">전시회 이름</p>
+                <p th:text="'작성자: ' + ${comment.userId}">작성자: 사용자 ID</p>
+            </div>
+            <br>
+            <p class="comment-content" th:text="${comment.content}">댓글 내용</p>
+            <form th:action="@{/comment/edit/{id}(id=${comment.id})}" method="get">
+                <button type="submit" class="edit-button">✏️</button>
+            </form>
+            <form th:action="@{/comment/delete/{id}(id=${comment.id})}" method="post">
+                <button type="submit" class="edit-button">❌</button>
+            </form>
         </div>
     </div>
-</form>
+</div>
 
 <!-- 푸터 -->
 <div th:replace="footer :: footer"></div>
 </body>
 </html>
+
+

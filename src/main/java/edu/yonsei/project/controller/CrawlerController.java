@@ -1,27 +1,21 @@
 package edu.yonsei.project.controller;
 
-import edu.yonsei.project.dto.ReviewDto;
 import edu.yonsei.project.entity.CrawledData;
-import edu.yonsei.project.entity.ReviewEntity;
-import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.repository.CrawledDataRepository;
 import edu.yonsei.project.repository.ReviewRepository;
 import edu.yonsei.project.service.CrawlerService;
 import edu.yonsei.project.service.ReviewService;
 import edu.yonsei.project.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 public class CrawlerController {
@@ -40,9 +34,6 @@ public class CrawlerController {
 
     @Autowired
     private ReviewService reviewService;
-
-
-
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
     //크롤링 페이지
@@ -75,6 +66,26 @@ public class CrawlerController {
         model.addAttribute("exhibitions", deadlineExhibitions);
         return "exhibition_T_page";
     }
+
+    // 키워드로 전시회 목록 가져오기
+    @GetMapping("/exh_keyword/{key_num}")
+    public String getExhibitionsByKeyNumber(@PathVariable int key_num, Model model) {
+        String keyword = getKeywordByNumber(key_num);
+        List<CrawledData> keywordExhibitions = crawlerService.getExhibitionsByKeyword(keyword);
+        model.addAttribute("exhibitions", keywordExhibitions);
+        return "exhibition_T_page";
+    }
+
+    private String getKeywordByNumber(int key_num) {
+        switch (key_num) {
+            case 1: return "원화/실물 전시회";
+            case 2: return "미디어 아트";
+            case 3: return "몰입형 체험 전시";
+            case 4: return "뮤지엄";
+            default: throw new IllegalArgumentException("Invalid key number: " + key_num);
+        }
+    }
+
     //전시회 상세페이지
     /*@GetMapping("/exhibition/{id}")
     //@GetMapping("/exhibition")

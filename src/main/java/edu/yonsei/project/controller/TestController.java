@@ -52,128 +52,15 @@ public class TestController {
         return "main_page_auth";
     }
 
-    //취향 테스트
-    @GetMapping({"/home/test", "/home_auth/test"})
-    public String showTestPage() {
-        return "index";
-    }
-
-    //마이페이지 수정 전 디테일 페이지
-    @GetMapping("home_auth/mypage/auth/edit_detail")
-    public String showMypageEditDetail() {
-        return "mypage_edit_detail";
-    }
-
-    // 마이페이지 수정 페이지
-    @GetMapping("/home_auth/mypage/auth/edit")
-    public String showMypageEditPage(HttpSession session, Model model) {
-        String loginId = (String) session.getAttribute("loginId");
-        if (loginId == null) {
-            model.addAttribute("error", "로그인이 필요합니다.");
-            return "redirect:/home/login"; // 로그인 안 되어 있으면 로그인 페이지로 리디렉션
-        }
-        try {
-            Optional<UserEntity> userOpt = userService.getUserByLoginId(loginId);
-            if (!userOpt.isPresent()) {
-                model.addAttribute("error", "사용자를 찾을 수 없습니다.");
-                return "errorPage"; // 사용자가 없을 경우 에러 페이지로 이동
-            }
-            UserEntity user = userOpt.get();
-            model.addAttribute("user", user);
-            return "mypage_edit";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "errorPage"; // 에러 발생 시 에러 페이지로 이동
-        }
-    }
-
-    @PostMapping("/home_auth/mypage/auth/edit")
-    public String updateUser(@ModelAttribute UserEntity user, HttpSession session, Model model) {
-        String loginId = (String) session.getAttribute("loginId");
-
-        /*if (loginId == null || !loginId.equals(user.getLoginId())) {
-            model.addAttribute("error", "세션 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
-            return "redirect:/home/login";
-        }*/ //이 코드 넣으니깐 계속 login 페이지로만 가짐
-        try {
-            userService.updateUser(loginId, user); // 사용자 정보 업데이트
-            return "redirect:/home_auth/mypage"; // 업데이트 후 마이페이지로 리디렉션
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "errorPage"; // 에러 발생 시 에러 페이지로 이동
-        }
-    }
-
-    //본인이 작성한 후기 모음집
-    /*@GetMapping("/home_auth/mypage/reviews")
-    public String showMypageReviews() {
-        return "mypage_reviews";
-    }*/
-    @GetMapping("/home_auth/mypage/reviews")
-    public String showMypageReviews(HttpSession session, Model model) {
-        String userId = (String) session.getAttribute("loginId");
-        if (userId != null) {
-            try {
-                Optional<UserEntity> userOpt = userService.getUserByLoginId(userId);
-                if (!userOpt.isPresent()) {
-                    model.addAttribute("error", "사용자를 찾을 수 없습니다.");
-                    return "errorPage"; // 사용자를 찾을 수 없는 경우 에러 페이지로 이동
-                }
-
-                UserEntity user = userOpt.get();
-                model.addAttribute("nickname", user.getNickname()); // 닉네임을 모델에 추가
-
-                List<ReviewEntity> reviews = reviewService.findByUserId(user.getLoginId());
-                model.addAttribute("reviews", reviews);
-
-                return "mypage_reviews";
-            } catch (Exception e) {
-                model.addAttribute("error", e.getMessage());
-                return "errorPage";
-            }
-        } else {
-            return "redirect:/home/login"; // 세션에 loginId가 없다면 로그인 페이지로 리다이렉트
-        }
-    }
-
-    //마이페이지
-    @GetMapping("/home_auth/mypage")
-    public String getUserInfo(HttpSession session, Model model) {
-        String loginId = (String) session.getAttribute("loginId"); //세션에서 loginId를 기준으로 불러옴.
-
-        if (loginId != null) {
-            try {
-                Optional<UserEntity> userOpt = userService.getUserByLoginId(loginId);
-                if (!userOpt.isPresent()) {
-                    model.addAttribute("error", "사용자를 찾을 수 없습니다.");
-                    return "errorPage"; // 사용자를 찾을 수 없는 경우 에러 페이지로 이동
-                }
-
-                UserEntity user = userOpt.get();
-                model.addAttribute("nickname", user.getNickname()); // 닉네임을 모델에 추가
-                model.addAttribute("email", user.getEmail());
-                model.addAttribute("phone", user.getPhone());
-                return "mypage";
-            } catch (Exception e) {
-                model.addAttribute("error", e.getMessage());
-                return "errorPage";
-            }
-        } else {
-            return "redirect:/home/login"; // 세션에 loginId가 없다면 로그인 페이지로 리다이렉트
-        }
-    }
     //회원 탈퇴 페이지
     @GetMapping("/home_auth/mypage/delete")
     public String showDelete() {
         return "delete";
     }
+
     @PostMapping("/home_auth/mypage/delete")
     public String deleteUser(HttpSession session, RedirectAttributes redirectAttributes) {
         String loginId = (String) session.getAttribute("loginId"); //세션에서 loginId를 기준으로 불러옴.
-       /* if (userId == null) {
-            redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
-            return "redirect:/login";  // 로그인 페이지로 리다이렉션
-        }*/
         try {
             userService.deleteUserByLoginId(loginId);
             session.invalidate();  // 탈퇴 후 세션 무효화

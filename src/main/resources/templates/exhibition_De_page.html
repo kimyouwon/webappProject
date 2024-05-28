@@ -152,13 +152,28 @@
                 padding: 30px 50px;
             }
 
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            padding: 1rem;
+            cursor: pointer;
+        }
 
+        .star-rating {
+            display: flex;
+            margin-bottom: 10px;
+        }
 
-            .star {
-            padding: 2px 5px;
-            margin:5px 10px;
-            }
+        .star {
+            font-size: 20px;
+            color: #FD6F22;
+            cursor: pointer;
+        }
 
+        .filled {
+            content: '★';
+        }
 
 
             .rv-box{
@@ -203,13 +218,9 @@
                 padding: 30px 50px;
             }
 
-            #review_text{
-                width:80%
-            }
-
-            /* 푸터 */
-            #footer{
-                background-color: black;
+        /* 푸터 */
+        #footer {
+            background-color: black;
                 width: auto;
                 height: 100px;
                 color: white;
@@ -220,9 +231,9 @@
                 margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
                 font-size:13px;
                 padding:10px;
-            }
-        </style>
-    </head>
+        }
+    </style>
+</head>
     <body link="black" vlink="black" alink="black">
     <!-- 헤더 -->
     <div th:replace="header :: header"></div>
@@ -289,30 +300,28 @@
 
             <hr style="width: 80%; margin-bottom: 70px;">
 
-            <!-- 전시 후기 -->
-            <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
-            <!-- 리뷰 작성란 -->
-            <div id="review">
-                <div id="review_edit">
-                    <div style="display:flex; align-items: center; margin-bottom:10px;">
-                        <p>평점</p>
-                        <select class="star"  name="rating">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-
-                    <p>후기</p>
-                    <div id="edit">
-                        <textarea id="review_text" name="content"></textarea>
-                        <button type="submit">작성</button>
-                    </div>
+    <!-- 전시 후기 -->
+    <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
+        <!-- 리뷰 작성란 -->
+        <div id="review">
+            <div id="review_edit">
+                <p>평점</p>
+                <div class="star-rating" th:data-rating="${review.rating}">
+                    <span class="star empty">☆</span>
+                    <span class="star empty">☆</span>
+                    <span class="star empty">☆</span>
+                    <span class="star empty">☆</span>
+                    <span class="star empty">☆</span>
+                </div>
+                <input type="hidden" id="rating" name="rating" value="0">
+                <p>후기</p>
+                <div id="edit">
+                    <textarea id="review_text" name="content"></textarea>
+                    <button type="submit">작성</button>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 
         <!-- 리뷰 목록 -->
         <div id="review_list">
@@ -332,29 +341,48 @@
                             <div style="display:flex; align-items: center; margin-top:10px;">👍 <span th:text="${review.likeCount}"></span>
                                 <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
                                 <button type="submit">up</button>
-                                </form>
-                            </div>
-
+                            </form>
                         </div>
-                        <h3>Comments</h3>
-                        <ul>
-                            <th:block th:each="comment : ${review.comments}">
-                                <li>
-                                    <p>Content: <span th:text="${comment.content}"></span></p>
-                                    <p>User ID: <span th:text="${comment.userId}"></span></p>
-                                </li>
-                            </th:block>
-                        </ul>
-                        <form th:action="@{/review/{reviewId}/comment(reviewId=${review.id})}" method="post">
-                            <textarea name="content" placeholder="Add a comment"></textarea>
-                            <button type="submit">Submit</button>
-                        </form>
-                    </li>
-                </th:block>
-            </div>
+                    </div>
+                    <h3>Comments</h3>
+                    <ul>
+                        <th:block th:each="comment : ${review.comments}">
+                            <li>
+                                <p>Content: <span th:text="${comment.content}"></span></p>
+                                <p>User ID: <span th:text="${comment.userId}"></span></p>
+                            </li>
+                        </th:block>
+                    </ul>
+                    <form th:action="@{/review/{reviewId}/comment(reviewId=${review.id})}" method="post">
+                        <textarea name="content" placeholder="Add a comment"></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </li>
+            </th:block>
         </div>
     </div>
+</div>
+
     <!-- 푸터 -->
     <div th:replace="footer :: footer"></div>
-    </body>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const starRatings = document.querySelectorAll('.star-rating');
+            starRatings.forEach(rating => {
+                const ratingValue = rating.getAttribute('data-rating');
+                const stars = rating.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < ratingValue) {
+                        star.textContent = '★';
+                    } else {
+                        star.textContent = '☆';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
 </html>

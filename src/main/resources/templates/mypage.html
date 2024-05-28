@@ -252,13 +252,20 @@
                     <a href="/home_auth/mypage/auth">수정</a>
                 </div>
                 <div class="small-button">
-                    <a href="/home_auth/mypage/reviews">작성한 전시회 후기</a>
+                    <a href="/home_auth/mypage/reviews">작성한 전시회 후기 보기</a>
+                </div>
+                <div class="small-button">
+                    <a href="/home_auth/mypage/comments">작성한 댓글 보기</a>
                 </div>
             </div>
 
             <div id="edit-container">
-                <button th:href="@{/logout}" class="edit-button red-button">로그아웃</button>
-                <p><a href="/home_auth/mypage/delete" class="edit-button red-button">회원탈퇴</a></p>
+                <form action="/logout" method="get">
+                <button type="submit" class="edit-button red-button">로그아웃</button>
+                </form>
+                <form action="/home_auth/mypage/delete" method="get">
+                <button class="edit-button red-button">회원탈퇴</button>
+                </form>
             </div>
         </div>
 

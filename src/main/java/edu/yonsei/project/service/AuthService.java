@@ -34,4 +34,9 @@ public class AuthService {
         }
         return isAuthenticated;
     }
+
+    public boolean doesUserExist(String loginId) {
+        Optional<UserEntity> userOpt = userService.getUserByLoginId(loginId);
+        return userOpt.isPresent();
+    }
 }
