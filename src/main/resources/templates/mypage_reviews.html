@@ -132,20 +132,19 @@
             }
 
             .star-rating {
-                display: flex;
-                margin-bottom: 10px;
-            }
+            display: flex;
+            margin-bottom: 10px;
+        }
 
-            .star {
-            appearance: none;
-            padding: 1px;
-            }
-
-            .star::after {
-            content: '☆';
-            color: #FD6F22;
+        .star {
             font-size: 20px;
-            }
+            color: #FD6F22;
+            cursor: pointer;
+        }
+
+        .filled {
+            content: '★';
+        }
 
             .review_title{
                 font-size: 16;
@@ -176,76 +175,6 @@
                 padding:10px;
             }
         </style>
-        <script>
-            function editReview(reviewId) {
-                const reviewBox = document.getElementById('review-box-' + reviewId);
-                const content = reviewBox.querySelector('.review-content').innerText;
-                reviewBox.innerHTML = `
-                    <textarea class="edit-content">${content}</textarea>
-                    <button onclick="saveReview(${reviewId})">저장</button>
-                    <button onclick="cancelEdit(${reviewId}, '${content}')">취소</button>
-                `;
-            }
-
-            function saveReview(reviewId) {
-                const reviewBox = document.getElementById('review-box-' + reviewId);
-                const content = reviewBox.querySelector('.edit-content').value;
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', '/review/' + reviewId + '/edit', true);
-                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        location.reload();
-                    }
-                };
-                xhr.send(JSON.stringify({ content: content }));
-            }
-
-            function cancelEdit(reviewId, content) {
-                const reviewBox = document.getElementById('review-box-' + reviewId);
-                reviewBox.innerHTML = `
-                    <div id="box_top">
-                        <div class="star-rating">
-                            <input type="radio" class="star" value="1">
-                            <input type="radio" class="star" value="2">
-                            <input type="radio" class="star" value="3">
-                            <input type="radio" class="star" value="4">
-                            <input type="radio" class="star" value="5">
-                        </div>
-                        <div style="display: flex;">
-                            <button class="clickable" style="font-size: 13px; margin-right: 10px;" onclick="editReview(${reviewId})">✏️</button>
-                            <button class="clickable" style="font-size: 13px;" onclick="confirmDelete(${reviewId})">❌</button>
-                        </div>
-                    </div>
-                    <p class="review_title">전시회 이름</p>
-                    <p class="review-content">${content}</p>
-                `;
-            }
-
-            function confirmDelete(reviewId) {
-                const reviewBox = document.getElementById('review-box-' + reviewId);
-                reviewBox.innerHTML = `
-                    <p>정말 삭제하시겠습니까?</p>
-                    <button onclick="deleteReview(${reviewId})">삭제</button>
-                    <button onclick="cancelDelete(${reviewId})">취소</button>
-                `;
-            }
-
-            function cancelDelete(reviewId) {
-                location.reload();
-            }
-
-            function deleteReview(reviewId) {
-                const xhr = new XMLHttpRequest();
-                xhr.open('DELETE', '/review/' + reviewId, true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        location.reload();
-                    }
-                };
-                xhr.send();
-            }
-        </script>
     </head>
     <body>
         <!-- 헤더 -->
@@ -268,16 +197,20 @@
                     <div id="box_top">
                         <p class="review_title" th:text="${review.exhibitionName}">전시회 이름</p>
                         <div style="display: flex;">
-                            <button class="clickable" style="font-size: 13px; margin-right: 10px;" onclick="editReview([[${review.id}]])">작성</button>
-                            <button class="clickable" style="font-size: 13px;" onclick="confirmDelete([[${review.id}]])">삭제</button>
+                            <form th:action="@{/review/edit/{id}(id=${review.id})}" method="get">
+                                <button type="submit" class="edit-button">✏️</button>
+                            </form>
+                            <form th:action="@{/review/delete/{id}(id=${review.id})}" method="post">
+                                <button type="submit" class="edit-button">❌</button>
+                            </form>
                         </div>
                     </div>
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1" th:attr="checked=${review.rating == 1}">
-                        <input type="radio" class="star" value="2" th:attr="checked=${review.rating == 2}">
-                        <input type="radio" class="star" value="3" th:attr="checked=${review.rating == 3}">
-                        <input type="radio" class="star" value="4" th:attr="checked=${review.rating == 4}">
-                        <input type="radio" class="star" value="5" th:attr="checked=${review.rating == 5}">
+                    <div class="star-rating" th:data-rating="${review.rating}">
+                        <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
                     </div>
                     <br>
                     <p class="review-content" th:text="${review.content}">리뷰 내용</p>
@@ -287,5 +220,21 @@
 
         <!-- 푸터 -->
         <div th:replace="footer :: footer"></div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const starRatings = document.querySelectorAll('.star-rating');
+                starRatings.forEach(rating => {
+                    const ratingValue = rating.getAttribute('data-rating');
+                    const stars = rating.querySelectorAll('.star');
+                    stars.forEach((star, index) => {
+                        if (index < ratingValue) {
+                            star.textContent = '★';
+                        } else {
+                            star.textContent = '☆';
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
