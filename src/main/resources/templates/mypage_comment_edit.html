@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>WETE</title>
+    <title>WETE - 댓글 수정</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
         @font-face {
@@ -85,52 +85,40 @@
             flex-direction: column;
         }
 
-        #review_list {
-            height: auto;
-            margin: 40px 0px;
-        }
-
-        .review_box, .comment_box {
-            margin-bottom: 30px;
-            width: 700px;
-            border: 1px solid rgb(193, 193, 193);
-            border-radius: 10px;
-            padding: 30px;
-        }
-
-        #box_top {
+        .edit-container {
+            margin-top: 20px;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            width: 100%;
+            max-width: 700px;
         }
 
-        .star-rating {
-            display: flex;
+        .edit-container label {
+            font-size: 16px;
+            font-weight: 600;
             margin-bottom: 10px;
         }
 
-        .star {
-            appearance: none;
-            padding: 1px;
+        .edit-container textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
 
-        .star::after {
-            content: '☆';
-            color: #FD6F22;
-            font-size: 20px;
-        }
-
-        .review_title {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        /* 커서 포인터 스타일 */
-        .clickable {
-            cursor: pointer;
-            background: none;
+        .edit-button {
+            width: 100px;
+            height: 40px;
             border: none;
-            padding: 0;
-            margin: 0;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: 0.5s;
         }
 
         /* 푸터 */
@@ -155,31 +143,22 @@
 
 <!-- 페이지 설명 배너 -->
 <div id="page_banner">
-    <p>마이페이지</p>
+    <p>댓글 수정</p>
 </div>
 
 <div id="sub_header">
-    <p th:text="${nickname} + '님의 댓글 모음'"></p>
+    <p th:text="'댓글 수정 - ' + ${comment.review.exhibitionName}"></p>
 </div>
 
 <hr style="margin: 0px 50px;">
 
 <div id="white">
-    <div id="review_list">
-        <div th:each="comment : ${comments}" class="comment_box" th:id="'comment-box-' + ${comment.id}">
-            <div id="box_top">
-                <p class="review_title" th:text="${comment.review.exhibitionName}">전시회 이름</p>
-                <p th:text="'작성자: ' + ${comment.userId}">작성자: 사용자 ID</p>
-            </div>
-            <br>
-            <p class="comment-content" th:text="${comment.content}">댓글 내용</p>
-            <form th:action="@{/comment/edit/{id}(id=${comment.id})}" method="get">
-                <button type="submit" class="edit-button">✏️</button>
-            </form>
-            <form th:action="@{/comment/delete/{id}(id=${comment.id})}" method="post">
-                <button type="submit" class="edit-button">❌</button>
-            </form>
-        </div>
+    <div class="edit-container">
+        <form th:action="@{/comment/edit/{id}(id=${comment.id})}" method="post">
+            <label for="content">댓글 내용:</label>
+            <textarea id="content" name="content" th:text="${comment.content}"></textarea>
+            <button type="submit" class="edit-button">수정</button>
+        </form>
     </div>
 </div>
 
@@ -187,5 +166,3 @@
 <div th:replace="footer :: footer"></div>
 </body>
 </html>
-
-

@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,5 +51,26 @@ public class CommentController {
         } else {
             return "redirect:/home/login"; // 세션에 loginId가 없다면 로그인 페이지로 리다이렉트
         }
+    }
+    //댓글 수정 페이지
+    @GetMapping("/comment/edit/{id}")
+    public String editComment(@PathVariable("id") Long id, Model model) {
+        CommentEntity comment = commentService.getCommentById(id);
+        model.addAttribute("comment", comment);
+        return "mypage_comment_edit"; // 리뷰 수정 페이지로 이동
+    }
+
+    //댓글 수정 로직 처리.
+    @PostMapping("/comment/edit/{id}")
+    public String updateComment(@PathVariable("id") Long id, @RequestParam("content") String content) {
+        commentService.updateComment(id, content);
+        return "redirect:/home_auth/mypage/comments"; // 댓글 목록 페이지로 리다이렉트
+    }
+
+    //댓글 삭제 로직 처리.
+    @PostMapping("/comment/delete/{id}")
+    public String deleteComment(@PathVariable("id") Long id) {
+        commentService.deleteComment(id);
+        return "redirect:/home_auth/mypage/comments"; // 댓글 목록 페이지로 리다이렉트
     }
 }
