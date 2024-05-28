@@ -160,14 +160,19 @@
             cursor: pointer;
         }
 
-        .star {
-            font-size: 2rem;
-            color: #ddd;
-            transition: color 0.2s;
+        .star-rating {
+            display: flex;
+            margin-bottom: 10px;
         }
 
-        .star.checked {
-            color: gold;
+        .star {
+            font-size: 20px;
+            color: #FD6F22;
+            cursor: pointer;
+        }
+
+        .filled {
+            content: '★';
         }
 
 
@@ -301,12 +306,12 @@
         <div id="review">
             <div id="review_edit">
                 <p>평점</p>
-                <div class="star-rating">
-                    <span class="star" data-value="5">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="1">&#9733;</span>
+                <div class="star-rating" th:data-rating="${review.rating}">
+                    <span class="star empty">☆</span>
+                    <span class="star empty">☆</span>
+                    <span class="star empty">☆</span>
+                    <span class="star empty">☆</span>
+                    <span class="star empty">☆</span>
                 </div>
                 <input type="hidden" id="rating" name="rating" value="0">
                 <p>후기</p>
@@ -362,47 +367,22 @@
     <div th:replace="footer :: footer"></div>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const stars = document.querySelectorAll('.star-rating .star');
-        const ratingInput = document.getElementById('rating');
-
-        stars.forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = this.dataset.value;
-                ratingInput.value = rating;
-
-                // 모든 별 체크 해제
-                stars.forEach(s => s.classList.remove('checked'));
-
-                // 클릭한 별까지 체크
-                this.classList.add('checked');
-                let nextSibling = this.nextElementSibling;
-                while (nextSibling) {
-                    nextSibling.classList.add('checked');
-                    nextSibling = nextSibling.nextElementSibling;
-                }
-            });
-
-            star.addEventListener('mouseover', function() {
-                // 모든 별 체크 해제
-                stars.forEach(s => s.classList.remove('hover'));
-
-                // 클릭한 별까지 체크
-                this.classList.add('hover');
-                let nextSibling = this.nextElementSibling;
-                while (nextSibling) {
-                    nextSibling.classList.add('hover');
-                    nextSibling = nextSibling.nextElementSibling;
-                }
-            });
-
-            star.addEventListener('mouseout', function() {
-                stars.forEach(s => s.classList.remove('hover'));
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const starRatings = document.querySelectorAll('.star-rating');
+            starRatings.forEach(rating => {
+                const ratingValue = rating.getAttribute('data-rating');
+                const stars = rating.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < ratingValue) {
+                        star.textContent = '★';
+                    } else {
+                        star.textContent = '☆';
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>
