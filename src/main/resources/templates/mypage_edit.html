@@ -176,7 +176,15 @@
     </head>
     <body>
         <!-- 헤더 -->
-        <div th:replace="header :: header"></div>
+        <div id="header">
+            <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
+            <ul id="page_list">
+                <li><a href="https://exhibition-test.netlify.app/" target="_blank">취향 테스트</a></li>
+                <li><a href="/exhibition">전시회</a></li>
+                <li><a th:href="@{/logout}">로그아웃</a></li>
+                <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
+            </ul>
+        </div>
 
         <!-- 페이지 설명 배너 -->
         <div id="page_banner">
