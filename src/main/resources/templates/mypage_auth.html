@@ -1,198 +1,209 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>WETE</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-            @font-face {
-                font-family: 'Freesentation-9Black';
-                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-                font-weight: 800;
-                font-style: normal;
-            }
+<head>
+    <meta charset="UTF-8">
+    <title>WETE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
 
-            *{
-                font-family: "Noto Sans KR", sans-serif;
-                font-optical-sizing: auto;
-                font-weight: 400;
-                font-style: normal;
-                margin: 0;
-                padding: 0;
-                text-decoration: none;
+        * {
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
 
-            }
-            /* 헤더 */
-            #header{
-                position: relative;
-                width: auto;
-                height: 50px;
-                color: #FD6F22;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+        /* 헤더 */
+        #header {
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-            #title{
-                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-            }
+        #title {
+            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+        }
 
-            #page_list{
-                margin-left: 20px;
-            }
+        #page_list {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+        }
 
-            #page_list{
-                display: flex;
-                flex-direction: row;
-                list-style:none;
-                margin-left: 20px;
-            }
+        #page_list a {
+            color: #FD6F22;
+            margin-right: 10px;
+        }
 
-            #page_list a{
-                color: #FD6F22;
-                margin-right: 10px;
-            }
+        /* 페이지 배너 */
+        #page_banner {
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-size: 900px 200px;
+        }
+        #page_banner p {
+            padding: 60px 80px;
+            color: white;
+            font-size: 5vh;
+        }
 
-            /* 페이지 배너 */
-            #page_banner{
-                width: 100%;
-                height: 200px;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-                background-size: 900px 200px;
-            }
-            #page_banner p{
-                padding: 60px 80px;
-                color: white;
-                font-size: 5vh;
-            }
+        /* 중헤더 */
+        #sub_header {
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px;
+            flex-direction: column;
+        }
+        .gray-text {
+            color: gray;
+            font-size: 13px;
+        }
 
+        /* 비밀번호 입력 */
+        #white {
+            width: auto;
+            height: auto;
+            margin: 50px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            flex-direction: column;
+        }
 
-            /* 중헤더 */
-            #sub_header{
-                position: relative;
-                width: auto;
-                height: 50px;
-                color: black;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 30px;
-                flex-direction: column;
-            }
-            .gray-text {
-                color: gray;
-                font-size: 13px;
-            }
+        .password {
+            width: 40%;
+            height: 40px;
+            border-width: 1;
+            margin: 30px;
+            padding: 10px;
+        }
 
-            /* 비밀번호 입력 */
-            #white{
-                width: auto;
-                height: auto;
-                margin: 50px;
-                /* background-color: rgb(145, 145, 185); */
-                display: flex;
-                align-items: center;
-                justify-items: center;
-                flex-direction: column;
+        #box {
+            width: 600px;
+            height: 50px;
+            border: 2px solid gray;
+        }
 
-            }
+        #edit-container {
+            margin-top: 10px;
+        }
 
+        .edit-button {
+            width: 70px;
+            height: 40px;
+            border: none;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: 0.5s;
+        }
 
+        /* 회색 버튼 스타일 */
+        .gray-button {
+            background-color: gray;
+        }
 
-            .password{
-                width: 40%;
-                height: 40px;
-                border-width: 1;
-                margin: 30px;
-                padding: 10px;
-            }
+        .whitebox {
+            background-color: white;
+            width: auto;
+            height: 600px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
+        /* 에러 메시지 박스 */
+        .error-box {
+            background-color: #ffdddd;
+            color: red;
+            border: 1px solid red;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
 
-            #box {
-                width: 600px;
-                height: 50px;
-                border: 2px solid gray
-            }
+        .error-box .exclamation {
+            font-size: 20px;
+            margin-right: 10px;
+        }
 
+        /* 푸터 */
+        #footer {
+            background-color: black;
+            width: auto;
+            height: 100px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+            font-size: 13px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<!-- 헤더 -->
+<div th:replace="header :: header"></div>
 
+<!-- 페이지 설명 배너 -->
+<div id="page_banner">
+    <p>마이페이지</p>
+</div>
 
-            #edit-container {
-                margin-top: 10px;
-            }
+<div id="sub_header">
+    <span><h2>개인정보 관리</h2></span>
+    <span class="gray-text">비밀번호 인증</span>
+</div>
 
-            .edit-button {
-                width: 70px;
-                height: 40px;
-                border: none;
-                border-radius: 7px;
-                background-color: #FD6F22;
-                color: white;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-                cursor: pointer;
-                transition: 0.5s;
-            }
+<hr style="margin: 0px 50px;">
 
-            /* 회색 버튼 스타일 */
-            .gray-button {
-                background-color: gray;
-            }
+<form th:action="@{/home_auth/mypage/auth/verify}" method="post">
+    <div id="white">
+        <div th:if="${error}" class="error-box">
+            <span class="exclamation">❗</span>
+            <p th:text="${error}"></p>
+        </div>
+        <h2>보안을 위해 비밀번호를 한 번 더 입력해주세요.</h2>
+        <input type="password" class="password" placeholder="비밀번호 입력" name="password" required>
 
-            .whitebox{
-                background-color: white;
-                width: auto;
-                height: 600px;
-                color: white;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-
-            }
-
-            /* 푸터 */
-            #footer{
-                background-color: black;
-                width: auto;
-                height: 100px;
-                color: white;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
-                font-size:13px;
-                padding:10px;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- 헤더 -->
-        <div th:replace="header :: header"></div>
-
-        <!-- 페이지 설명 배너 -->
-        <div id="page_banner">
-            <p>마이페이지</p>
+        <div id="edit-container">
+            <button class="edit-button" type="submit">확인</button>
+            <button class="edit-button gray-button" type="button" onclick="window.history.back()">취소</button>
         </div>
 
-        <div id = "sub_header">
-            <span> <h2>개인정보 관리</h2></span>
-            <span class = "gray-text">비밀번호 인증</span>
-        </div>
 
-        <hr style="margin: 0px 50px;">
-        <form th:action="@{/home_auth/mypage/auth/verify}" method="post">
-            <div id="white">
-                <h2>보안을 위해 비밀번호를 한 번 더 입력해주세요.</h2>
-                <input type="password" class="password" placeholder="비밀번호 입력" name="password" required>
+    </div>
+</form>
 
-                <div id="edit-container">
-                    <button class="edit-button" type="submit">확인</button>
-                    <button class="edit-button gray-button">취소</button>
-                </div>
-            </div>
-        </form>
-
-        <!-- 푸터 -->
-        <div th:replace="footer :: footer"></div>
-    </body>
+<!-- 푸터 -->
+<div th:replace="footer :: footer"></div>
+</body>
 </html>
