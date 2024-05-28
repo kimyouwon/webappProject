@@ -38,7 +38,7 @@
         #page_banner{
             width: 100%;
             height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("./img/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
             background-size: 900px 200px;
         }
         #page_banner p{
@@ -146,45 +146,43 @@
 
     </style>
 </head>
-<body>
-
-    <div id="header">
-        <p id= "title">전시회 사이트</p>
-        <div id="page_list">
-            <a href="/home/test">취향 테스트</a>
-            <a href="/exhibition">전시회</a>
-            <a th:href="@{/home_auth/mypage}">마이 페이지</a>
+    <body>
+        <div id="header">
+            <p id= "title">전시회 사이트</p>
+            <div id="page_list">
+                <a href="/home/test">취향 테스트</a>
+                <a href="/exhibition">전시회</a>
+                <a th:href="@{/home_auth/mypage}">마이 페이지</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 페이지 설명 배너 -->
-    <div id="page_banner">
-        <p>마이페이지</p>
-    </div>
-
-    <div id = "sub_header">
-        <span> <h2>개인정보 관리</h2></span>
-        <span class = "gray-text">비밀번호 인증</span>
-    </div>
-
-    <hr style="margin: 0px 50px;">
-    <form th:action="@{/home_auth/mypage/auth/verify}" method="post">
-    <div id="white">
-        <h2>보안을 위해 비밀번호를 한 번 더 입력해주세요.</h2>
-        <input type="password" class="password" placeholder="비밀번호 입력" name="password" required>
-
-        <div id="edit-container">
-            <button class="edit-button" type="submit">확인</button>
-            <button class="edit-button gray-button">취소</button>
+        <!-- 페이지 설명 배너 -->
+        <div id="page_banner">
+            <p>마이페이지</p>
         </div>
-    </div>
-    </form>
 
-    
-    <!-- 푸터 -->
-    <div class="footer">
-        <p>이메일: abcda111@gmail.com</p>
-        <p>전화번호: 000-0000-0000</p>
-    </div>
-</body>
+        <div id = "sub_header">
+            <span> <h2>개인정보 관리</h2></span>
+            <span class = "gray-text">비밀번호 인증</span>
+        </div>
+
+        <hr style="margin: 0px 50px;">
+        <form th:action="@{/home_auth/mypage/auth/verify}" method="post">
+        <div id="white">
+            <h2>보안을 위해 비밀번호를 한 번 더 입력해주세요.</h2>
+            <input type="password" class="password" placeholder="비밀번호 입력" name="password" required>
+
+            <div id="edit-container">
+                <button class="edit-button" type="submit">확인</button>
+                <button class="edit-button gray-button">취소</button>
+            </div>
+        </div>
+        </form>
+
+        <!-- 푸터 -->
+        <div class="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+    </body>
 </html>
