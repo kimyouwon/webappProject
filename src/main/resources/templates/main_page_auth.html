@@ -412,196 +412,187 @@
         </style>
     </head>
     <body>
-    <!-- 헤더 -->
-    <div th:replace="header :: header"></div>
+        <!-- 헤더 -->
+        <div th:replace="header :: header"></div>
 
-    <!-- 메인 배너 -->
-    <div id="banner">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
-        <div id="circle"></div>
-        <img id="dog" src="/img/dogdog.png"/>
-        <img class="eye1" src="/img/dogeye1.png"/>
-        <img class="eye2" src="/img/dogeye2.png"/>
-        <span>W</span>
-        <span>E</span>
-        <span>T</span>
-        <span>E</span>
-        <div id="main_text">
-            <p>GO! Go!</p>
-            <p>GO! Go!</p>
-            <p>GO! Go!</p>
-        </div>
-
-
-        <div class="text-line">
-            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
-            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
-            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
-            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
-            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
-            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
-        </div>
-
-    </div>
-
-    <!-- 사이트 설명 부분 -->
-    <!-- <div id="site_info">
-
-    </div> -->
-
-    <!-- 취향 테스트 -->
-    <div id="test_box">
-        <div class="fade-wrap" style="display: flex; flex-direction: column;"></div>
-        <a href="/home/test">
-            <div style="display: flex; flex-direction: column;
-            align-items: top;
-            padding-top: 50px; padding-left:50px;">
-                <p id="test_text">지금 당장<br>나의 전시회 취향<br>을 확인하러!</p>
+        <!-- 메인 배너 -->
+        <div id="banner">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+            <div id="circle"></div>
+            <img id="dog" src="/img/dogdog.png"/>
+            <img class="eye1" src="/img/dogeye1.png"/>
+            <img class="eye2" src="/img/dogeye2.png"/>
+            <span>W</span>
+            <span>E</span>
+            <span>T</span>
+            <span>E</span>
+            <div id="main_text">
+                <p>GO! Go!</p>
+                <p>GO! Go!</p>
+                <p>GO! Go!</p>
             </div>
-        </a>
 
-    </div>
 
-    <!-- 전시회 목록 -->
-    <div id="exh_list_box">
-        <p class="exh_review">전시회</p>
-        <div id="poster_list">
-            <div id="poster" th:each="exhibition, stat : ${exhibitions}" th:if="${stat.index < 6}">
-                <a th:href="@{'/exhibition/' + ${exhibition.id}}">
-                    <!--<a th:href="@{/exhibition/{id}(id=${exhibition.id})}">-->
-                    <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
-                    <p th:text="${exhibition.title}">전시회 이름</p>
-                    <p th:text="${exhibition.date}">날짜</p>
-                </a>
+            <div class="text-line">
+                wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+                wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+                wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+                wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+                wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+                wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
             </div>
         </div>
-        <a href="/exhibition"><p id="more">더보기 ></p></a>
-    </div>
 
+        <!-- 사이트 설명 부분 -->
+        <!-- <div id="site_info">
 
+        </div> -->
 
-    </div>
-
-    <hr style="margin: 0px 80px;">
-
-    <!-- 전시회 후기 -->
-    <div id="review">
-        <p class="exh_review">전시회 후기</p>
-        <div id="review_content">
-            <div class="review_box">
-                <div class="rv_cont">
-                    <p>전시회 이름</p>
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1">
-                        <input type="radio" class="star" value="2">
-                        <input type="radio" class="star" value="3">
-                        <input type="radio" class="star" value="4">
-                        <input type="radio" class="star" value="5">
-                    </div>
+        <!-- 취향 테스트 -->
+        <div id="test_box">
+            <div class="fade-wrap" style="display: flex; flex-direction: column;"></div>
+            <a href="/home/test">
+                <div style="display: flex; flex-direction: column;
+                align-items: top;
+                padding-top: 50px; padding-left:50px;">
+                    <p id="test_text">지금 당장<br>나의 전시회 취향<br>을 확인하러!</p>
                 </div>
-                <hr class="und_line"/>
-                <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                    후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                    후기후기</p>
-            </div>
-
-            <div class="review_box">
-                <div class="rv_cont">
-                    <p>전시회 이름</p>
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1">
-                        <input type="radio" class="star" value="2">
-                        <input type="radio" class="star" value="3">
-                        <input type="radio" class="star" value="4">
-                        <input type="radio" class="star" value="5">
-                    </div>
-                </div>
-                <hr class="und_line"/>
-                <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                    후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                    후기후기</p>
-            </div>
-            <div class="review_box">
-                <div class="rv_cont">
-                    <p>전시회 이름</p>
-                    <div class="star-rating">
-                        <input type="radio" class="star" value="1">
-                        <input type="radio" class="star" value="2">
-                        <input type="radio" class="star" value="3">
-                        <input type="radio" class="star" value="4">
-                        <input type="radio" class="star" value="5">
-                    </div>
-                </div>
-                <hr class="und_line"/>
-                <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                    후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                    후기후기</p>
-            </div>
-
+            </a>
         </div>
 
-    </div>
+        <!-- 전시회 목록 -->
+        <div id="exh_list_box">
+            <p class="exh_review">전시회</p>
+            <div id="poster_list">
+                <div id="poster" th:each="exhibition, stat : ${exhibitions}" th:if="${stat.index < 6}">
+                    <a th:href="@{'/exhibition/' + ${exhibition.id}}">
+                        <!--<a th:href="@{/exhibition/{id}(id=${exhibition.id})}">-->
+                        <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
+                        <p th:text="${exhibition.title}">전시회 이름</p>
+                        <p th:text="${exhibition.date}">날짜</p>
+                    </a>
+                </div>
+            </div>
+            <a href="/exhibition"><p id="more">더보기 ></p></a>
+        </div>
 
-    <!-- 푸터 -->
-    <div id="footer">
-        <p>이메일: abcda111@gmail.com</p>
-        <p>전화번호: 000-0000-0000</p>
-    </div>
-    <script>
-        /* javascript */
-        // Intersection Observer 생성
-        const observer = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                // 화면에 들어옴
-                entry.target.classList.add("fade-in");
-              } else {
-                // 화면에서 나감
-                entry.target.classList.remove("fade-in");
-              }
-            });
-          },
-          // 화면에서 해당 요소가 10% 이상 보일 경우 화면에 들어온 것으로 판단함
-          { threshold: 0.1 }
-        );
+        <hr style="margin: 0px 80px;">
 
-        // 관찰 대상 설정
-        const targetElements = document.querySelectorAll(".fade-wrap");
-        targetElements.forEach((element) => {
-          observer.observe(element);
-        });
+        <!-- 전시회 후기 -->
+        <div id="review">
+            <p class="exh_review">전시회 후기</p>
+            <div id="review_content">
+                <div class="review_box">
+                    <div class="rv_cont">
+                        <p>전시회 이름</p>
+                        <div class="star-rating">
+                            <input type="radio" class="star" value="1">
+                            <input type="radio" class="star" value="2">
+                            <input type="radio" class="star" value="3">
+                            <input type="radio" class="star" value="4">
+                            <input type="radio" class="star" value="5">
+                        </div>
+                    </div>
+                    <hr class="und_line"/>
+                    <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                        후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                        후기후기</p>
+                </div>
 
-        //눈 돌아가는 거
-            const eye1 = document.querySelector('.eye1');
-            const eye2 = document.querySelector('.eye2');
+                <div class="review_box">
+                    <div class="rv_cont">
+                        <p>전시회 이름</p>
+                        <div class="star-rating">
+                            <input type="radio" class="star" value="1">
+                            <input type="radio" class="star" value="2">
+                            <input type="radio" class="star" value="3">
+                            <input type="radio" class="star" value="4">
+                            <input type="radio" class="star" value="5">
+                        </div>
+                    </div>
+                    <hr class="und_line"/>
+                    <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                        후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                        후기후기</p>
+                </div>
+                <div class="review_box">
+                    <div class="rv_cont">
+                        <p>전시회 이름</p>
+                        <div class="star-rating">
+                            <input type="radio" class="star" value="1">
+                            <input type="radio" class="star" value="2">
+                            <input type="radio" class="star" value="3">
+                            <input type="radio" class="star" value="4">
+                            <input type="radio" class="star" value="5">
+                        </div>
+                    </div>
+                    <hr class="und_line"/>
+                    <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                        후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                        후기후기</p>
+                </div>
+            </div>
+        </div>
 
-            let x = 0;
-            let y = 0;
-            let followX = 0;
-            let followY = 0;
-            const speed = 1;
+        <!-- 푸터 -->
+        <div id="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+        <script>
+            /* javascript */
+            // Intersection Observer 생성
+            const observer = new IntersectionObserver(
+              (entries, observer) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    // 화면에 들어옴
+                    entry.target.classList.add("fade-in");
+                  } else {
+                    // 화면에서 나감
+                    entry.target.classList.remove("fade-in");
+                  }
+                });
+              },
+              // 화면에서 해당 요소가 10% 이상 보일 경우 화면에 들어온 것으로 판단함
+              { threshold: 0.1 }
+            );
 
-            function animate() {
-                x += (followX - x) * speed;
-                y += (followY - y) * speed;
-                eye1.style.transform = `translate(${-x}px, ${-y}px)`;
-                eye2.style.transform = `translate(${-x}px, ${-y}px)`;
-                requestAnimationFrame(animate);
-            }
-
-            window.addEventListener('mousemove', (e) => {
-                const mouseX = Math.max(-100, Math.min(100, window.innerWidth / 2 - e.clientX));
-                const mouseY = Math.max(-100, Math.min(100, window.innerHeight / 2 - e.clientY));
-
-                followX = (4 * mouseX) / 100;
-                followY = (8 * mouseY) / 100;
+            // 관찰 대상 설정
+            const targetElements = document.querySelectorAll(".fade-wrap");
+            targetElements.forEach((element) => {
+              observer.observe(element);
             });
 
-            animate();
-    </script>
+            //눈 돌아가는 거
+                const eye1 = document.querySelector('.eye1');
+                const eye2 = document.querySelector('.eye2');
 
+                let x = 0;
+                let y = 0;
+                let followX = 0;
+                let followY = 0;
+                const speed = 1;
+
+                function animate() {
+                    x += (followX - x) * speed;
+                    y += (followY - y) * speed;
+                    eye1.style.transform = `translate(${-x}px, ${-y}px)`;
+                    eye2.style.transform = `translate(${-x}px, ${-y}px)`;
+                    requestAnimationFrame(animate);
+                }
+
+                window.addEventListener('mousemove', (e) => {
+                    const mouseX = Math.max(-100, Math.min(100, window.innerWidth / 2 - e.clientX));
+                    const mouseY = Math.max(-100, Math.min(100, window.innerHeight / 2 - e.clientY));
+
+                    followX = (4 * mouseX) / 100;
+                    followY = (8 * mouseY) / 100;
+                });
+
+                animate();
+        </script>
     </body>
 </html>

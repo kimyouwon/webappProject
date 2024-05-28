@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
-    <div th:fragment="header">
-        <div id="header">
-            <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-            <ul id="page_list">
-                <li><a href="https://exhibition-test.netlify.app/" target="_blank">취향 테스트</a></li>
-                <li><a href="/exhibition">전시회</a></li>
-                <li><a href="/home/login">로그인</a></li>
-                <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-            </ul>
+    <body>
+        <div th:fragment="header">
+            <div id="header">
+                <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
+                <ul id="page_list">
+                    <li><a href="https://exhibition-test.netlify.app/" target="_blank">취향 테스트</a></li>
+                    <li><a href="/exhibition">전시회</a></li>
+                    <li><a href="/home/login">로그인</a></li>
+                    <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
