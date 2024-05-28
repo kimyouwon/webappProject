@@ -1,358 +1,396 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" dir="ltr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WETE</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-            @font-face {
-                font-family: 'Freesentation-9Black';
-                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-                font-weight: 900;
-                font-style: normal;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WETE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
 
-            *{
-                text-decoration: none;
-                font-family: "Noto Sans KR", sans-serif;
-                font-optical-sizing: auto;
-                font-weight: 400;
-                font-style: normal;
-                margin: 0;
-                padding: 0;
+        * {
+            text-decoration: none;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+        }
 
-            }
-            /* 헤더 */
-            #header{
-                position: relative;
-                width: auto;
-                height: 50px;
-                color: #FD6F22;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            #title{
-                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-            }
-
-            #page_list{
-                margin-left: 20px;
-            }
-
-            #page_list{
-                display: flex;
-                flex-direction: row;
-                list-style:none;
-                margin-left: 20px;
-            }
-
-            #page_list a{
-                color: #FD6F22;
-                margin-right: 10px;
-            }
-
-            /* 페이지배너 */
-            #page_banner{
-                width: 100%;
-                height: 200px;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-                background-size: 900px 200px;
-            }
-            #page_banner p{
-                padding: 60px 80px;
-                color: white;
-                font-size: 40px;
-                font-family: 'Freesentation-9Black';
-            }
-
-            /* 상세 */
-            #detail_box{
-                width: 100%;
-                height: auto;
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-            }
-
-            #exh_info{
-                margin-top: 100px;
-                display: inline-block;
-                text-align: center;
-                height:auto;
-
-            }
-
-            #exh_info img{
-                width: 300px;
-                height: 400px;
-                object-position: center;
-                display: inline-block;
-
-            }
-
-            /* 테이블 */
-            #exh_info table{
-                width: 500px;
-                height:auto;
-                text-align: center;
-                border-collapse:collapse;
-                display: inline-block;
-                margin:0px 30px;
-
-            }
-
-
-            #exh_info th,td{
-                border: 1px solid rgb(207, 207, 207);
-                padding:5px;
-            }
-
-            #detail_box ul{
-                margin-top: 90px;
-            }
-
-            /* 클릭 */
-            #detail_box li{
-                display: inline;
-                margin-left: 40px;
-                font-size: 20px;
-                font-weight: bold;
-            }
-
-            #exh_detail{
-                width: 70%;
-                white-space: pre-line;
-                height: auto;
-                margin: 80px 50px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            #exh_detail img{
-               margin: 40px;
-                width: 550px;
-                height: 600px;
-            }
-
-            #exh_detail p{
-               margin-top: 70px;
-               font-size: 17px;
-            }
-
-            /* 리뷰란 */
-            #review{
-                width: 700px;
-                border: 1px solid rgb(193, 193, 193);
-                border-radius: 10px;
-                margin-bottom: 90px;
-                padding: 30px 50px;
-            }
-
-            .star-rating {
-            display: flex;
-            margin-bottom: 20px;
-            }
-
-            .star {
-            appearance: none;
-            padding: 1px;
-            }
-
-            .star::after {
-            content: '☆';
+        /* 헤더 */
+        #header {
+            position: relative;
+            width: auto;
+            height: 50px;
             color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #title {
+            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+        }
+
+        #page_list {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+        }
+
+        #page_list a {
+            color: #FD6F22;
+            margin-right: 10px;
+        }
+
+        /* 페이지배너 */
+        #page_banner {
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-size: 900px 200px;
+        }
+
+        #page_banner p {
+            padding: 60px 80px;
+            color: white;
+            font-size: 40px;
+            font-family: 'Freesentation-9Black';
+        }
+
+        /* 상세 */
+        #detail_box {
+            width: 100%;
+            height: auto;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #exh_info {
+            margin-top: 100px;
+            display: inline-block;
+            text-align: center;
+            height: auto;
+        }
+
+        #exh_info img {
+            width: 300px;
+            height: 400px;
+            object-position: center;
+            display: inline-block;
+        }
+
+        /* 테이블 */
+        #exh_info table {
+            width: 500px;
+            height: auto;
+            text-align: center;
+            border-collapse: collapse;
+            display: inline-block;
+            margin: 0px 30px;
+        }
+
+        #exh_info th, td {
+            border: 1px solid rgb(207, 207, 207);
+            padding: 5px;
+        }
+
+        #detail_box ul {
+            margin-top: 90px;
+        }
+
+        /* 클릭 */
+        #detail_box li {
+            display: inline;
+            margin-left: 40px;
             font-size: 20px;
-            }
+            font-weight: bold;
+        }
 
+        #exh_detail {
+            width: 70%;
+            white-space: pre-line;
+            height: auto;
+            margin: 80px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-            .rv-box{
+        #exh_detail img {
+            margin: 40px;
+            width: 550px;
+            height: 600px;
+        }
 
-                border: 1px solid rgb(193, 193, 193);
-                border-radius:10px;
-                padding: 10px 30px;
-                font-size:15px;
-            }
+        #exh_detail p {
+            margin-top: 70px;
+            font-size: 17px;
+        }
 
-            #edit{
-                margin-top: 10px;
-                display: flex;
-                justify-content: space-between;
+        /* 리뷰란 */
+        #review {
+            width: 700px;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            margin-bottom: 90px;
+            padding: 30px 50px;
+        }
 
-            }
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            padding: 1rem;
+            cursor: pointer;
+        }
 
-            #edit button{
-                margin-top: 60px;
-                width: 70px;
-                height: 40px;
-                border: none;
-                border-radius: 7px;
-                background-color: #FD6F22;
-                color: white;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-                cursor: pointer;
-                transition: 0.5s;
-            }
+        .star {
+            font-size: 2rem;
+            color: #ddd;
+            transition: color 0.2s;
+        }
 
-            #review_list{
-                height: auto;
-                margin-bottom: 40px;
+        .star.checked {
+            color: gold;
+        }
 
-            }
+        .star:hover,
+        .star:hover ~ .star {
+            color: gold;
+        }
 
-            #review_box{
-                margin-bottom: 30px;
-                width: 700px;
-                border: 1px solid rgb(193, 193, 193);
-                border-radius: 10px;
-                padding: 30px 50px;
-            }
+        .rv-box {
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 10px 30px;
+            font-size: 15px;
+        }
 
-            /* 푸터 */
-            #footer{
-                background-color: black;
-                width: auto;
-                height: 120px;
-                color: white;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-        </style>
-    </head>
-    <body link="black" vlink="black" alink="black">
-    <!-- 헤더 -->
-    <div th:replace="header :: header"></div>
+        #edit {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
 
-        <!-- 페이지 설명 배너 -->
-        <div id="page_banner">
-            <p th:text="${exhibition.title}">전시회 제목</p>
-        </div>
+        #edit button {
+            margin-top: 60px;
+            width: 70px;
+            height: 40px;
+            border: none;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: 0.5s;
+        }
 
-        <!-- 전시회 상세 -->
-        <div id="detail_box">
-            <!-- 전시 간략 설명 -->
-            <div id="exh_info">
-                <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
-                <table>
-                    <tr>
-                        <td>전시 제목</td>
-                        <td th:text="${exhibition.title}"></td>
-                    </tr>
-                    <tr>
-                        <td>전시 기간</td>
-                        <td th:text="${exhibition.date}"></td>
-                    </tr>
-                    <tr>
-                        <td>관람시간</td>
-                        <td th:text="${exhibition.time}"></td>
-                    </tr>
-                    <tr>
-                        <td>휴관일</td>
-                        <td th:text="${exhibition.rest}"></td>
-                    </tr>
-                    <tr>
-                        <td>장르</td>
-                        <td th:text="${exhibition.genre}"></td>
-                    </tr>
-                    <tr>
-                        <td>관람료</td>
-                        <td th:text="${exhibition.fee}"></td>
-                    </tr>
-                    <tr>
-                        <td>장소</td>
-                        <td th:text="${exhibition.place}"></td>
-                    </tr>
-                    <tr>
-                        <td>연락처</td>
-                        <td th:text="${exhibition.contact}"></td>
-                    </tr>
-                    <tr>
-                        <td id='column' colspan='2' style="background-color: rgb(193, 193, 193);;"><a th:href="${exhibition.url}">전시회 페이지</a></td>
-                    </tr>
-                </table>
-            </div>
+        #review_list {
+            height: auto;
+            margin-bottom: 40px;
+        }
 
-            <ul>
-                <li><a href="#exh_detail" style="text-decoration:none">전시회 상세설명</a></li>
-                <li><a href="#review" style="text-decoration:none" >전시 후기</a></li>
-            </ul>
+        #review_box {
+            margin-bottom: 30px;
+            width: 700px;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 30px 50px;
+        }
 
-            <hr style="width: 80%; margin-top: 30px;">
-            <!-- 전시 상세 설명 -->
-            <div id="exh_detail">
-                <p th:text="${exhibition.text}"></p>
-            </div>
+        /* 푸터 */
+        #footer {
+            background-color: black;
+            width: auto;
+            height: 120px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body link="black" vlink="black" alink="black">
+<!-- 헤더 -->
+<div th:replace="header :: header"></div>
 
-            <hr style="width: 80%; margin-bottom: 70px;">
+<!-- 페이지 설명 배너 -->
+<div id="page_banner">
+    <p th:text="${exhibition.title}">전시회 제목</p>
+</div>
 
-            <!-- 전시 후기 -->
-            <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
-            <!-- 리뷰 작성란 -->
-            <div id="review">
-                <div id="review_edit">
-                    <p>평점</p>
-                    <div class="star-rating">
-                        <select class="star" name="rating">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select><br/>
-                    </div>
-                    <p>후기</p>
-                    <div id="edit">
-                        <textarea id="review_text" name="content"></textarea>
-                        <button type="submit">작성</button>
-                    </div>
+<!-- 전시회 상세 -->
+<div id="detail_box">
+    <!-- 전시 간략 설명 -->
+    <div id="exh_info">
+        <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
+        <table>
+            <tr>
+                <td>전시 제목</td>
+                <td th:text="${exhibition.title}"></td>
+            </tr>
+            <tr>
+                <td>전시 기간</td>
+                <td th:text="${exhibition.date}"></td>
+            </tr>
+            <tr>
+                <td>관람시간</td>
+                <td th:text="${exhibition.time}"></td>
+            </tr>
+            <tr>
+                <td>휴관일</td>
+                <td th:text="${exhibition.rest}"></td>
+            </tr>
+            <tr>
+                <td>장르</td>
+                <td th:text="${exhibition.genre}"></td>
+            </tr>
+            <tr>
+                <td>관람료</td>
+                <td th:text="${exhibition.fee}"></td>
+            </tr>
+            <tr>
+                <td>장소</td>
+                <td th:text="${exhibition.place}"></td>
+            </tr>
+            <tr>
+                <td>연락처</td>
+                <td th:text="${exhibition.contact}"></td>
+            </tr>
+            <tr>
+                <td id='column' colspan='2' style="background-color: rgb(193, 193, 193);"><a th:href="${exhibition.url}">전시회 페이지</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <ul>
+        <li><a href="#exh_detail" style="text-decoration:none">전시회 상세설명</a></li>
+        <li><a href="#review" style="text-decoration:none">전시 후기</a></li>
+    </ul>
+
+    <hr style="width: 80%; margin-top: 30px;">
+    <!-- 전시 상세 설명 -->
+    <div id="exh_detail">
+        <p th:text="${exhibition.text}"></p>
+    </div>
+
+    <hr style="width: 80%; margin-bottom: 70px;">
+
+    <!-- 전시 후기 -->
+    <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
+        <!-- 리뷰 작성란 -->
+        <div id="review">
+            <div id="review_edit">
+                <p>평점</p>
+                <div class="star-rating">
+                    <span class="star" data-value="5">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="1">&#9733;</span>
+                </div>
+                <input type="hidden" id="rating" name="rating" value="0">
+                <p>후기</p>
+                <div id="edit">
+                    <textarea id="review_text" name="content"></textarea>
+                    <button type="submit">작성</button>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 
-        <!-- 리뷰 목록 -->
-        <div id="review_list">
-            <h2>리뷰</h2>
-            <div id="review_box">
-                <th:block th:each="review : ${reviews}">
-                    <li>
-                        <div class="rv-box">
-                            <div style="font-size:19px;"><span style="font-weight:600;" th:text="${review.userId}"></span></div>
-                            <div>별점: <span th:text="${review.rating}"></span></div>
-                            <div>내용: <span th:text="${review.content}"></span></div>
-                            <div>👍 <span th:text="${review.likeCount}"></span>
-                                <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
+    <!-- 리뷰 목록 -->
+    <div id="review_list">
+        <h2>리뷰</h2>
+        <div id="review_box">
+            <th:block th:each="review : ${reviews}">
+                <li>
+                    <div class="rv-box">
+                        <div style="font-size:19px;"><span style="font-weight:600;" th:text="${review.userId}"></span></div>
+                        <div>별점: <span th:text="${review.rating}"></span></div>
+                        <div>내용: <span th:text="${review.content}"></span></div>
+                        <div>👍 <span th:text="${review.likeCount}"></span>
+                            <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
                                 <button type="submit">up</button>
-                                </form>
-                            </div>
-
+                            </form>
                         </div>
-                        <h3>Comments</h3>
-                        <ul>
-                            <th:block th:each="comment : ${review.comments}">
-                                <li>
-                                    <p>Content: <span th:text="${comment.content}"></span></p>
-                                    <p>User ID: <span th:text="${comment.userId}"></span></p>
-                                </li>
-                            </th:block>
-                        </ul>
-                        <form th:action="@{/review/{reviewId}/comment(reviewId=${review.id})}" method="post">
-                            <textarea name="content" placeholder="Add a comment"></textarea>
-                            <button type="submit">Submit</button>
-                        </form>
-                    </li>
-                </th:block>
-            </div>
+                    </div>
+                    <h3>Comments</h3>
+                    <ul>
+                        <th:block th:each="comment : ${review.comments}">
+                            <li>
+                                <p>Content: <span th:text="${comment.content}"></span></p>
+                                <p>User ID: <span th:text="${comment.userId}"></span></p>
+                            </li>
+                        </th:block>
+                    </ul>
+                    <form th:action="@{/review/{reviewId}/comment(reviewId=${review.id})}" method="post">
+                        <textarea name="content" placeholder="Add a comment"></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </li>
+            </th:block>
         </div>
     </div>
-            <!-- 푸터 -->
-            <div id="footer">
-                <p>이메일: abcda111@gmail.com</p>
-                <p>전화번호: 000-0000-0000</p>
-            </div>
-    </body>
+</div>
+
+<!-- 푸터 -->
+<div id="footer">
+    <p>이메일: abcda111@gmail.com</p>
+    <p>전화번호: 000-0000-0000</p>
+</div>
+
+<<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.star-rating .star');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.dataset.value;
+                ratingInput.value = rating;
+
+                // 모든 별 체크 해제
+                stars.forEach(s => s.classList.remove('checked'));
+
+                // 클릭한 별까지 체크
+                this.classList.add('checked');
+                let nextSibling = this.nextElementSibling;
+                while (nextSibling) {
+                    nextSibling.classList.add('checked');
+                    nextSibling = nextSibling.nextElementSibling;
+                }
+            });
+
+            star.addEventListener('mouseover', function() {
+                // 모든 별 체크 해제
+                stars.forEach(s => s.classList.remove('hover'));
+
+                // 클릭한 별까지 체크
+                this.classList.add('hover');
+                let nextSibling = this.nextElementSibling;
+                while (nextSibling) {
+                    nextSibling.classList.add('hover');
+                    nextSibling = nextSibling.nextElementSibling;
+                }
+            });
+
+            star.addEventListener('mouseout', function() {
+                stars.forEach(s => s.classList.remove('hover'));
+            });
+        });
+    });
+</script>
+
+</body>
 </html>
