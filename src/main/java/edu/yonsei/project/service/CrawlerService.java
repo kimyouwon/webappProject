@@ -16,6 +16,8 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class CrawlerService {
@@ -24,6 +26,16 @@ public class CrawlerService {
     private CrawledDataRepository crawledDataRepository;
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+
+    private static final Map<String, List<String>> genreKeywords = new HashMap<>();
+
+    //추천 전시회 장르
+    static {
+        genreKeywords.put("원화/실물 전시회", List.of("회화", "한국화", "데생", "드로잉", "판화", "파스텔", "연필", "수채"));
+        genreKeywords.put("미디어 아트", List.of("설치", "사진", "아카이브", "영상", "사운드", "퍼포먼스", "입체", "모형", "음악"));
+        genreKeywords.put("몰입형 체험 전시", List.of("설치", "퍼포먼스", "영상", "사운드", "건축", "입체", "의상", "음악"));
+        genreKeywords.put("뮤지엄", List.of("회화", "조각", "도자", "유물", "건축", "출판물", "자수", "청사진", "말갑옷", "유리공예"));
+    }
 
     public void crawlAndSaveData() {
         System.setProperty("webdriver.chrome.whitelistedIps", "");
@@ -181,4 +193,16 @@ public class CrawlerService {
                 })
                 .collect(Collectors.toList());
     }
+
+    //추천 전시회 불러오는 메소드
+    public List<CrawledData> getExhibitionsByKeyword(String keyword) {
+        List<CrawledData> activeExhibitions = getActiveExhibitions();
+        List<String> targetGenres = genreKeywords.getOrDefault(keyword, List.of());
+
+        return activeExhibitions.stream()
+                .filter(exhibition -> targetGenres.stream().anyMatch(genre -> exhibition.getGenre().contains(genre)))
+                .collect(Collectors.toList());
+    }
+
+
 }
