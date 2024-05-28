@@ -1,252 +1,230 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>회원가입</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+            @font-face {
+                font-family: 'Freesentation-9Black';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+                font-weight: 900;
+                font-style: normal;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <title>회원가입</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-        @font-face {
-            font-family: 'Freesentation-9Black';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-            font-weight: 900;
-            font-style: normal;
-        }
+            *{
+                text-decoration: none;
+                font-family: "Noto Sans KR", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+            }
+            /* 헤더 */
+            #header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: #FD6F22;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        *{
-            text-decoration: none;
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-        }
-        /* 헤더 */
-        #header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: #FD6F22;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            #title{
+                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+            }
 
-        #title{
-            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-        }
+            #page_list{
+                margin-left: 20px;
+            }
 
-        #page_list{
-            margin-left: 20px;
-        }
+            #page_list{
+                display: flex;
+                flex-direction: row;
+                list-style:none;
+                margin-left: 20px;
+            }
 
-        #page_list{
-            display: flex;
-            flex-direction: row;
-            list-style:none;
-            margin-left: 20px;
-        }
+            #page_list a{
+                color: #FD6F22;
+                margin-right: 10px;
+            }
 
-        #page_list a{
-            color: #FD6F22;
-            margin-right: 10px;
-        }
+            /* 페이지배너 */
+            #page_banner{
+                width: 100%;
+                height: 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("/img/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+                background-size: 900px 200px;
+            }
+            #page_banner p{
+                padding: 60px 80px;
+                color: white;
+                font-size: 40px;
+                font-family: 'Freesentation-9Black';
+            }
 
-        /* 페이지배너 */
-        #page_banner{
-            width: 100%;
-            height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("/img/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-            background-size: 900px 200px;
-        }
-        #page_banner p{
-            padding: 60px 80px;
-            color: white;
-            font-size: 40px;
-            font-family: 'Freesentation-9Black';
-        }
+            /* 회원가입 */
+            #acc_box{
+                width: 100%;
+                height: auto;
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top:50px;
+                margin-bottom:50px;
+            }
 
-        /* 회원가입 */
-        #acc_box{
-            width: 100%;
-            height: auto;
-            display:flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top:50px;
-            margin-bottom:50px;
-        }
+            #orange {
+                font-weight: bold;
+                color: #FD6F22;
+            }
 
-
-
-        #orange {
-            font-weight: bold;
-            color: #FD6F22;
-        }
-
-         .editbox{
-            width: 450px;
-            height: 40px;
-            border-width: 1;
-            margin-top:5px;
-            margin-bottom: 20px;
-            padding: 10px;
-            padding-left:20px;
-        }
+             .editbox{
+                width: 450px;
+                height: 40px;
+                border-width: 1;
+                margin-top:5px;
+                margin-bottom: 20px;
+                padding: 10px;
+                padding-left:20px;
+            }
 
 
-        #edit-container {
-            margin-top: 10px;
-        }
+            #edit-container {
+                margin-top: 10px;
+            }
 
-        .blue-button {
-            width: 100px;
-            height: 50px;
-            border: none;
-            background-color: skyblue;
-            color: white;
-            cursor: pointer;
-            transition: 0.5s;
-        }
+            .blue-button {
+                width: 100px;
+                height: 50px;
+                border: none;
+                background-color: skyblue;
+                color: white;
+                cursor: pointer;
+                transition: 0.5s;
+            }
 
-        #edit-container {
-            margin-top: 10px;
-        }
+            #edit-container {
+                margin-top: 10px;
+            }
 
-        .edit-button {
-            width: 492px;
-            height: 50px;
-            border: none;
-            background-color: #FD6F22;
-            color: white;
-            cursor: pointer;
-        }
+            .edit-button {
+                width: 492px;
+                height: 50px;
+                border: none;
+                background-color: #FD6F22;
+                color: white;
+                cursor: pointer;
+            }
 
-        .orange-button {
+            .orange-button {
+                width: 100%;
+                height: 55px;
+                border: none;
+                background-color: #FD6F22;
+                color: white;
+                cursor: pointer;
+                border-radius:10px;
+            }
 
-            width: 100%;
-            height: 55px;
-            border: none;
-            background-color: #FD6F22;
-            color: white;
-            cursor: pointer;
-            border-radius:10px;
-        }
+            .whitebox{
+                background-color: white;
+                width: auto;
+                height: 550px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom:50px;
+            }
 
-        .whitebox{
-            background-color: white;
-            width: auto;
-            height: 550px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom:50px;
-
-        }
-
-        /* 푸터 */
-        .footer{
-            background-color: black;
-            width: auto;
-            height: 120px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
-        }
-
-    </style>
-</head>
-
-<body>
-
-<!-- 헤더 -->
-<div id="header">
-    <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-    <ul id="page_list">
-        <li><a href="/home/test">취향 테스트</a></li>
-        <li><a href="/exhibition">전시회</a></li>
-        <li><a href="/home/login">로그인</a></li>
-        <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-    </ul>
-</div>
-<!-- 페이지 설명 배너 -->
-<div id="page_banner">
-    <p>회원가입</p>
-</div>
-
-    <!---공백 -->
-    <div class = "blank"></div>
-
-    <div id="acc_box">
-        <form th:action="@{/home/register}" th:object="${user}" method="post">
-
-            <p>아이디</p>
-            <input class="editbox" type = "text" name="loginId" placeholder="아이디를 입력하시오"/>
-
-            <p>비밀번호</p>
-            <input class="editbox" type = "text" name="password" placeholder="비밀번호를 8자 이상 입력하시오."/>
-            <br>
-            <input  class="editbox" type = "text" name="passwordcheck" placeholder="비밀번호를 다시 입력하시오."/>
-
-            <hr style="margin-top:30px; margin-bottom:30px;">
-
-            <p>이름</p>
-            <input class="editbox" type = "text" name="name" placeholder="이름을 입력하시오"/>
-
-            <p>닉네임</p>
-            <input class="editbox" type = "text" name="nickname" placeholder="닉네임을 입력하시오"/>
-
-            <p>주소</p>
-            <input class="editbox" type = "text" name="residence" placeholder="주소 입력"/>
-
-            <p>생일</p>
-            <input class="editbox" type = "text" name="birth" placeholder="생일 입력"/>
-
-            <p>나이</p>
-            <input class="editbox" type = "text" name="age" placeholder="나이 입력">
-
-            <p>성별</p>
-            <input class="editbox" type = "text" name="gender" placeholder="성별 입력"/>
-
-            <p>관심있는 지역</p>
-            <input class="editbox" type = "text" name="interestedArea" placeholder="관심있는지역 입력">
-
-            <hr style="margin-top:30px; margin-bottom:30px;">
-
-            <p id = orange>연락처 입력</p>
-            <input class="editbox" type = "text" name="phone" placeholder="전화번호 입력">
-
-
-            <!---공백 -->
-            <div class = "blank"></div>
-
-            <input class="editbox" type = "text" name="email" placeholder="이메일 입력">
-
-            <div style="margin-top:20px; margin-bottom:30px; text-align:center;">
-                <input type="checkbox" id="myCheckbox" name="myCheckbox">
-                <label for="myCheckbox">동의 및 회원가입을 누르면 <a href = "로그인_회원가입_이용약관.html">사이트 이용약관</a>에 동의하게 됩니다.</label>
-            </div>
-
-            <div id="edit-container">
-                <button class="orange-button" type="submit"  value="Submit">가입하기</button>
-            </div>
-        </form>
-
+            /* 푸터 */
+            .footer{
+                background-color: black;
+                width: auto;
+                height: 120px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+            }
+        </style>
+    </head>
+    <body>
+    <!-- 페이지 설명 배너 -->
+    <div id="page_banner">
+        <p>회원가입</p>
     </div>
+        <!---공백 -->
+        <div class = "blank"></div>
 
-    <!-- 푸터 -->
-    <div class="footer">
-        <p>이메일: abcda111@gmail.com</p>
-        <p>전화번호: 000-0000-0000</p>
-    </div>
+        <div id="acc_box">
+            <form th:action="@{/home/register}" th:object="${user}" method="post">
 
-</body>
+                <p>아이디</p>
+                <input class="editbox" type = "text" name="loginId" placeholder="아이디를 입력하시오"/>
+
+                <p>비밀번호</p>
+                <input class="editbox" type = "text" name="password" placeholder="비밀번호를 8자 이상 입력하시오."/>
+                <br>
+                <input  class="editbox" type = "text" name="passwordcheck" placeholder="비밀번호를 다시 입력하시오."/>
+
+                <hr style="margin-top:30px; margin-bottom:30px;">
+
+                <p>이름</p>
+                <input class="editbox" type = "text" name="name" placeholder="이름을 입력하시오"/>
+
+                <p>닉네임</p>
+                <input class="editbox" type = "text" name="nickname" placeholder="닉네임을 입력하시오"/>
+
+                <p>주소</p>
+                <input class="editbox" type = "text" name="residence" placeholder="주소 입력"/>
+
+                <p>생일</p>
+                <input class="editbox" type = "text" name="birth" placeholder="생일 입력"/>
+
+                <p>나이</p>
+                <input class="editbox" type = "text" name="age" placeholder="나이 입력">
+
+                <p>성별</p>
+                <input class="editbox" type = "text" name="gender" placeholder="성별 입력"/>
+
+                <p>관심있는 지역</p>
+                <input class="editbox" type = "text" name="interestedArea" placeholder="관심 있는 지역 입력">
+
+                <hr style="margin-top:30px; margin-bottom:30px;">
+
+                <p id = orange>연락처 입력</p>
+                <input class="editbox" type = "text" name="phone" placeholder="전화번호 입력">
+
+
+                <!---공백 -->
+                <div class = "blank"></div>
+
+                <input class="editbox" type = "text" name="email" placeholder="이메일 입력">
+
+                <div style="margin-top:20px; margin-bottom:30px; text-align:center;">
+                    <input type="checkbox" id="myCheckbox" name="myCheckbox">
+                    <label for="myCheckbox">동의 및 회원가입을 누르면 <a href = "로그인_회원가입_이용약관.html">사이트 이용약관</a>에 동의하게 됩니다.</label>
+                </div>
+
+                <div id="edit-container">
+                    <button class="orange-button" type="submit"  value="Submit">가입하기</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 푸터 -->
+        <div class="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
+        </div>
+    </body>
 </html>

@@ -17,9 +17,9 @@ public class CustomErrorController implements ErrorController {
             Integer statusCode = Integer.valueOf(status.toString());
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                return "error/404"; // 404.html 파일을 가리킴
+                return "error/404";
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                return "error/500"; // 500.html 파일을 가리킴
+                return "error/500";
             }
         }
         return "error/error"; // 일반적인 에러 페이지

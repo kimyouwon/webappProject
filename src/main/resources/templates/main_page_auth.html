@@ -1,320 +1,545 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>site_name</title>
-    <style>
-        *{
-            
-            margin: 0;
-            padding: 0;
-        }
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WETE</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+            @font-face {
+                font-family: 'Freesentation-9Black';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+                font-weight: 900;
+                font-style: normal;
+            }
+            @import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
 
-        /* 헤더 */
-        #header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            background-color: #FD6F22;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            *{
+                text-decoration: none;
+                font-family: "Noto Sans KR", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+            }
 
-        }
+            /* 헤더 */
+            #header{
+                position: relative;
+                width: auto;
+                height: 90px;
+                background-color: #FD6F22;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        #title{
-            font-size: 20px;
-            font-weight: bold;
-        }
+            #title{
+                filter: invert(85%) sepia(100%) saturate(0%) hue-rotate(213deg) brightness(110%) contrast(101%);
+            }
 
-        #page_list{
-            margin-left: 20px;
-        }
-        
-        #page_list>p{
-            display: inline-block;
-            margin-left: 10px;
-        }
-         
-        /* 배너 */
-        #banner{
-            background-color: #FD6F22;
-            
-            height: 630px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            #page_list{
+                margin-left: 20px;
+            }
 
-        #circle{
-            background-color: white;
-            width: 400px;
-            height: 400px;
-            border-radius: 100%;
-        }
-        /* 취향 테스트 */
-        #test_box{
-            width: 100%;
-            background-color: #8BFF17;
-            height: 400px;
-            display: inline-flex;
-            /* white-space: nowrap; */
-        }
+            #page_list{
+                display: flex;
+                flex-direction: row;
+                list-style:none;
+                margin-left: 20px;
+            }
 
-        #test_image{
-            background-image: url("./content/ricardo-gomez-angel-B4zK-epGgW0-unsplash.jpg");
-            background-size: 950PX 400PX;
-            width: 60%;
-        }
-     
-        #test_text{
-            box-sizing : border-box;
-            font-size: 4.5vh;
-            font-weight: bold;
-        }
-        
-        /* 전시회 목록 */
-        #exh_list{
-            width: 100%;
-            height: auto;
-            align-items: center;
-            padding-top: 10px;
-            padding-bottom: 20px;
-            /* padding: 10px; */
-        }
+            #page_list a{
+                color: white;
+                margin-right: 10px;
+                /**/
+                position: relative;
+                display: block;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
 
-        #exh_list>p{
-            text-align: center;
-            font-size: 4.5vh;
-            font-weight: 450;
-            padding-top: 70px;
-            padding-bottom: 50px;
-        }
+            #page_list a:after {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background: #ffece1;
+                content: '';
+                opacity: 0;
+                -webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+                -moz-transition: height 0.3s, opacity 0.3s, -moz-transform 0.3s;
+                transition: height 0.3s, opacity 0.3s, transform 0.3s;
+                -webkit-transform: translateY(-10px);
+                -moz-transform: translateY(-10px);
+                transform: translateY(-10px);
+                }
 
-        #poster_list{
-            text-align: center;
-        }
+            #page_list a:hover:after, #page_list a:focus:after {
+                height: 3px;
+                opacity: 1;
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                transform: translateY(0px);
+                }
 
-        #poster{
-            display: inline-block;
-            width: 300px;
-            height: 500px;
-            margin: 10px 50px;
-        }
-        #poster>p{
-            margin: 7px;
-        }
+            /* 배너 */
+            #banner{
+                background-color: #FD6F22;
+                width:100%;
+                height: 640px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow-x: hidden;
+                position: relative;
+            }
 
-        #poster img{
-            display:inline-block;
-            width: 100%;
-            height: auto;
-        }
+            /* 살짝 네온 효과 */
+            @keyframes shadow{
+                from{text-shadow: 20px 25px rgb(0, 0, 0);}
+                to{text-shadow:  5px 20px rgb(0, 0, 0);}
+            }
 
-        /* 후기란 */
-        #review{
-            width: 100%;
-            height: 700px;
-            background-color: #FD6F22;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+            /* 옆으로 쭉우우욱 */
+            @keyframes flow{
+                from{transform: translateX(0%);}
+                to{transform: translateX(-50%);}
+            }
 
-        #exh_review{
-            font-size: 4.5vh;
-            font-weight: 450;
-            padding-top: 70px;
-            padding-bottom: 50px;
-        }
+            @keyframes slideIn{
+                from{ transform: translateX(-100%);}
+                to{transform: translateX(0);}
+            }
 
-        #review_content{
-            width: 1300px;
-            height: 450px;
-            display: flex;
-            align-items: center;
-        }
+            @keyframes wave {
+                0%, 40%, 100% {transform: translateY(0);}
+                20%{transform: translateY(-15px);}
+                60%{transform: translateY(-5px);}
+            }
 
-        #review_content img{
-            width: 20%;
-            height: 75%;
-            margin-left: 10%;
-            margin-right: 5%;
-        }
+            .text-line{
+                font-family: "Shrikhand", serif;
+                animation: flow 100s linear infinite;
+                color:white;
+                position:absolute;
+                bottom:40px;
+                font-size:30px;
+                white-space: nowrap;
+                bottom:20px;
 
-        #review_list{
-            width: 50%;
-            height: 75%;
-            display: flex;
-            align-items: center;
-            
-        }
+            }
 
-        #content{
-            width: 50%;
-            height: 80%;
-            border: 1px solid gray;
-            border-radius: 10%;
-            background-color: white;
-            margin: 10px;
-            display: flex;
-            justify-content: center;
-        }
+            #banner span{
+                position:relative;
+                font-family: "Shrikhand", serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 170px;
+                color: #0028B7;
+                right:200px;
+                bottom:200px;
+                -webkit-text-stroke: 4px white;
+                animation: wave 1.5s ease-in-out infinite;
+            }
+            #banner span:nth-of-type(1) {animation-delay: 0.1s;}
+            #banner span:nth-of-type(2) {animation-delay: 0.5s;}
+            #banner span:nth-of-type(3) {animation-delay: 0.1s;}
+            #banner span:nth-of-type(4) {animation-delay: 0.5s;}
 
-        .star-rating {
-        display: flex;
-        }
+            #main_text{
+                display:flex;
+                flex-direction:column;
+            }
 
-        .star {
-        appearance: none;
-        padding: 1px;
-        }
+            #main_text p{
+                position:relative;
+                font-family: "Shrikhand", serif;
+                font-style: normal;
+                font-size: 100px;
+                color: #0028B7;
+                -webkit-text-stroke: 2px white;
+                white-space: nowrap;
+                left: 190px;
+                top:170px;
+            }
 
-        .star::after {
-        content: '☆';
-        color: #FD6F22;
-        font-size: 20px;
-        }
+            #main_text > p:nth-of-type(1) {
+            }
+            #main_text > p:nth-of-type(2) {
+                position:relative;
+                left: 130px;
+                top:110px;
+            }
+            #main_text > p:nth-of-type(3) {
+                left: 80px;
+                top:50px;
+            }
 
-        #content p{
-            padding-top: 10px;
-        }
+            #circle{
+                position: absolute;
+                background-color: white;
+                width: 320px;
+                height: 320px;
+                border-radius: 100%;
+                margin-left:140px;
+                margin-bottom:50px;
+            }
+
+            #dog{
+                position: absolute;
+                width: 400px;
+                height: 450px;
+            }
+
+            .eye1 {
+                position: relative;
+                width: 33px;
+                height: 60px;
+                bottom:110px;
+                left:447px;
+                object-fit: cover;
+            }
+
+            .eye2 {
+                position: relative;
+                width: 33px;
+                height: 60px;
+                bottom:113px;
+                left:463px;
+                object-fit: cover;
+            }
 
 
+            /* 사이트 설명 */
+            #site_info{
+                width: 100%;
+                height: 400px;
+                background-color: #dbe3ff;
+            }
 
-        /* 푸터 */
-        #footer{
-            background-color: black;
-            width: auto;
-            height: 120px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+            /* 취향 테스트 */
+            #test_box{
+                width: 100%;
+                background-color: #0028B7;
+                height: 300px;
+                display: inline-flex;
+                /* white-space: nowrap; */
+            }
 
-        
+            .fade-wrap{
+                background-image: url("./img/ricardo-gomez-angel-B4zK-epGgW0-unsplash.jpg");
+                background-size: 950PX 400PX;
+                width: 65%;
+            }
 
-        
-    </style>
-</head>
-<body>
+            .fade-wrap {
+                /* 나타나는 효과가 1초동안 발생 */
+                transition: 2s;
+
+                /* 투명도 0 (안보임) */
+                opacity: 0;
+
+                /* 왼쪽에서 오른쪽으로 나타나게 하기 위함 */
+                position: relative;
+                left: -150px;
+            }
+
+            .fade-wrap.fade-in {
+                /* 투명도 0 (보임) */
+                opacity: 1;
+
+                /* 왼쪽에서 오른쪽으로 나타나게 하기 위함 */
+                left: 0;
+            }
+
+            test_text{
+                font-family: 'Freesentation-9Black';
+                box-sizing : border-box;
+                font-size: 4.5vh;
+                color: white;
+            }
+
+            /* 전시회 목록 */
+            #exh_list{
+                width: 100%;
+                height: auto;
+                align-items: center;
+                padding-top: 10px;
+                padding-bottom: 40px;
+                /* padding: 10px; */
+            }
+
+            #exh_list>p{
+                font-family: 'Freesentation-9Black';
+                text-align: center;
+                font-size: 4.5vh;
+                font-weight: 600;;
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+
+            #poster_list{
+                text-align: center;
+            }
+
+            #more{
+                font-size:13px;
+                color:gray;
+                text-align: right;
+                margin-right:20%;
+                margin-bottom:40px;
+
+            }
+
+            #poster{
+                display: inline-block;
+                width: 300px;
+                height: 500px;
+                margin: 10px 50px;
+            }
+            #poster>p{
+                margin: 7px;
+            }
+
+            #poster a{
+                color:black;
+            }
+
+            #poster img{
+                display:inline-block;
+                width: 300px;
+                height: 400px;
+                object-position: center;
+            }
+
+
+            /* 후기란 */
+            #review{
+                width: auto;
+                background-color: white;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .exh_review{
+                font-family: 'Freesentation-9Black';
+                font-size: 4.5vh;
+                font-weight: 450;
+                padding-top: 70px;
+                padding-bottom: 50px;
+                text-align:center;
+            }
+
+            #review_content{
+                width: auto;
+                height: 100%;
+                display: inline-block;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            #review_list{
+                width: 100%;
+                height: 75%;
+                display: inline-block;
+                text-align:center;
+            }
+
+            .rv_cont p{
+                font-size:20px;
+              font-weight: 600;
+            }
+
+            .star-rating {
+                display: flex;
+            }
+
+            .star {
+                appearance: none;
+                padding: 1px;
+            }
+
+            .star::after {
+                content: '☆';
+                color: #FD6F22;
+                font-size: 20px;
+            }
+
+            #content p{
+                padding-top: 10px;
+            }
+
+            .und_line{
+                width: 80%;
+                margin-top:10px;
+            }
+
+            .review_box{
+                width:250px;
+                border: 1px solid gray;
+                padding: 30px;
+                border-radius:10px;
+                margin:20px;
+                display: inline-block;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .review_box *{
+                margin:10px
+            }
+
+            /* 푸터 */
+            #footer{
+                background-color: black;
+                width: auto;
+                height: 120px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
     <!-- 헤더 -->
-    <div id="header">
-        <p id="title">전시회 사이트</p>   
-        <div id="page_list">
-            <a href="/home/test">취향 테스트</a>
-            <a href="/exhibition">전시회</a>
-            <a th:href="@{/home_auth/mypage}">마이 페이지</a>
-            <a th:href="@{/logout}">로그아웃</a>
-        </div>
-    </div>
+    <div th:replace="header :: header"></div>
 
     <!-- 메인 배너 -->
     <div id="banner">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
         <div id="circle"></div>
+        <img id="dog" src="/img/dogdog.png"/>
+        <img class="eye1" src="/img/dogeye1.png"/>
+        <img class="eye2" src="/img/dogeye2.png"/>
+        <span>W</span>
+        <span>E</span>
+        <span>T</span>
+        <span>E</span>
+        <div id="main_text">
+            <p>GO! Go!</p>
+            <p>GO! Go!</p>
+            <p>GO! Go!</p>
+        </div>
+
+
+        <div class="text-line">
+            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+            wellcome to Exhibition wellcome to Exhibition  wellcome to Exhibition  wellcome to Exhibition
+        </div>
+
     </div>
-    
+
+    <!-- 사이트 설명 부분 -->
+    <!-- <div id="site_info">
+
+    </div> -->
+
     <!-- 취향 테스트 -->
     <div id="test_box">
-        <div id="test_image" style="display: flex; flex-direction: column;"></div>
-        <div style="display: flex; flex-direction: column; 
-        align-items: top;
-        padding-top: 50px;
-        padding-left: 6% ;">
-            <p id="test_text">나의 전시회 취향을<br>확인하러!</p>
-            <button style="margin-top: 40px;">화살표</button>
-        </div>
-        
+        <div class="fade-wrap" style="display: flex; flex-direction: column;"></div>
+        <a href="/home/test">
+            <div style="display: flex; flex-direction: column;
+            align-items: top;
+            padding-top: 50px; padding-left:50px;">
+                <p id="test_text">지금 당장<br>나의 전시회 취향<br>을 확인하러!</p>
+            </div>
+        </a>
+
     </div>
-    
+
     <!-- 전시회 목록 -->
-    <div id="exh_list">
-        <P>전시회</P>
+    <div id="exh_list_box">
+        <p class="exh_review">전시회</p>
         <div id="poster_list">
-            <div id="poster"> 
-                <img src="./content/b955aedd88d8788068516dbb7814cf93.jpg" />
-                <p>전시회 이름</p>
-                <p>날짜</p>
-            </div>
-            <div id="poster"> 
-                <img src="./content/b955aedd88d8788068516dbb7814cf93.jpg" />
-                <p>전시회 이름</p>
-                <p>날짜</p>
-            </div>
-            <div id="poster"> 
-                <img src="./content/b955aedd88d8788068516dbb7814cf93.jpg" />
-                <p>전시회 이름</p>
-                <p>날짜</p>
-            </div>
-            <div id="poster"> 
-                <img src="./content/b955aedd88d8788068516dbb7814cf93.jpg" />
-                <p>전시회 이름</p>
-                <p>날짜</p>
-            </div>
-            <div id="poster"> 
-                <img src="./content/b955aedd88d8788068516dbb7814cf93.jpg" />
-                <p>전시회 이름</p>
-                <p>날짜</p>
-            </div>
-            <div id="poster"> 
-                <img src="./content/b955aedd88d8788068516dbb7814cf93.jpg" />
-                <p>전시회 이름</p>
-                <p>날짜</p>
+            <div id="poster" th:each="exhibition, stat : ${exhibitions}" th:if="${stat.index < 6}">
+                <a th:href="@{'/exhibition/' + ${exhibition.id}}">
+                    <!--<a th:href="@{/exhibition/{id}(id=${exhibition.id})}">-->
+                    <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
+                    <p th:text="${exhibition.title}">전시회 이름</p>
+                    <p th:text="${exhibition.date}">날짜</p>
+                </a>
             </div>
         </div>
+        <a href="/exhibition"><p id="more">더보기 ></p></a>
     </div>
+
+
+
+    </div>
+
+    <hr style="margin: 0px 80px;">
 
     <!-- 전시회 후기 -->
     <div id="review">
-        <p id="exh_review">전시회 후기</p>
+        <p class="exh_review">전시회 후기</p>
         <div id="review_content">
-            <img src="./content/97092_78784_548.jpg">
-            <div id="review_list">
-                <div id="content">
-                    <div style="display: flex; flex-direction: column; margin-top: 40px;">
-                        <div class="star-rating">
-                            <input type="radio" class="star" value="1">
-                            <input type="radio" class="star" value="2">
-                            <input type="radio" class="star" value="3">
-                            <input type="radio" class="star" value="4">
-                            <input type="radio" class="star" value="5">
-                        </div>
-                        <hr style="width: 150px; height: 1px; margin-top:10px;"/>
-                        <p>후기후기후기후기</p>
-                    </div> 
+            <div class="review_box">
+                <div class="rv_cont">
+                    <p>전시회 이름</p>
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1">
+                        <input type="radio" class="star" value="2">
+                        <input type="radio" class="star" value="3">
+                        <input type="radio" class="star" value="4">
+                        <input type="radio" class="star" value="5">
+                    </div>
                 </div>
-                <div id="content">
-                    <div style="display: flex; flex-direction: column; margin-top: 40px;">
-                        <div class="star-rating">
-                            <input type="radio" class="star" value="1">
-                            <input type="radio" class="star" value="2">
-                            <input type="radio" class="star" value="3">
-                            <input type="radio" class="star" value="4">
-                            <input type="radio" class="star" value="5">
-                        </div>
-                        <hr style="width: 150px; height: 1px; margin-top:10px;"/>
-                        <p>후기후기후기후기</p>
-                    </div> 
-                </div>
-                <div id="content">
-                    <div style="display: flex; flex-direction: column; margin-top: 40px;">
-                        <div class="star-rating">
-                            <input type="radio" class="star" value="1">
-                            <input type="radio" class="star" value="2">
-                            <input type="radio" class="star" value="3">
-                            <input type="radio" class="star" value="4">
-                            <input type="radio" class="star" value="5">
-                        </div>
-                        <hr style="width: 150px; height: 1px; margin-top:10px;"/>
-                        <p>후기후기후기후기</p>
-                    </div> 
-                </div>
+                <hr class="und_line"/>
+                <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기</p>
             </div>
+
+            <div class="review_box">
+                <div class="rv_cont">
+                    <p>전시회 이름</p>
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1">
+                        <input type="radio" class="star" value="2">
+                        <input type="radio" class="star" value="3">
+                        <input type="radio" class="star" value="4">
+                        <input type="radio" class="star" value="5">
+                    </div>
+                </div>
+                <hr class="und_line"/>
+                <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기</p>
+            </div>
+            <div class="review_box">
+                <div class="rv_cont">
+                    <p>전시회 이름</p>
+                    <div class="star-rating">
+                        <input type="radio" class="star" value="1">
+                        <input type="radio" class="star" value="2">
+                        <input type="radio" class="star" value="3">
+                        <input type="radio" class="star" value="4">
+                        <input type="radio" class="star" value="5">
+                    </div>
+                </div>
+                <hr class="und_line"/>
+                <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
+                    후기후기</p>
+            </div>
+
         </div>
 
     </div>
@@ -324,7 +549,59 @@
         <p>이메일: abcda111@gmail.com</p>
         <p>전화번호: 000-0000-0000</p>
     </div>
-    
-    
-</body>
+    <script>
+        /* javascript */
+        // Intersection Observer 생성
+        const observer = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // 화면에 들어옴
+                entry.target.classList.add("fade-in");
+              } else {
+                // 화면에서 나감
+                entry.target.classList.remove("fade-in");
+              }
+            });
+          },
+          // 화면에서 해당 요소가 10% 이상 보일 경우 화면에 들어온 것으로 판단함
+          { threshold: 0.1 }
+        );
+
+        // 관찰 대상 설정
+        const targetElements = document.querySelectorAll(".fade-wrap");
+        targetElements.forEach((element) => {
+          observer.observe(element);
+        });
+
+        //눈 돌아가는 거
+            const eye1 = document.querySelector('.eye1');
+            const eye2 = document.querySelector('.eye2');
+
+            let x = 0;
+            let y = 0;
+            let followX = 0;
+            let followY = 0;
+            const speed = 1;
+
+            function animate() {
+                x += (followX - x) * speed;
+                y += (followY - y) * speed;
+                eye1.style.transform = `translate(${-x}px, ${-y}px)`;
+                eye2.style.transform = `translate(${-x}px, ${-y}px)`;
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                const mouseX = Math.max(-100, Math.min(100, window.innerWidth / 2 - e.clientX));
+                const mouseY = Math.max(-100, Math.min(100, window.innerHeight / 2 - e.clientY));
+
+                followX = (4 * mouseX) / 100;
+                followY = (8 * mouseY) / 100;
+            });
+
+            animate();
+    </script>
+
+    </body>
 </html>

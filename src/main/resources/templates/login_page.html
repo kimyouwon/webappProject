@@ -1,184 +1,168 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <title>로그인 화면</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-        @font-face {
-            font-family: 'Freesentation-9Black';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-            font-weight: 900;
-            font-style: normal;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <title>WETE</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+            @font-face {
+                font-family: 'Freesentation-9Black';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+                font-weight: 900;
+                font-style: normal;
+            }
 
-        *{
-            text-decoration: none;
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-        }
-        /* 헤더 */
-        #header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: #FD6F22;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            *{
+                text-decoration: none;
+                font-family: "Noto Sans KR", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+            }
+            /* 헤더 */
+            #header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: #FD6F22;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        #title{
-            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-        }
+            #title{
+                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+            }
 
-        #page_list{
-            margin-left: 20px;
-        }
+            #page_list{
+                margin-left: 20px;
+            }
 
-        #page_list{
-            display: flex;
-            flex-direction: row;
-            list-style:none;
-            margin-left: 20px;
-        }
+            #page_list{
+                display: flex;
+                flex-direction: row;
+                list-style:none;
+                margin-left: 20px;
+            }
 
-        #page_list a{
-            color: #FD6F22;
-            margin-right: 10px;
-        }
+            #page_list a{
+                color: #FD6F22;
+                margin-right: 10px;
+            }
 
-        /* 페이지배너 */
-        #page_banner{
-            width: 100%;
-            height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("/img/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-            background-size: 900px 200px;
-        }
-        #page_banner p{
-            padding: 60px 80px;
-            color: white;
-            font-size: 40px;
-            font-family: 'Freesentation-9Black';
-        }
+            /* 페이지배너 */
+            #page_banner{
+                width: 100%;
+                height: 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("/img/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+                background-size: 900px 200px;
+            }
+            #page_banner p{
+                padding: 60px 80px;
+                color: white;
+                font-size: 40px;
+                font-family: 'Freesentation-9Black';
+            }
 
-        /* 상세 */
-        #detail_box{
-            width: 100%;
-            height: 500px;
-            display:flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .editbox{
-            width: 450px;
-            height: 40px;
-            border-width: 1;
-            margin-bottom: 10px;
-            padding: 10px;
-            padding-left:20px;
-        }
+            /* 상세 */
+            #detail_box{
+                width: 100%;
+                height: 500px;
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .editbox{
+                width: 450px;
+                height: 40px;
+                border-width: 1;
+                margin-bottom: 10px;
+                padding: 10px;
+                padding-left:20px;
+            }
 
-        #edit-container {
-            margin-top:5px;
-            margin-bottom:30px;
-            margin-left:10px;
-        }
+            #edit-container {
+                margin-top:5px;
+                margin-bottom:30px;
+                margin-left:10px;
+            }
 
+            .edit-button {
+                width: 490px;
+                height: 55px;
+                border: none;
+                background-color: #FD6F22;
+                color: white;
+                cursor: pointer;
+                border-radius:10px;
+                margin-bottom:30px;
+                display:inline-block;
+            }
 
-        .edit-button {
-            width: 490px;
-            height: 55px;
-            border: none;
-            background-color: #FD6F22;
-            color: white;
-            cursor: pointer;
-            border-radius:10px;
-            margin-bottom:30px;
-            display:inline-block;
-        }
+            #information{
+                width: auto;
+                height: 50px;
+                color: #FD6F22;
+                display: flex;
+            }
 
-        #information{
-            width: auto;
-            height: 50px;
-            color: #FD6F22;
-            display: flex;
-        }
+            #information p{
+                margin-right:15px;
 
-        #information p{
-            margin-right:15px;
+            }
 
-        }
-
-
-        /* 푸터 */
-        #footer{
-            background-color: black;
-            width: auto;
-            height: 120px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-    </style>
-</head>
-<body>
-<!-- 헤더 -->
-<div id="header">
-    <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-    <ul id="page_list">
-        <li><a href="/home/test">취향 테스트</a></li>
-        <li><a href="/exhibition">전시회</a></li>
-        <li><a href="/home/login">로그인</a></li>
-        <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-    </ul>
-</div>
-<!-- 페이지 설명 배너 -->
-<div id="page_banner">
-    <p>로그인</p>
-</div>
-
-<div id="detail_box">
-    <form action="/home/login" method="post">
-        <div style="display:flex; flex-direction: column; align-items: center; justify-content: center;">
-            <input class="editbox" type = "text" name="loginId" placeholder="아이디를 입력하세요."/>
-            <input class="editbox" type= "text" name="password" placeholder="비밀번호 입력하세요."/>
+            /* 푸터 */
+            #footer{
+                background-color: black;
+                width: auto;
+                height: 120px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 헤더 -->
+        <div th:replace="header :: header"></div>
+        <!-- 페이지 설명 배너 -->
+        <div id="page_banner">
+            <p>로그인</p>
         </div>
-        <div id="edit-container">
-            <input type="checkbox" id="myCheckbox" name="myCheckbox">
-            <label for="myCheckbox">로그인 유지</label>
+
+        <div id="detail_box">
+            <form action="/home/login" method="post">
+                <div style="display:flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <input class="editbox" type = "text" name="loginId" placeholder="아이디를 입력하세요."/>
+                    <input class="editbox" type= "text" name="password" placeholder="비밀번호 입력하세요."/>
+                </div>
+                <div id="edit-container">
+                    <input type="checkbox" id="myCheckbox" name="myCheckbox">
+                    <label for="myCheckbox">로그인 유지</label>
+                </div>
+                <hr style="margin-bottom:50px;">
+                <div style="text-align:center;">
+                    <button type="submit" class="edit-button">로그인</button>
+                </div>
+                <div><p th:text="${error}"></p></div>
+            </form>
+
+            <!---공백 -->
+            <div id="information">
+                <a href="로그인_아이디 찾기.html" style="text-decoration:none; color:black;" ><p>아이디 찾기</p></a>
+                <a href="로그인_비밀번호 찾기.html" style="text-decoration:none; color:black;" ><p>비밀번호 찾기</p></a>
+                <a href="/home/register" style="text-decoration:none; color:black;" ><p>회원가입하기</p></a>
+            </div>
         </div>
-        <hr style="margin-bottom:50px;">
-        <div style="text-align:center;">
-            <button type="submit" class="edit-button">로그인</button>
+
+        <div id="footer">
+            <p>이메일: abcda111@gmail.com</p>
+            <p>전화번호: 000-0000-0000</p>
         </div>
-        <div><p th:text="${error}"></p></div>
-
-    </form>
-
-    <!---공백 -->
-
-
-    <div id="information">
-        <a href="로그인_아이디 찾기.html" style="text-decoration:none; color:black;" ><p>아이디 찾기</p></a>
-        <a href="로그인_비밀번호 찾기.html" style="text-decoration:none; color:black;" ><p>비밀번호 찾기</p></a>
-        <a href="/home/register" style="text-decoration:none; color:black;" ><p>회원가입하기</p></a>
-
-    </div>
-    </div>
-</div>
-<div id="footer">
-    <p>이메일: abcda111@gmail.com</p>
-    <p>전화번호: 000-0000-0000</p>
-</div>
-
-</body>
+    </body>
 </html>
