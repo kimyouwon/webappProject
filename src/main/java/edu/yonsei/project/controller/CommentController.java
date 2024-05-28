@@ -1,6 +1,4 @@
 package edu.yonsei.project.controller;
 
-public class TestPageController {
-
-
+public class CommentController {
 }
