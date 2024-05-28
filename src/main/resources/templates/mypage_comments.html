@@ -173,6 +173,12 @@
             </div>
             <br>
             <p class="comment-content" th:text="${comment.content}">댓글 내용</p>
+            <form th:action="@{/comment/edit/{id}(id=${comment.id})}" method="get">
+                <button type="submit" class="edit-button">✏️</button>
+            </form>
+            <form th:action="@{/comment/delete/{id}(id=${comment.id})}" method="post">
+                <button type="submit" class="edit-button">❌</button>
+            </form>
         </div>
     </div>
 </div>
