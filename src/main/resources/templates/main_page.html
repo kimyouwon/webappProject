@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -338,7 +338,7 @@
             text-align: center;
         }
 
-        #exh_review{
+        .exh_review{
             font-family: 'Freesentation-9Black';
             font-size: 4.5vh;
             font-weight: 450;
@@ -363,7 +363,7 @@
             text-align:center;
         }
 
-        #rv_cont p{
+        .rv_cont p{
             font-size:20px;
             font-weight: 600;
         }
@@ -390,12 +390,12 @@
             padding-top: 10px;
         }
 
-        #und_line{
+        .und_line{
             width: 80%;
             margin-top:10px;
         }
 
-        #review_box{
+        .review_box{
             width:250px;
             border: 1px solid gray;
             padding: 30px;
@@ -409,7 +409,7 @@
 
         }
 
-        #review_box *{
+        .review_box *{
             margin:10px
         }
 
@@ -490,7 +490,7 @@
 
 <!-- 전시회 목록 -->
 <div id="exh_list_box">
-    <p id="exh_review">전시회</p>
+    <p class="exh_review">전시회</p>
     <div id="poster_list">
         <div id="poster" th:each="exhibition, stat : ${exhibitions}" th:if="${stat.index < 6}">
             <a th:href="@{'/exhibition/' + ${exhibition.id}}">
@@ -509,10 +509,10 @@
 
 <!-- 전시회 후기 -->
 <div id="review">
-    <p id="exh_review">전시회 후기</p>
+    <p class="exh_review">전시회 후기</p>
     <div id="review_content">
-        <div id="review_box">
-            <div id="rv_cont">
+        <div class="review_box">
+            <div class="rv_cont">
                 <p>전시회 이름</p>
                 <div class="star-rating">
                     <input type="radio" class="star" value="1">
@@ -522,14 +522,14 @@
                     <input type="radio" class="star" value="5">
                 </div>
             </div>
-            <hr id="und_line"/>
+            <hr class="und_line"/>
             <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
                 후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
                 후기후기</p>
         </div>
 
-        <div id="review_box">
-                <div id="rv_cont">
+        <div class="review_box">
+                <div class="rv_cont">
                     <p>전시회 이름</p>
                     <div class="star-rating">
                         <input type="radio" class="star" value="1">
@@ -539,13 +539,13 @@
                         <input type="radio" class="star" value="5">
                     </div>
                 </div>
-                <hr id="und_line"/>
+                <hr class="und_line"/>
                 <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
                     후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
                     후기후기</p>
             </div>
-        <div id="review_box">
-                <div id="rv_cont">
+        <div class="review_box">
+                <div class="rv_cont">
                     <p>전시회 이름</p>
                     <div class="star-rating">
                         <input type="radio" class="star" value="1">
@@ -555,7 +555,7 @@
                         <input type="radio" class="star" value="5">
                     </div>
                 </div>
-                <hr id="und_line"/>
+                <hr class="und_line"/>
                 <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
                     후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
                     후기후기</p>
