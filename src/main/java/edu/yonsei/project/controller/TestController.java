@@ -57,13 +57,10 @@ public class TestController {
     public String showDelete() {
         return "delete";
     }
+
     @PostMapping("/home_auth/mypage/delete")
     public String deleteUser(HttpSession session, RedirectAttributes redirectAttributes) {
         String loginId = (String) session.getAttribute("loginId"); //세션에서 loginId를 기준으로 불러옴.
-       /* if (userId == null) {
-            redirectAttributes.addFlashAttribute("error", "로그인이 필요합니다.");
-            return "redirect:/login";  // 로그인 페이지로 리다이렉션
-        }*/
         try {
             userService.deleteUserByLoginId(loginId);
             session.invalidate();  // 탈퇴 후 세션 무효화
