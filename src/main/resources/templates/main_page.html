@@ -418,12 +418,15 @@
             #footer{
                 background-color: black;
                 width: auto;
-                height: 120px;
+                height: 100px;
                 color: white;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+                font-size:13px;
+                padding:10px;
             }
         </style>
     </head>
@@ -555,10 +558,7 @@
         </div>
 
         <!-- 푸터 -->
-        <div id="footer">
-            <p>이메일: abcda111@gmail.com</p>
-            <p>전화번호: 000-0000-0000</p>
-        </div>
+        <div th:replace="footer :: footer"></div>
         <script>
             /* javascript */
             // Intersection Observer 생성
