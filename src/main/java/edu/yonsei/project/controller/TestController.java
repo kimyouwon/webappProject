@@ -52,6 +52,12 @@ public class TestController {
         return "main_page_auth";
     }
 
+    //취향 테스트
+    @GetMapping({"/home/test", "/home_auth/test"})
+    public String showTestPage() {
+        return "index";
+    }
+
     //회원 탈퇴 페이지
     @GetMapping("/home_auth/mypage/delete")
     public String showDelete() {

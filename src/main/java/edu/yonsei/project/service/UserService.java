@@ -69,6 +69,13 @@ public class UserService {
         UserEntity saveEntity = userRepository.save(user);  // 변경된 엔티티 저장
         return true;
     }
+    @Transactional
+    public void updateUserPreference(String loginId, String preference) {
+        UserEntity user = userRepository.findByLoginId(loginId)
+                .orElseThrow(() -> new RuntimeException("User not found with login ID: " + loginId));
+        user.setPreference(preference);
+        userRepository.save(user);
+    }
 
     @Transactional
     public void deleteUserByLoginId(String loginId) {

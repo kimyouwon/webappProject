@@ -39,4 +39,6 @@ public class UserDto {
     private java.util.Date birth; // 사용자의 생일
 
     private String preference; //전시회 취향 테스트 결과
+
+
 }
