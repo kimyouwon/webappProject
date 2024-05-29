@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,7 +35,7 @@ public class RegisterController {
     }
 
     @PostMapping("/home/register")
-    public String registerUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, Model model) {
+    public String registerUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, RedirectAttributes redirectAttributes, Model model) {
         if (result.hasErrors()) {
             return "createacc_page";
         }
@@ -69,8 +70,14 @@ public class RegisterController {
             model.addAttribute("error", "회원가입 중 오류가 발생했습니다.");
             return "createacc_page";
         }
+        redirectAttributes.addAttribute("nickname", userDto.getNickname());
+        return "redirect:/home/welcome";  // 회원가입 완료 후 환영 페이지로 리다이렉트
+    }
 
-        return "redirect:/home/login";
+    @GetMapping("/home/welcome")
+    public String showWelcomePage(@RequestParam("nickname") String nickname, Model model) {
+        model.addAttribute("nickname", nickname);
+        return "welcome";  // 환영 페이지 반환
     }
 
 }
