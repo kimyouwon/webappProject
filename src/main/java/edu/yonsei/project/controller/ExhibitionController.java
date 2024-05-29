@@ -4,6 +4,7 @@ import edu.yonsei.project.dto.ReviewDto;
 import edu.yonsei.project.entity.CommentEntity;
 import edu.yonsei.project.entity.CrawledData;
 import edu.yonsei.project.entity.ReviewEntity;
+import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.repository.CrawledDataRepository;
 import edu.yonsei.project.repository.ReviewRepository;
 import edu.yonsei.project.service.CommentService;
@@ -40,6 +41,20 @@ public class ExhibitionController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/exhibition/recommend")
+    public String getExhibitionsByUserPreference(HttpSession session, Model model) {
+        String loginId = (String) session.getAttribute("loginId");
+        if (loginId != null) {
+            Optional<UserEntity> userOpt = userService.getUserByLoginId(loginId);
+            if (userOpt.isPresent()) {
+                UserEntity user = userOpt.get();
+                int preference = user.getPreference();
+                return "redirect:/exh_keyword/" + preference;
+            }
+        }
+        return "redirect:/home/login"; // 로그인하지 않은 경우 로그인 페이지로 리다이렉트
+    }
 
     @GetMapping("/exhibition/{id}")
     public String getExhibitionDetail(@PathVariable("id") Long id, Model model) {
