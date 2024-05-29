@@ -1,285 +1,222 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>회원가입</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-        @font-face {
-            font-family: 'Freesentation-9Black';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-            font-weight: 900;
-            font-style: normal;
-        }
-
-        *{
-            text-decoration: none;
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-        }
-        /* 에러 메시지 박스 */
-        .error-box {
-            background-color: #ffdddd;
-            color: red;
-            border: 1px solid red;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .error-box .exclamation {
-            font-size: 20px;
-            margin-right: 10px;
-        }
-
-        /* 헤더 */
-        #header{
-            position: relative;
-            width: auto;
-            height: 50px;
-            color: #FD6F22;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #title{
-            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-        }
-
-        #page_list{
-            margin-left: 20px;
-        }
-
-        #page_list{
-            display: flex;
-            flex-direction: row;
-            list-style:none;
-            margin-left: 20px;
-        }
-
-        #page_list a{
-            color: #FD6F22;
-            margin-right: 10px;
-        }
-
-        /* 페이지배너 */
-        #page_banner{
-            width: 100%;
-            height: 200px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("/img/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-            background-size: 900px 200px;
-        }
-        #page_banner p{
-            padding: 60px 80px;
-            color: white;
-            font-size: 40px;
-            font-family: 'Freesentation-9Black';
-        }
-
-        /* 회원가입 */
-        #acc_box{
-            width: 100%;
-            height: auto;
-            display:flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top:50px;
-            margin-bottom:50px;
-        }
-
-        #orange {
-            font-weight: bold;
-            color: #FD6F22;
-        }
-
-        .editbox{
-            width: 450px;
-            height: 40px;
-            border-width: 1;
-            margin-top:5px;
-            margin-bottom: 20px;
-            padding: 10px;
-            padding-left:20px;
-        }
-
-        #edit-container {
-            margin-top: 10px;
-        }
-
-        .blue-button {
-            width: 100px;
-            height: 50px;
-            border: none;
-            background-color: skyblue;
-            color: white;
-            cursor: pointer;
-            transition: 0.5s;
-        }
-
-        #edit-container {
-            margin-top: 10px;
-        }
-
-        .edit-button {
-            width: 492px;
-            height: 50px;
-            border: none;
-            background-color: #FD6F22;
-            color: white;
-            cursor: pointer;
-        }
-
-        .orange-button {
-            width: 100%;
-            height: 55px;
-            border: none;
-            background-color: #FD6F22;
-            color: white;
-            cursor: pointer;
-            border-radius:10px;
-        }
-
-        .whitebox{
-            background-color: white;
-            width: auto;
-            height: 550px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom:50px;
-        }
-
-        /* 푸터 */
-        #footer{
-            background-color: black;
-            width: auto;
-            height: 100px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
-            font-size:13px;
-            padding:10px;
-        }
-    </style>
-    <script>
-        function validateForm() {
-            var loginId = document.forms["registerForm"]["loginId"].value;
-            var password = document.forms["registerForm"]["password"].value;
-            var passwordCheck = document.forms["registerForm"]["passwordcheck"].value;
-            var nickname = document.forms["registerForm"]["nickname"].value;
-            var errorMessages = [];
-
-            // 비밀번호 검증
-            var passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
-            if (!passwordPattern.test(password)) {
-                errorMessages.push("비밀번호는 8자 이상 15자 이하의 영문, 숫자, 특수문자를 포함해야 합니다.");
-            }
-            if (password !== passwordCheck) {
-                errorMessages.push("비밀번호가 일치하지 않습니다.");
+    <head>
+        <meta charset="UTF-8">
+        <title>회원가입</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+            @font-face {
+                font-family: 'Freesentation-9Black';
+                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+                font-weight: 900;
+                font-style: normal;
             }
 
-            // 닉네임 검증
-            var nicknamePattern = /^[가-힣a-zA-Z0-9]{3,10}$/;
-            if (!nicknamePattern.test(nickname)) {
-                errorMessages.push("닉네임은 영문/한글, 숫자로 이루어져야 하며 3자 이상 10자 이하이어야 합니다.");
+            *{
+                text-decoration: none;
+                font-family: "Noto Sans KR", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400;
+                font-style: normal;
+                margin: 0;
+                padding: 0;
+            }
+            /* 헤더 */
+            #header{
+                position: relative;
+                width: auto;
+                height: 50px;
+                color: #FD6F22;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            // 에러 메시지 표시
-            if (errorMessages.length > 0) {
-                var errorBox = document.getElementById("error-box");
-                errorBox.innerHTML = "";
-                errorMessages.forEach(function(message) {
-                    var p = document.createElement("p");
-                    p.innerText = "❗ " + message;
-                    errorBox.appendChild(p);
-                });
-                errorBox.style.display = "block";
-                return false;
+            #title{
+                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
             }
 
-            return true;
-        }
-    </script>
-</head>
-<body>
-<div th:replace="header :: header"></div>
-<!-- 페이지 설명 배너 -->
-<div id="page_banner">
-    <p>회원가입</p>
-</div>
-<!---공백 -->
-<div class = "blank"></div>
+            #page_list{
+                margin-left: 20px;
+            }
 
-<div id="acc_box">
-    <form name="registerForm" th:action="@{/home/register}" th:object="${user}" method="post" onsubmit="return validateForm()">
+            #page_list{
+                display: flex;
+                flex-direction: row;
+                list-style:none;
+                margin-left: 20px;
+            }
 
-        <div id="error-box" class="error-box" style="display: none;"></div>
+            #page_list a{
+                color: #FD6F22;
+                margin-right: 10px;
+            }
 
-        <p>아이디</p>
-        <input class="editbox" type = "text" name="loginId" placeholder="아이디를 입력하시오" required>
-        <div th:if="${errorLoginId}" class="error-box">
-            <span class="exclamation">❗</span>
-            <p th:text="${errorLoginId}"></p>
-        </div>
+            /* 페이지배너 */
+            #page_banner{
+                width: 100%;
+                height: 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("/img/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+                background-size: 900px 200px;
+            }
+            #page_banner p{
+                padding: 60px 80px;
+                color: white;
+                font-size: 40px;
+                font-family: 'Freesentation-9Black';
+            }
 
-        <p>비밀번호</p>
-        <input class="editbox" type = "password" name="password" placeholder="비밀번호를 8자 이상 입력하시오." required>
-        <br>
-        <input  class="editbox" type = "password" name="passwordcheck" placeholder="비밀번호를 다시 입력하시오." required>
+            /* 회원가입 */
+            #acc_box{
+                width: 100%;
+                height: auto;
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top:50px;
+                margin-bottom:50px;
+            }
 
-        <hr style="margin-top:30px; margin-bottom:30px;">
+            #orange {
+                font-weight: bold;
+                color: #FD6F22;
+            }
 
-        <p>이름</p>
-        <input class="editbox" type = "text" name="name" placeholder="이름을 입력하시오" required>
+             .editbox{
+                width: 450px;
+                height: 40px;
+                border-width: 1;
+                margin-top:5px;
+                margin-bottom: 20px;
+                padding: 10px;
+                padding-left:20px;
+            }
 
-        <p>닉네임</p>
-        <input class="editbox" type = "text" name="nickname" placeholder="닉네임을 입력하시오" required>
-        <div th:if="${errorNickname}" class="error-box">
-            <span class="exclamation">❗</span>
-            <p th:text="${errorNickname}"></p>
-        </div>
 
-        <p>생일</p>
-        <input class="editbox" type = "text" name="birth" placeholder="생일 입력">
+            #edit-container {
+                margin-top: 10px;
+            }
 
-        <p>나이</p>
-        <input class="editbox" type = "text" name="age" placeholder="나이 입력">
+            .blue-button {
+                width: 100px;
+                height: 50px;
+                border: none;
+                background-color: skyblue;
+                color: white;
+                cursor: pointer;
+                transition: 0.5s;
+            }
 
-        <hr style="margin-top:30px; margin-bottom:30px;">
+            #edit-container {
+                margin-top: 10px;
+            }
 
-        <p id = orange>연락처 입력</p>
-        <input class="editbox" type = "text" name="phone" placeholder="전화번호 입력">
+            .edit-button {
+                width: 492px;
+                height: 50px;
+                border: none;
+                background-color: #FD6F22;
+                color: white;
+                cursor: pointer;
+            }
 
+            .orange-button {
+                width: 100%;
+                height: 55px;
+                border: none;
+                background-color: #FD6F22;
+                color: white;
+                cursor: pointer;
+                border-radius:10px;
+            }
+
+            .whitebox{
+                background-color: white;
+                width: auto;
+                height: 550px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom:50px;
+            }
+
+            /* 푸터 */
+            #footer{
+                background-color: black;
+                width: auto;
+                height: 100px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
+                font-size:13px;
+                padding:10px;
+            }
+        </style>
+    </head>
+    <body>
+    <div th:replace="header :: header"></div>
+    <!-- 페이지 설명 배너 -->
+    <div id="page_banner">
+        <p>회원가입</p>
+    </div>
         <!---공백 -->
         <div class = "blank"></div>
 
-        <input class="editbox" type = "text" name="email" placeholder="이메일 입력">
+        <div id="acc_box">
+            <form th:action="@{/home/register}" th:object="${user}" method="post">
 
-        <div style="margin-top:20px; margin-bottom:30px; text-align:center;">
-            <input type="checkbox" id="myCheckbox" name="myCheckbox" required>
-            <label for="myCheckbox">동의 및 회원가입을 누르면 <a href = "로그인_회원가입_이용약관.html">사이트 이용약관</a>에 동의하게 됩니다.</label>
+                <p>아이디</p>
+                <input class="editbox" type = "text" name="loginId" placeholder="아이디를 입력하시오"/>
+
+                <p>비밀번호</p>
+                <input class="editbox" type = "text" name="password" placeholder="비밀번호를 8자 이상 입력하시오."/>
+                <br>
+                <input  class="editbox" type = "text" name="passwordcheck" placeholder="비밀번호를 다시 입력하시오."/>
+
+                <hr style="margin-top:30px; margin-bottom:30px;">
+
+                <p>이름</p>
+                <input class="editbox" type = "text" name="name" placeholder="이름을 입력하시오"/>
+
+                <p>생일</p>
+                <input class="editbox" type = "text" name="birth" placeholder="생일 입력"/>
+
+                <p>나이</p>
+                <input class="editbox" type = "text" name="age" placeholder="나이 입력">
+
+                <p>닉네임</p>
+                <input class="editbox" type = "text" name="nickname" placeholder="닉네임을 입력하시오"/>
+
+
+                <hr style="margin-top:30px; margin-bottom:30px;">
+
+                <p id = orange>연락처 입력</p>
+                <input class="editbox" type = "text" name="phone" placeholder="전화번호 입력">
+
+
+                <!---공백 -->
+                <div class = "blank"></div>
+
+                <input class="editbox" type = "text" name="email" placeholder="이메일 입력">
+
+                <div style="margin-top:20px; margin-bottom:30px; text-align:center;">
+                    <input type="checkbox" id="myCheckbox" name="myCheckbox">
+                    <label for="myCheckbox">동의 및 회원가입을 누르면 <a href = "로그인_회원가입_이용약관.html">사이트 이용약관</a>에 동의하게 됩니다.</label>
+                </div>
+
+                <div id="edit-container">
+                    <button class="orange-button" type="submit"  value="Submit">가입하기</button>
+                </div>
+            </form>
         </div>
 
-        <div id="edit-container">
-            <button class="orange-button" type="submit"  value="Submit">가입하기</button>
-        </div>
-    </form>
-</div>
-
-<!-- 푸터 -->
-<div th:replace="footer :: footer"></div>
-</body>
+    <!-- 푸터 -->
+    <div th:replace="footer :: footer"></div>
+    </body>
 </html>
