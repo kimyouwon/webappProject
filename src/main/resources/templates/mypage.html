@@ -114,11 +114,12 @@
 
 
             /* 기능버튼 */
-            #buttons{
+            .buttons{
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
+                margin-bottom:30px;
             }
 
             .Container{
@@ -128,16 +129,16 @@
             }
 
             .small-button {
-                width: 150px;
+                width: 180px;
                 height: 50px;
-                background-color: #0038FF;
+                background-color: blue;
                 color: white;
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
                 font-size: 15px;
 
-                margin: 0 30px; /* 버튼 사이의 공백 조절 */
+                margin: 0 10px; /* 버튼 사이의 공백 조절 */
                 text-align: center;
                 display: flex;
                 align-items: center;
@@ -162,20 +163,26 @@
             }
 
             .edit-button {
-                width: 200px;
-                height: 40px;
+                width: 180px;
+                height: 50px;
                 border: none;
                 border-radius: 7px;
-                background-color: #FD6F22;
                 color: white;
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
                 cursor: pointer;
                 transition: 0.5s;
+                margin: 10px;
             }
 
             /* 종료 버튼 스타일 */
             .red-button {
+                width: 130px;
+                height: 40px;
                 background-color: red;
+            }
+
+            .blue-button {
+                background-color: blue;
             }
 
             /* 푸터 */
@@ -255,27 +262,29 @@
         </div>
 
         <!-- 항목들 -->
-        <div id="buttons">
+        <div class="buttons">
             <div class="Container">
-                <div class="small-button">
-                    <a href="/home_auth/mypage/auth">수정</a>
-                </div>
-                <div class="small-button">
-                    <a href="/home_auth/mypage/reviews">작성한 전시회 후기 보기</a>
-                </div>
-                <div class="small-button">
-                    <a href="/home_auth/mypage/comments">작성한 댓글 보기</a>
-                </div>
+                <form action="/home_auth/mypage/auth" method="get">
+                    <button class="edit-button blue-button">수정</button>
+                </form>
+                <form action="/home_auth/mypage/reviews" method="get">
+                    <button class="edit-button blue-button">작성한 전시회 후기 보기</button>
+                </form>
+                <form action="/home_auth/mypage/comments" method="get">
+                    <button class="edit-button blue-button">작성한 댓글 보기</button>
+                </form>
             </div>
 
-            <div id="edit-container">
+            <div class="Container">
                 <form action="/logout" method="get">
-                <button type="submit" class="edit-button red-button">로그아웃</button>
+                    <button type="submit" class="edit-button red-button">로그아웃</button>
                 </form>
                 <form action="/home_auth/mypage/delete" method="get">
-                <button class="edit-button red-button">회원탈퇴</button>
+                    <button class="edit-button red-button">회원탈퇴</button>
                 </form>
             </div>
+
+
         </div>
 
         <!-- 푸터 -->
