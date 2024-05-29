@@ -137,6 +137,9 @@
 
             }
 
+
+
+
             #banner span{
                 position:relative;
                 font-family: "Shrikhand", serif;
@@ -218,6 +221,31 @@
                 bottom:113px;
                 left:463px;
                 object-fit: cover;
+            }
+
+            /* Top 버튼 스타일 */
+            #topBtn {
+                width:80px;
+                height:80px;
+                display: none; /* 기본적으로 숨김 */
+                position: fixed; /* 화면에 고정 */
+                bottom: 20px; /* 화면 하단에서의 거리 */
+                right: 30px; /* 화면 오른쪽에서의 거리 */
+                z-index: 99; /* 다른 요소들보다 위에 위치 */
+                border: none; /* 테두리 없음 */
+                outline: none; /* 외곽선 없음 */
+                color: white; /* 글자색 */
+                cursor: pointer; /* 커서 모양 */
+                padding: 15px; /* 패딩 */
+                border-radius: 10px; /* 둥근 모서리 */
+                font-size: 18px; /* 글자 크기 */
+                background: url("./img/head_button.png") no-repeat;
+                background-size:cover;
+            }
+
+            /* Top 버튼 호버 효과 */
+            #topBtn:hover {
+                filter: invert(62%) sepia(18%) saturate(538%) hue-rotate(306deg) brightness(200%) contrast(105%);
             }
 
 
@@ -465,6 +493,9 @@
 
         </div>
 
+        <!-- 화면의 가장 위로 이동하는 버튼 -->
+        <button id="topBtn" onclick="scrollToTop()">Top</button>
+
         <!-- 사이트 설명 부분 -->
         <!-- <div id="site_info">
 
@@ -577,6 +608,36 @@
                 });
 
                 animate();
+            // 스크롤 이벤트를 감지하여 버튼을 표시하거나 숨기는 함수
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var topBtn = document.getElementById("topBtn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+        }
+
+        // 버튼 클릭 시 화면을 위로 스크롤하는 함수
+        function scrollToTop() {
+            document.body.scrollTop = 0; // Safari
+            document.documentElement.scrollTop = 0; // Chrome, Firefox, IE, Opera
+        }
+
+        const fadeInSection = document.querySelector('.fade-wrap');
+
+        window.addEventListener('scroll', () => {
+            const sectionPos = fadeInSection.getBoundingClientRect().top;
+            const screenPos = window.innerHeight;
+
+            if(sectionPos < screenPos) {
+                fadeInSection.classList.add('fade-in');
+            }
+        });
         </script>
     </body>
 </html>
