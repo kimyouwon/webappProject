@@ -1,304 +1,308 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" dir="ltr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WETE</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-            @font-face {
-                font-family: 'Freesentation-9Black';
-                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-                font-weight: 900;
-                font-style: normal;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WETE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
 
-            *{
-                text-decoration: none;
-                font-family: "Noto Sans KR", sans-serif;
-                font-optical-sizing: auto;
-                font-weight: 400;
-                font-style: normal;
-                margin: 0;
-                padding: 0;
+        * {
+            text-decoration: none;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+        }
 
-            }
-            /* 헤더 */
-            #header{
-                position: relative;
-                width: auto;
-                height: 50px;
-                color: #FD6F22;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+        /* 헤더 */
+        #header {
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-            #title{
-                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-            }
+        #title {
+            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+        }
 
-            #page_list{
-                margin-left: 20px;
-            }
+        #page_list {
+            margin-left: 20px;
+        }
 
-            #page_list{
-                display: flex;
-                flex-direction: row;
-                list-style:none;
-                margin-left: 20px;
-            }
+        #page_list {
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+            margin-left: 20px;
+        }
 
-            #page_list a{
-                color: #FD6F22;
-                margin-right: 10px;
-            }
+        #page_list a {
+            color: #FD6F22;
+            margin-right: 10px;
+        }
 
-            /* 페이지배너 */
-            #page_banner{
-                width: 100%;
-                height: 200px;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-                background-size: 900px 200px;
-            }
-            #page_banner p{
-                padding: 60px 80px;
-                color: white;
-                font-size: 40px;
-                font-family: 'Freesentation-9Black';
-            }
+        /* 페이지배너 */
+        #page_banner {
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
+            background-size: 900px 200px;
+        }
 
-            /* 상세 */
-            #detail_box{
-                width: 100%;
-                height: auto;
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-            }
+        #page_banner p {
+            padding: 60px 80px;
+            color: white;
+            font-size: 40px;
+            font-family: 'Freesentation-9Black';
+        }
 
-            #exh_info{
-                margin-top: 100px;
-                display: inline-block;
-                text-align: center;
-                height:auto;
+        /* 상세 */
+        #detail_box {
+            width: 100%;
+            height: auto;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
 
-            }
+        #exh_info {
+            margin-top: 100px;
+            display: inline-block;
+            text-align: center;
+            height: auto;
+        }
 
-            #exh_info img{
-                width: 300px;
-                height: 400px;
-                object-position: center;
-                display: inline-block;
+        #exh_info img {
+            width: 300px;
+            height: 400px;
+            object-position: center;
+            display: inline-block;
+        }
 
-            }
+        /* 테이블 */
+        #exh_info table {
+            width: 500px;
+            height: auto;
+            text-align: center;
+            border-collapse: collapse;
+            display: inline-block;
+            margin: 0px 30px;
+        }
 
-            /* 테이블 */
-            #exh_info table{
-                width: 500px;
-                height:auto;
-                text-align: center;
-                border-collapse:collapse;
-                display: inline-block;
-                margin:0px 30px;
+        #exh_info th,
+        td {
+            border: 1px solid rgb(207, 207, 207);
+            padding: 5px;
+        }
 
-            }
+        #detail_box ul {
+            margin-top: 90px;
+        }
 
+        /* 클릭 */
+        #detail_box li {
+            display: inline;
+            margin-left: 40px;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-            #exh_info th,td{
-                border: 1px solid rgb(207, 207, 207);
-                padding:5px;
-            }
+        #exh_detail {
+            width: 70%;
+            white-space: pre-line;
+            height: auto;
+            margin: 80px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-            #detail_box ul{
-                margin-top: 90px;
-            }
+        #exh_detail img {
+            margin: 40px;
+            width: 550px;
+            height: 600px;
+        }
 
-            /* 클릭 */
-            #detail_box li{
-                display: inline;
-                margin-left: 40px;
-                font-size: 20px;
-                font-weight: bold;
-            }
+        #exh_detail p {
+            margin-top: 70px;
+            font-size: 17px;
+        }
 
-            #exh_detail{
-                width: 70%;
-                white-space: pre-line;
-                height: auto;
-                margin: 80px 50px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            #exh_detail img{
-               margin: 40px;
-                width: 550px;
-                height: 600px;
-            }
-
-            #exh_detail p{
-               margin-top: 70px;
-               font-size: 17px;
-            }
-
-            /* 리뷰란 */
-            #review{
-                width: 700px;
-                border: 1px solid rgb(193, 193, 193);
-                border-radius: 10px;
-                margin-bottom: 90px;
-                padding: 30px 50px;
-            }
+        /* 리뷰란 */
+        #review {
+            width: 700px;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            margin-bottom: 90px;
+            padding: 30px 50px;
+        }
 
         .star-rating {
             display: flex;
-            flex-direction: row-reverse;
             justify-content: center;
             padding: 1rem;
             cursor: pointer;
-        }
-
-        .star-rating {
-            display: flex;
             margin-bottom: 10px;
         }
 
-        .star {
-            font-size: 20px;
+        .star-rating .star {
+            font-size: 2rem;
             color: #FD6F22;
+        }
+
+        .star-rating .star.filled {
+            color: #FD6F22;
+        }
+
+        .star-rating-static {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+
+        .star-rating-static .star {
+            font-size: 1.5rem;
+            color: #FD6F22;
+        }
+
+        .star-rating-static .star.filled {
+            color: #FD6F22;
+        }
+
+        .rv-box {
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 10px 30px;
+            font-size: 15px;
+        }
+
+        #edit {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #edit button {
+            margin-top: 60px;
+            width: 70px;
+            height: 40px;
+            border: none;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             cursor: pointer;
+            transition: 0.5s;
         }
 
-        .filled {
-            content: '★';
+        #review_list {
+            height: auto;
+            margin-bottom: 40px;
         }
 
-
-            .rv-box{
-
-                border: 1px solid rgb(193, 193, 193);
-                border-radius:10px;
-                padding: 10px 30px;
-                font-size:15px;
-            }
-
-            #edit{
-                margin-top: 10px;
-                display: flex;
-                justify-content: space-between;
-
-            }
-
-            #edit button{
-                margin-top: 60px;
-                width: 70px;
-                height: 40px;
-                border: none;
-                border-radius: 7px;
-                background-color: #FD6F22;
-                color: white;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-                cursor: pointer;
-                transition: 0.5s;
-            }
-
-            #review_list{
-                height: auto;
-                margin-bottom: 40px;
-
-            }
-
-            #review_box{
-                margin-bottom: 30px;
-                width: 700px;
-                border: 1px solid rgb(193, 193, 193);
-                border-radius: 10px;
-                padding: 30px 50px;
-            }
+        #review_box {
+            margin-bottom: 30px;
+            width: 700px;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 30px 50px;
+        }
 
         /* 푸터 */
         #footer {
             background-color: black;
-                width: auto;
-                height: 100px;
-                color: white;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
-                font-size:13px;
-                padding:10px;
+            width: auto;
+            height: 100px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
+            font-size: 13px;
+            padding: 10px;
         }
     </style>
 </head>
-    <body link="black" vlink="black" alink="black">
-    <!-- 헤더 -->
-    <div th:replace="header :: header"></div>
+<body link="black" vlink="black" alink="black">
+<!-- 헤더 -->
+<div th:replace="header :: header"></div>
 
-        <!-- 페이지 설명 배너 -->
-        <div id="page_banner">
-            <p th:text="${exhibition.title}">전시회 제목</p>
-        </div>
+<!-- 페이지 설명 배너 -->
+<div id="page_banner">
+    <p th:text="${exhibition.title}">전시회 제목</p>
+</div>
 
-        <!-- 전시회 상세 -->
-        <div id="detail_box">
-            <!-- 전시 간략 설명 -->
-            <div id="exh_info">
-                <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
-                <table>
-                    <tr>
-                        <td>전시 제목</td>
-                        <td th:text="${exhibition.title}"></td>
-                    </tr>
-                    <tr>
-                        <td>전시 기간</td>
-                        <td th:text="${exhibition.date}"></td>
-                    </tr>
-                    <tr>
-                        <td>관람시간</td>
-                        <td th:text="${exhibition.time}"></td>
-                    </tr>
-                    <tr>
-                        <td>휴관일</td>
-                        <td th:text="${exhibition.rest}"></td>
-                    </tr>
-                    <tr>
-                        <td>장르</td>
-                        <td th:text="${exhibition.genre}"></td>
-                    </tr>
-                    <tr>
-                        <td>관람료</td>
-                        <td th:text="${exhibition.fee}"></td>
-                    </tr>
-                    <tr>
-                        <td>장소</td>
-                        <td th:text="${exhibition.place}"></td>
-                    </tr>
-                    <tr>
-                        <td>연락처</td>
-                        <td th:text="${exhibition.contact}"></td>
-                    </tr>
-                    <tr>
-                        <td id='column' colspan='2' style="background-color: rgb(193, 193, 193);;"><a th:href="${exhibition.url}">전시회 페이지</a></td>
-                    </tr>
-                </table>
-            </div>
+<!-- 전시회 상세 -->
+<div id="detail_box">
+    <!-- 전시 간략 설명 -->
+    <div id="exh_info">
+        <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
+        <table>
+            <tr>
+                <td>전시 제목</td>
+                <td th:text="${exhibition.title}"></td>
+            </tr>
+            <tr>
+                <td>전시 기간</td>
+                <td th:text="${exhibition.date}"></td>
+            </tr>
+            <tr>
+                <td>관람시간</td>
+                <td th:text="${exhibition.time}"></td>
+            </tr>
+            <tr>
+                <td>휴관일</td>
+                <td th:text="${exhibition.rest}"></td>
+            </tr>
+            <tr>
+                <td>장르</td>
+                <td th:text="${exhibition.genre}"></td>
+            </tr>
+            <tr>
+                <td>관람료</td>
+                <td th:text="${exhibition.fee}"></td>
+            </tr>
+            <tr>
+                <td>장소</td>
+                <td th:text="${exhibition.place}"></td>
+            </tr>
+            <tr>
+                <td>연락처</td>
+                <td th:text="${exhibition.contact}"></td>
+            </tr>
+            <tr>
+                <td id='column' colspan='2' style="background-color: rgb(193, 193, 193);;"><a th:href="${exhibition.url}">전시회 페이지</a></td>
+            </tr>
+        </table>
+    </div>
 
-            <ul>
-                <li><a href="#exh_detail" style="text-decoration:none">전시회 상세설명</a></li>
-                <li><a href="#review" style="text-decoration:none" >전시 후기</a></li>
-            </ul>
+    <ul>
+        <li><a href="#exh_detail" style="text-decoration:none">전시회 상세설명</a></li>
+        <li><a href="#review" style="text-decoration:none">전시 후기</a></li>
+    </ul>
 
-            <hr style="width: 80%; margin-top: 30px;">
-            <!-- 전시 상세 설명 -->
-            <div id="exh_detail">
-                <p th:text="${exhibition.text}"></p>
-            </div>
+    <hr style="width: 80%; margin-top: 30px;">
+    <!-- 전시 상세 설명 -->
+    <div id="exh_detail">
+        <p th:text="${exhibition.text}"></p>
+    </div>
 
-            <hr style="width: 80%; margin-bottom: 70px;">
+    <hr style="width: 80%; margin-bottom: 70px;">
 
     <!-- 전시 후기 -->
     <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
@@ -306,12 +310,12 @@
         <div id="review">
             <div id="review_edit">
                 <p>평점</p>
-                <div class="star-rating" th:data-rating="${review.rating}">
-                    <span class="star empty">☆</span>
-                    <span class="star empty">☆</span>
-                    <span class="star empty">☆</span>
-                    <span class="star empty">☆</span>
-                    <span class="star empty">☆</span>
+                <div class="star-rating">
+                    <span class="star empty" data-value="5">☆</span>
+                    <span class="star empty" data-value="4">☆</span>
+                    <span class="star empty" data-value="3">☆</span>
+                    <span class="star empty" data-value="2">☆</span>
+                    <span class="star empty" data-value="1">☆</span>
                 </div>
                 <input type="hidden" id="rating" name="rating" value="0">
                 <p>후기</p>
@@ -323,23 +327,36 @@
         </div>
     </form>
 
-        <!-- 리뷰 목록 -->
-        <div id="review_list">
-            <h2>리뷰</h2>
-            <div id="review_box">
-                <th:block th:each="review : ${reviews}">
-                    <li>
-                        <div class="rv-box">
-                            <div style="display:flex; align-items: center;">
-                                <div style="font-size:19px;"><span style="font-weight:600;" th:text="${review.userId}"></span></div>
-                                <div style="margin-left:15px">평점: <span th:text="${review.rating}"></span></div>
+    <!-- 리뷰 목록 -->
+    <div id="review_list">
+        <h2>리뷰</h2>
+        <div id="review_box">
+            <th:block th:each="review : ${reviews}">
+                <li>
+                    <div class="rv-box">
+                        <div style="display:flex; align-items: center;">
+                            <div style="font-size:19px;">
+                                <span style="font-weight:600;" th:text="${review.userId}"></span>
                             </div>
-                            <hr style="width: 100%; margin:8px 0px;">
+                            <div style="margin-left:15px">
+                                평점:
+                                <span class="star-rating-static" th:data-rating="${review.rating}">
+                                <span class="star">☆</span>
+                                <span class="star">☆</span>
+                                <span class="star">☆</span>
+                                <span class="star">☆</span>
+                                <span class="star">☆</span>
+                            </span>
+                            </div>
+                        </div>
+                        <hr style="width: 100%; margin:8px 0px;">
 
-                            <div><span th:text="${review.content}"></span></div>
+                        <div>
+                            <span th:text="${review.content}"></span>
+                        </div>
 
-                            <div style="display:flex; align-items: center; margin-top:10px;">👍 <span th:text="${review.likeCount}"></span>
-                                <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
+                        <div style="display:flex; align-items: center; margin-top:10px;">👍 <span th:text="${review.likeCount}"></span>
+                            <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
                                 <button type="submit">up</button>
                             </form>
                         </div>
@@ -361,17 +378,13 @@
             </th:block>
         </div>
     </div>
-</div>
-
-    <!-- 푸터 -->
-
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const starRatings = document.querySelectorAll('.star-rating');
-            starRatings.forEach(rating => {
-                const ratingValue = rating.getAttribute('data-rating');
+            // 리뷰 목록의 별점 처리
+            const starRatingsStatic = document.querySelectorAll('.star-rating-static');
+            starRatingsStatic.forEach(rating => {
+                const ratingValue = parseInt(rating.getAttribute('data-rating'));
                 const stars = rating.querySelectorAll('.star');
                 stars.forEach((star, index) => {
                     if (index < ratingValue) {
@@ -381,8 +394,44 @@
                     }
                 });
             });
+
+            // 리뷰 작성 별점 처리
+            const stars = document.querySelectorAll('.star-rating .star');
+            const ratingInput = document.getElementById('rating');
+
+            stars.forEach((star, index) => {
+                star.addEventListener('click', function () {
+                    const rating = index + 1;
+                    ratingInput.value = rating;
+
+                    stars.forEach(s => {
+                        s.classList.remove('filled');
+                        s.classList.add('empty');
+                        s.textContent = '☆';
+                    });
+
+                    for (let i = 0; i < rating; i++) {
+                        stars[i].classList.remove('empty');
+                        stars[i].classList.add('filled');
+                        stars[i].textContent = '★';
+                    }
+                });
+
+                star.addEventListener('mouseover', function () {
+                    stars.forEach(s => s.textContent = '☆');
+
+                    for (let i = 0; i <= index; i++) {
+                        stars[i].textContent = '★';
+                    }
+                });
+
+                star.addEventListener('mouseout', function () {
+                    stars.forEach(s => {
+                        s.textContent = s.classList.contains('filled') ? '★' : '☆';
+                    });
+                });
+            });
         });
     </script>
-
 </body>
 </html>
