@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -42,6 +43,7 @@ public class ReviewService {
     }
 
     public ReviewEntity saveReview(ReviewEntity review) {
+        review.setCreatedAt(LocalDateTime.now()); // 작성 날짜 설정
         return reviewRepository.save(review);
     }
 

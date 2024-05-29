@@ -2,6 +2,8 @@ package edu.yonsei.project.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -41,4 +43,7 @@ public class ReviewEntity {
     private List<CommentEntity> comments; // 댓글 리스트
 
     private long likeCount; // 좋아요 개수
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt; // 작성 날짜
 }

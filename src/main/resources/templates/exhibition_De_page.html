@@ -139,7 +139,7 @@
         /* 리뷰란 */
         #review {
             width: 90%;
-            max-width: 700px;
+            max-width: 800px;
             border: 1px solid rgb(193, 193, 193);
             border-radius: 10px;
             margin-bottom: 90px;
@@ -166,8 +166,8 @@
         .star-rating-static {
             display: flex;
             flex-direction: row;
-            justify-content: center;
             padding: 0.5rem;
+            align-items: center;
         }
 
         .star-rating-static .star {
@@ -185,17 +185,19 @@
             padding: 10px 30px;
             font-size: 15px;
             margin-bottom: 20px;
+            position: relative;
         }
 
         #edit {
             margin-top: 10px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
         #edit button {
-            margin-top: 60px;
-            width: 70px;
+            margin-top: 0;
+            width: 100px;
             height: 40px;
             border: none;
             border-radius: 7px;
@@ -204,8 +206,20 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             cursor: pointer;
             transition: 0.5s;
-            font-size: 1.5rem; /* 버튼의 텍스트 크기를 키움 */
-            padding: 10px; /* 버튼의 내측 여백을 추가하여 크기를 키움 */
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        textarea#review_text {
+            width: 80%;
+            height: 100px;
+            border-radius: 5px;
+            border: 1px solid #FD6F22;
+            padding: 10px;
+            resize: none;
+            margin-right: 10px;
         }
 
         #review_list {
@@ -231,6 +245,14 @@
 
         .comment-box p {
             margin: 5px 0;
+        }
+
+        .review-date {
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            font-size: 12px;
+            color: #888;
         }
 
         /* 푸터 */
@@ -270,6 +292,15 @@
             .star-rating .star, .star-rating-static .star {
                 font-size: 1.5rem;
             }
+        }
+
+        .nickname-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .nickname-label {
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -370,24 +401,22 @@
         <div id="review_box">
             <th:block th:each="review : ${reviews}">
                 <div class="rv-box">
-                    <div style="display: flex; align-items: center;">
-                        <div style="margin-right: 15px">
-                            닉네임 |
-                            <span style="font-weight: 600;" th:text="${review.userNickname}"></span>
-                        </div>
-                        <div style="font-size: 19px;">
+                    <div class="review-date" th:text="${#temporals.format(review.createdAt, 'yyyy-MM-dd')}"></div>
+                    <div class="nickname-container">
+                        <div class="nickname-label">닉네임 |</div>
+                        <span style="font-weight: 600;" th:text="${review.userNickname}"></span>
+                        <div style="font-size: 19px; margin-left: 10px;">
                             <span style="font-weight: 600;" th:text="${review.userId}"></span>
                         </div>
-                        <div style="margin-left: 15px">
-
-                            <span class="star-rating-static" th:data-rating="${review.rating}">
-                                <span class="star">☆</span>
-                                <span class="star">☆</span>
-                                <span class="star">☆</span>
-                                <span class="star">☆</span>
-                                <span class="star">☆</span>
-                            </span>
-                        </div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <span class="star-rating-static" th:data-rating="${review.rating}">
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                        </span>
                     </div>
                     <hr style="width: 100%; margin: 8px 0px;">
                     <div>

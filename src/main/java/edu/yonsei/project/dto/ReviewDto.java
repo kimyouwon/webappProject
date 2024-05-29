@@ -3,6 +3,7 @@ package edu.yonsei.project.dto;
 import edu.yonsei.project.entity.CommentEntity;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -24,4 +25,5 @@ public class ReviewDto {
 
     private List<CommentEntity> comments; // 댓글 리스트
     private long likeCount;            // 좋아요 개수
+    private LocalDateTime createdAt;   // 작성 날짜
 }

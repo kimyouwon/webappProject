@@ -21,6 +21,7 @@
 
         body {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
@@ -32,11 +33,30 @@
             text-align: center;
             font-size: 30px;
             color: #333;
+            z-index: 10;
         }
 
         .welcome-message h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #fd6f22;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #e65c1a;
         }
 
         canvas {
@@ -46,13 +66,14 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 0;
         }
     </style>
 </head>
 <body>
 <div class="welcome-message">
     <h1 th:text="${nickname} + '님, WETE에 오신 걸 환영합니다!'"></h1>
+    <button class="back-button" onclick="window.location.href='/home'">메인페이지로 돌아가기</button>
 </div>
 <canvas id="confetti-canvas"></canvas>
 
