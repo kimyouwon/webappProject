@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>WETE</title>
+    <title>비밀번호 찾기</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
         @font-face {
@@ -103,16 +103,6 @@
             display: inline-block;
         }
 
-        #information {
-            width: auto;
-            height: 50px;
-            color: #FD6F22;
-            display: flex;
-        }
-
-        #information p {
-            margin-right: 15px;
-        }
         /* 에러 메시지 박스 */
         .error-box {
             background-color: #ffdddd;
@@ -149,37 +139,23 @@
 <body>
 <!-- 헤더 -->
 <div th:replace="header :: header"></div>
+
 <!-- 페이지 설명 배너 -->
 <div id="page_banner">
-    <p>로그인</p>
+    <p>비밀번호 찾기</p>
 </div>
 
 <div id="detail_box">
-    <form action="/home/login" method="post">
+    <form action="/home/findPw" method="post">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <div th:if="${error}" class="error-box">
-                <span class="exclamation">❗</span>
-                <p th:text="${error}"></p>
-            </div>
+            <input class="editbox" type="text" name="name" placeholder="이름을 입력하세요." >
             <input class="editbox" type="text" name="loginId" placeholder="아이디를 입력하세요." >
-            <input class="editbox" type="password" name="password" placeholder="비밀번호 입력하세요." >
+            <input class="editbox" type="text" name="phone" placeholder="전화번호를 입력하세요." >
         </div>
-        <div id="edit-container">
-            <input type="checkbox" id="myCheckbox" name="myCheckbox">
-            <label for="myCheckbox">로그인 유지</label>
-        </div>
-        <hr style="margin-bottom: 50px;">
         <div style="text-align: center;">
-            <button type="submit" class="edit-button">로그인</button>
+            <button type="submit" class="edit-button">비밀번호 찾기</button>
         </div>
     </form>
-
-    <!---공백 -->
-    <div id="information">
-        <a href="/home/findId" style="text-decoration: none; color: black;"><p>아이디 찾기</p></a>
-        <a href="/home/findPw" style="text-decoration: none; color: black;"><p>비밀번호 찾기</p></a>
-        <a href="/home/register" style="text-decoration: none; color: black;"><p>회원가입하기</p></a>
-    </div>
 </div>
 
 <!-- 푸터 -->

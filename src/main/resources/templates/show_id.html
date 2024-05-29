@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기 결과</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        * {
+            text-decoration: none;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            overflow: hidden;
+        }
+
+        .result-box {
+            text-align: center;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .result-box h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .result-box p {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+<div class="result-box">
+    <h1>아이디 찾기 결과</h1>
+    <p>회원님의 아이디는 <span th:text="${loginId}"></span> 입니다.</p>
+</div>
+</body>
+</html>

@@ -89,10 +89,7 @@ public class MypageController {
                     return "errorPage"; // 사용자를 찾을 수 없는 경우 에러 페이지로 이동
                 }
 
-                UserEntity user = userOpt.get();
-                model.addAttribute("nickname", user.getNickname()); // 닉네임을 모델에 추가
-                model.addAttribute("email", user.getEmail());
-                model.addAttribute("phone", user.getPhone());
+                model.addAttribute("user", userOpt.get()); // 닉네임을 모델에 추가
                 return "mypage";
             } catch (Exception e) {
                 model.addAttribute("error", e.getMessage());

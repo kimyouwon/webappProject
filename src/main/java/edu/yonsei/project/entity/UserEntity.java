@@ -24,6 +24,7 @@ public class UserEntity {
     private String nickname; //사용자의 닉네임
     private String password; //사용자의 패스워드
     private String email; //사용자의 이메일
+    @Column(unique = true)
     private String phone; //사용자의 전화번호
     private Integer age; //사용자의 나이
 

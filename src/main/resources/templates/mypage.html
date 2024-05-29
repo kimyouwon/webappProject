@@ -224,7 +224,7 @@
 
         <!-- 개인정보 -->
         <div id="infor">
-            <p th:text="${nickname} + '님, 안녕하세요!'"></p>
+            <p th:text="${user.nickname} + '님, 안녕하세요!'"></p>
         </div>
 
         <div id="person_info">
@@ -235,27 +235,27 @@
             <table>
                 <tr>
                     <td class="table_line">아이디</td>
-                    <td><p th:text="${login_id}"></p></td>
+                    <td><p th:text="${user.loginId}"></p></td>
                 </tr>
                 <tr class="odd_color">
                     <td class="odd_color">이름</td>
-                    <td><p th:text="${email}"></p></td>
+                    <td><p th:text="${user.email}"></p></td>
                 </tr>
                 <tr>
                     <td class="table_line">나이</td>
-                    <td><p th:text="${age}"></p></td>
+                    <td><p th:text="${user.age}"></p></td>
                 </tr>
                 <tr class="odd_color">
                     <td class="odd_color">생일</td>
-                    <td><p th:text="${birth}"></p></td>
+                    <td><p th:text="${user.birth}"></p></td>
                 </tr>
                 <tr>
                     <td class="table_line">전화번호</td>
-                    <td><p th:text="${phone}"></p></td>
+                    <td><p th:text="${user.phone}"></p></td>
                 </tr>
                 <tr class="odd_color">
                     <td class="odd_color">이메일</td>
-                    <td><p th:text="${email}"></p></td>
+                    <td><p th:text="${user.email}"></p></td>
                 </tr>
 
             </table>

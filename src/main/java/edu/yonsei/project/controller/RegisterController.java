@@ -1,6 +1,7 @@
 package edu.yonsei.project.controller;
 
 import edu.yonsei.project.dto.UserDto;
+import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -80,4 +82,60 @@ public class RegisterController {
         return "welcome";  // 환영 페이지 반환
     }
 
+    @GetMapping("/home/findId")
+    public String showFindIdForm() {
+        return "find_id";
+    }
+
+    //아아디 찾기 로직
+    @PostMapping("/home/findId")
+    public String findId(@RequestParam("name") String name,
+                         @RequestParam("phone") String phone,
+                         Model model) {
+        Optional<UserEntity> userOpt = userService.findByNameAndPhone(name, phone);
+        if (userOpt.isPresent()) {
+            model.addAttribute("loginId", userOpt.get().getLoginId());
+            return "show_id"; // 아이디를 보여주는 페이지로 이동
+        } else {
+            model.addAttribute("error", "일치하는 사용자가 없습니다. 이름 또는 전화번호를 다시 확인하세요.");
+            return "find_id";
+        }
+    }
+    // 비밀번호 찾기 폼 표시
+    @GetMapping("/home/findPw")
+    public String showFindPwForm() {
+        return "find_pw";
+    }
+
+    // 비밀번호 찾기 로직
+    @PostMapping("/home/findPw")
+    public String findPw(@RequestParam("name") String name,
+                         @RequestParam("loginId") String loginId,
+                         @RequestParam("phone") String phone,
+                         Model model) {
+        Optional<UserEntity> userOpt = userService.findByNameAndLoginIdAndPhone(name, loginId, phone);
+        if (userOpt.isPresent()) {
+            model.addAttribute("loginId", loginId);
+            return "reset_pw"; // 비밀번호 재설정 페이지로 이동
+        } else {
+            model.addAttribute("error", "일치하는 사용자가 없습니다. 이름, 아이디 또는 전화번호를 다시 확인하세요.");
+            return "find_pw";
+        }
+    }
+
+    // 비밀번호 재설정 로직
+    @PostMapping("/home/resetPw")
+    public String resetPw(@RequestParam("loginId") String loginId,
+                          @RequestParam("newPassword") String newPassword,
+                          @RequestParam("confirmPassword") String confirmPassword,
+                          Model model) {
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            model.addAttribute("loginId", loginId);
+            return "reset_pw";
+        }
+
+        userService.updatePassword(loginId, newPassword);
+        return "redirect:/home/login";  // 로그인 페이지로 리다이렉트
+    }
 }
