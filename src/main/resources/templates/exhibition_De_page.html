@@ -252,7 +252,7 @@
             top: 10px;
             right: 30px;
             font-size: 12px;
-            color: #888;
+            color: black;
         }
 
         /* 푸터 */
@@ -401,12 +401,12 @@
         <div id="review_box">
             <th:block th:each="review : ${reviews}">
                 <div class="rv-box">
-                    <div class="review-date" th:text="${#temporals.format(review.createdAt, 'yyyy-MM-dd')}"></div>
-                    <div class="nickname-container">
+                    <div class="review-date" th:text="${#temporals.format(review.createdAt, 'yyyy-MM-dd HH:mm')}"></div>
+                    <div style="display: flex; align-items: center;">
                         <div class="nickname-label">닉네임 |</div>
-                        <span style="font-weight: 600;" th:text="${review.userNickname}"></span>
+
                         <div style="font-size: 19px; margin-left: 10px;">
-                            <span style="font-weight: 600;" th:text="${review.userId}"></span>
+                            <span style="font-weight: 600;" th:text="${review.userNickname}"></span>
                         </div>
                     </div>
                     <div style="margin-top: 10px;">
@@ -429,12 +429,13 @@
                         <span th:text="${review.likeCount}"></span>
                     </div>
                     <div class="comment-box">
-                        <h3>Comments</h3>
+                        <h3>댓글</h3>
                         <ul>
                             <th:block th:each="comment : ${review.comments}">
                                 <li>
-                                    <p>Content: <span th:text="${comment.content}"></span></p>
-                                    <p>User ID: <span th:text="${comment.userId}"></span></p>
+                                    <p>닉네임: <span th:text="${comment.userNickname}"></span></p>
+                                    <p>내용: <span th:text="${comment.content}"></span></p>
+                                    <p>작성시간: <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
                                 </li>
                             </th:block>
                         </ul>

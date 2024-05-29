@@ -24,6 +24,9 @@ public class CommentEntity {
     @Column(nullable = false)
     private String userId;
 
+    @Column(nullable = true)
+    private String userNickname; // 사용자 닉네임
+
     @ManyToOne
     @JoinColumn(name = "review_id", nullable = false)
     private ReviewEntity review;

@@ -72,6 +72,8 @@ public class ExhibitionController {
                             .rating(review.getRating())
                             .userId(review.getUserId())
                             .exhibitionId(review.getExhibitionId())
+                            .createdAt(review.getCreatedAt()) // 작성 시간 설정
+                            .userNickname(review.getUserNickname()) // 사용자 닉네임 설정
                             .build();
 
                     // 댓글 엔티티를 가져옴
@@ -115,6 +117,7 @@ public class ExhibitionController {
                     .content(content)
                     .userId(userId)
                     .review(review)
+                    .userNickname(userService.getNickname(userId))
                     .build();
             commentService.addComment(comment);
         }
