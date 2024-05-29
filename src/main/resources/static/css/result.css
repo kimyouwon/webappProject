@@ -34,7 +34,7 @@
     color: #FEE500;
 }
 
-.gohome{
+.postresult{
     color: white;
     background-color: #FD6F22;
     font-size: 20px;
@@ -42,7 +42,20 @@
     border-radius: 20px;
 }
 
-.gohome:hover, .gohome:focus{
+.postresult:hover, .postresult:focus{
     background-color: white;
     color: #FD6F22;
+}
+
+.gohome{
+    color: white;
+    background-color: #0028B7;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 20px;
+}
+
+.gohome:hover, .gohome:focus{
+    background-color: white;
+    color: #0028B7;
 }

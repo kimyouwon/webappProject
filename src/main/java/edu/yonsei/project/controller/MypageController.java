@@ -1,5 +1,6 @@
 package edu.yonsei.project.controller;
 
+import edu.yonsei.project.dto.UserDto;
 import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.service.ReviewService;
 import edu.yonsei.project.service.UserService;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -97,6 +100,30 @@ public class MypageController {
             }
         } else {
             return "redirect:/home/login"; // 세션에 loginId가 없다면 로그인 페이지로 리다이렉트
+        }
+    }
+
+    // 취향 테스트 결과 추가
+    @PostMapping("/home_auth/mypage/save-result")
+    @ResponseBody
+    public ResponseEntity<?> saveUserPreference(@RequestBody UserDto userDto, HttpSession session) {
+        String loginId = (String) session.getAttribute("loginId");
+
+        if (loginId != null) {
+            try {
+                Optional<UserEntity> userOpt = userService.getUserByLoginId(loginId);
+                if (!userOpt.isPresent()) {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"사용자를 찾을 수 없습니다.\"}");
+                }
+
+                userService.updateUserPreference(loginId, userDto.getPreference());
+                return ResponseEntity.ok("{\"message\": \"결과가 WETE에 저장되었습니다!\"}");
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("{\"message\": \"" + e.getMessage() + "\"}");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"message\": \"먼저 WETE에 로그인해주세요.\"}");
         }
     }
 }
