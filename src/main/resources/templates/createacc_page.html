@@ -21,6 +21,23 @@
                 margin: 0;
                 padding: 0;
             }
+            /* 에러 메시지 박스 */
+            .error-box {
+                background-color: #ffdddd;
+                color: red;
+                border: 1px solid red;
+                border-radius: 5px;
+                padding: 10px;
+                margin-top: 20px;
+                display: flex;
+                align-items: center;
+            }
+
+            .error-box .exclamation {
+                font-size: 20px;
+                margin-right: 10px;
+            }
+
             /* 헤더 */
             #header{
                 position: relative;
@@ -158,6 +175,50 @@
                 padding:10px;
             }
         </style>
+        <script>
+            function validateForm() {
+                var loginId = document.forms["registerForm"]["loginId"].value;
+                var password = document.forms["registerForm"]["password"].value;
+                var passwordCheck = document.forms["registerForm"]["passwordcheck"].value;
+                var nickname = document.forms["registerForm"]["nickname"].value;
+                var errorMessages = [];
+
+                // 비밀번호 검증
+                var passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
+                if (!passwordPattern.test(password)) {
+                    errorMessages.push("비밀번호는 8자 이상 15자 이하의 영문, 숫자, 특수문자를 포함해야 합니다.");
+                }
+                if (password !== passwordCheck) {
+                    errorMessages.push("비밀번호가 일치하지 않습니다.");
+                }
+
+                // 닉네임 검증
+                var nicknamePattern = /^[가-힣a-zA-Z0-9]{3,10}$/;
+                if (!nicknamePattern.test(nickname)) {
+                    errorMessages.push("닉네임은 영문/한글, 숫자로 이루어져야 하며 3자 이상 10자 이하이어야 합니다.");
+                }
+
+                // 에러 메시지 표시
+                if (errorMessages.length > 0) {
+                    var errorBox = document.getElementById("error-box");
+                    errorBox.innerHTML = "";
+                    errorMessages.forEach(function(message) {
+                        var p = document.createElement("p");
+                        p.innerText = "❗ " + message;
+                        errorBox.appendChild(p);
+                    });
+                    errorBox.style.display = "block";
+                    return false;
+                }
+
+                return true;
+            }
+
+            function clearErrors() {
+                var errorBox = document.getElementById("error-box");
+                errorBox.style.display = "none";
+            }
+        </script>
     </head>
     <body>
     <div th:replace="header :: header"></div>
@@ -173,26 +234,32 @@
 
                 <p>아이디</p>
                 <input class="editbox" type = "text" name="loginId" placeholder="아이디를 입력하시오"/>
-
+                <div th:if="${errorLoginId}" class="error-box">
+                    <span class="exclamation">❗</span>
+                    <p th:text="${errorLoginId}"></p>
+                </div>
                 <p>비밀번호</p>
-                <input class="editbox" type = "text" name="password" placeholder="비밀번호를 8자 이상 입력하시오."/>
+                <input class="editbox" type = "password" name="password" placeholder="비밀번호를 8자 이상 입력하시오."/>
                 <br>
-                <input  class="editbox" type = "text" name="passwordcheck" placeholder="비밀번호를 다시 입력하시오."/>
+                <input  class="editbox" type = "password" name="passwordcheck" placeholder="비밀번호를 다시 입력하시오.">
 
                 <hr style="margin-top:30px; margin-bottom:30px;">
 
                 <p>이름</p>
-                <input class="editbox" type = "text" name="name" placeholder="이름을 입력하시오"/>
+                <input class="editbox" type = "text" name="name" placeholder="이름을 입력하시오">
 
                 <p>생일</p>
-                <input class="editbox" type = "text" name="birth" placeholder="생일 입력"/>
+                <input class="editbox" type = "text" name="birth" placeholder="생일 입력">
 
                 <p>나이</p>
                 <input class="editbox" type = "text" name="age" placeholder="나이 입력">
 
                 <p>닉네임</p>
-                <input class="editbox" type = "text" name="nickname" placeholder="닉네임을 입력하시오"/>
-
+                <input class="editbox" type = "text" name="nickname" placeholder="닉네임을 입력하시오">
+                <div th:if="${errorNickname}" class="error-box">
+                    <span class="exclamation">❗</span>
+                    <p th:text="${errorNickname}"></p>
+                </div>
 
                 <hr style="margin-top:30px; margin-bottom:30px;">
 
