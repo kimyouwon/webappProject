@@ -76,4 +76,12 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found with login ID: " + loginId));
         userRepository.delete(user);
     }
+
+    public boolean existsByLoginId(String loginId) {
+        return userRepository.existsByLoginId(loginId);
+    }
+
+    public boolean existsByNickname(String nickname) {
+        return userRepository.existsByNickname(nickname);
+    }
 }
