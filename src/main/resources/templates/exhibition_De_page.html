@@ -1,72 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" dir="ltr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WETE</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-            @font-face {
-                font-family: 'Freesentation-9Black';
-                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-                font-weight: 900;
-                font-style: normal;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WETE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
 
-            *{
-                text-decoration: none;
-                font-family: "Noto Sans KR", sans-serif;
-                font-optical-sizing: auto;
-                font-weight: 400;
-                font-style: normal;
-                margin: 0;
-                padding: 0;
+        * {
+            text-decoration: none;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+        }
 
-            }
-            /* 헤더 */
-            #header{
-                position: relative;
-                width: auto;
-                height: 50px;
-                color: #FD6F22;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+        /* 헤더 */
+        #header {
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-            #title{
-                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-            }
+        #title {
+            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+        }
 
-            #page_list{
-                margin-left: 20px;
-            }
+        #page_list {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+        }
 
-            #page_list{
-                display: flex;
-                flex-direction: row;
-                list-style:none;
-                margin-left: 20px;
-            }
+        #page_list a {
+            color: #FD6F22;
+            margin-right: 10px;
+        }
 
-            #page_list a{
-                color: #FD6F22;
-                margin-right: 10px;
-            }
+        /* 페이지배너 */
+        #page_banner {
+            width: 100%;
+            height: 200px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url("../img/banner_orange.png");
+            background-size: 1600px 200px;
+        }
 
-            /* 페이지배너 */
-            #page_banner{
-                width: 100%;
-                height: 200px;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../img/banner_orange.png");
-                background-size: 1600px 200px;
-            }
-            #page_banner p{
-                padding: 60px 80px;
-                color: white;
-                font-size: 40px;
-                font-family: 'Freesentation-9Black';
-            }
+        #page_banner p {
+            padding: 60px 80px;
+            color: white;
+            font-size: 40px;
+            font-family: 'Freesentation-9Black';
+        }
 
         /* 상세 */
         #detail_box {
@@ -101,8 +98,7 @@
             margin: 0px 30px;
         }
 
-        #exh_info th,
-        td {
+        #exh_info th, td {
             border: 1px solid rgb(207, 207, 207);
             padding: 5px;
         }
@@ -142,7 +138,8 @@
 
         /* 리뷰란 */
         #review {
-            width: 700px;
+            width: 90%;
+            max-width: 700px;
             border: 1px solid rgb(193, 193, 193);
             border-radius: 10px;
             margin-bottom: 90px;
@@ -187,6 +184,7 @@
             border-radius: 10px;
             padding: 10px 30px;
             font-size: 15px;
+            margin-bottom: 20px;
         }
 
         #edit {
@@ -206,19 +204,33 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             cursor: pointer;
             transition: 0.5s;
+            font-size: 1.5rem; /* 버튼의 텍스트 크기를 키움 */
+            padding: 10px; /* 버튼의 내측 여백을 추가하여 크기를 키움 */
         }
 
         #review_list {
+            width: 90%;
+            max-width: 700px;
             height: auto;
             margin-bottom: 40px;
         }
 
         #review_box {
             margin-bottom: 30px;
-            width: 700px;
+            width: 100%;
             border: 1px solid rgb(193, 193, 193);
             border-radius: 10px;
             padding: 30px 50px;
+        }
+
+        .comment-box {
+            border-top: 1px solid #ccc;
+            margin-top: 15px;
+            padding-top: 10px;
+        }
+
+        .comment-box p {
+            margin: 5px 0;
         }
 
         /* 푸터 */
@@ -234,6 +246,30 @@
             margin-top: auto;
             font-size: 13px;
             padding: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            #review, #review_box, #review_list {
+                width: 100%;
+                padding: 20px;
+            }
+
+            #exh_info table {
+                width: 100%;
+            }
+
+            #exh_detail {
+                width: 90%;
+            }
+
+            #exh_info img {
+                width: 100%;
+                height: auto;
+            }
+
+            .star-rating .star, .star-rating-static .star {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -285,14 +321,16 @@
                 <td th:text="${exhibition.contact}"></td>
             </tr>
             <tr>
-                <td id='column' colspan='2' style="background-color: rgb(193, 193, 193);;"><a th:href="${exhibition.url}">전시회 페이지</a></td>
+                <td id='column' colspan='2' style="background-color: rgb(193, 193, 193);">
+                    <a th:href="${exhibition.url}">전시회 페이지</a>
+                </td>
             </tr>
         </table>
     </div>
 
     <ul>
-        <li><a href="#exh_detail" style="text-decoration:none">전시회 상세설명</a></li>
-        <li><a href="#review" style="text-decoration:none">전시 후기</a></li>
+        <li><a href="#exh_detail" style="text-decoration: none">전시회 상세설명</a></li>
+        <li><a href="#review" style="text-decoration: none">전시 후기</a></li>
     </ul>
 
     <hr style="width: 80%; margin-top: 30px;">
@@ -310,11 +348,11 @@
             <div id="review_edit">
                 <p>평점</p>
                 <div class="star-rating">
-                    <span class="star empty" data-value="5">☆</span>
-                    <span class="star empty" data-value="4">☆</span>
-                    <span class="star empty" data-value="3">☆</span>
-                    <span class="star empty" data-value="2">☆</span>
                     <span class="star empty" data-value="1">☆</span>
+                    <span class="star empty" data-value="2">☆</span>
+                    <span class="star empty" data-value="3">☆</span>
+                    <span class="star empty" data-value="4">☆</span>
+                    <span class="star empty" data-value="5">☆</span>
                 </div>
                 <input type="hidden" id="rating" name="rating" value="0">
                 <p>후기</p>
@@ -328,114 +366,115 @@
 
     <!-- 리뷰 목록 -->
     <div id="review_list">
-        <h2>리뷰</h2>
+        <h2>후기</h2>
         <div id="review_box">
             <th:block th:each="review : ${reviews}">
-                <li>
-                    <div class="rv-box">
-                        <div style="display:flex; align-items: center;">
-                            <div style="font-size:19px;">
-                                <span style="font-weight:600;" th:text="${review.userId}"></span>
-                            </div>
-                            <div style="margin-left:15px">
-                                평점:
-                                <span class="star-rating-static" th:data-rating="${review.rating}">
+                <div class="rv-box">
+                    <div style="display: flex; align-items: center;">
+                        <div style="margin-right: 15px">
+                            닉네임 |
+                            <span style="font-weight: 600;" th:text="${review.userNickname}"></span>
+                        </div>
+                        <div style="font-size: 19px;">
+                            <span style="font-weight: 600;" th:text="${review.userId}"></span>
+                        </div>
+                        <div style="margin-left: 15px">
+
+                            <span class="star-rating-static" th:data-rating="${review.rating}">
                                 <span class="star">☆</span>
                                 <span class="star">☆</span>
                                 <span class="star">☆</span>
                                 <span class="star">☆</span>
                                 <span class="star">☆</span>
                             </span>
-                            </div>
-                        </div>
-                        <hr style="width: 100%; margin:8px 0px;">
-
-                        <div>
-                            <span th:text="${review.content}"></span>
-                        </div>
-
-                        <div style="display:flex; align-items: center; margin-top:10px;">👍 <span th:text="${review.likeCount}"></span>
-                            <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
-                                <button type="submit">up</button>
-                            </form>
                         </div>
                     </div>
-                    <h3>Comments</h3>
-                    <ul>
-                        <th:block th:each="comment : ${review.comments}">
-                            <li>
-                                <p>Content: <span th:text="${comment.content}"></span></p>
-                                <p>User ID: <span th:text="${comment.userId}"></span></p>
-                            </li>
-                        </th:block>
-                    </ul>
-                    <form th:action="@{/review/{reviewId}/comment(reviewId=${review.id})}" method="post">
-                        <textarea name="content" placeholder="Add a comment"></textarea>
-                        <button type="submit">Submit</button>
-                    </form>
-                </li>
+                    <hr style="width: 100%; margin: 8px 0px;">
+                    <div>
+                        <span th:text="${review.content}"></span>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 10px;">
+                        <form th:action="@{/review/{reviewId}/like(reviewId=${review.id})}" method="post">
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">❤️</button>
+                        </form>
+                        <span th:text="${review.likeCount}"></span>
+                    </div>
+                    <div class="comment-box">
+                        <h3>Comments</h3>
+                        <ul>
+                            <th:block th:each="comment : ${review.comments}">
+                                <li>
+                                    <p>Content: <span th:text="${comment.content}"></span></p>
+                                    <p>User ID: <span th:text="${comment.userId}"></span></p>
+                                </li>
+                            </th:block>
+                        </ul>
+                        <form th:action="@{/review/{reviewId}/comment(reviewId=${review.id})}" method="post">
+                            <textarea name="content" placeholder="Add a comment"></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
             </th:block>
         </div>
     </div>
 </div>
 
-    <!-- 푸터 -->
+<!-- 푸터 -->
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 리뷰 목록의 별점 처리
+        const starRatingsStatic = document.querySelectorAll('.star-rating-static');
+        starRatingsStatic.forEach(rating => {
+            const ratingValue = parseInt(rating.getAttribute('data-rating'));
+            const stars = rating.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < ratingValue) {
+                    star.textContent = '★';
+                } else {
+                    star.textContent = '☆';
+                }
+            });
+        });
 
+        // 리뷰 작성 별점 처리
+        const stars = document.querySelectorAll('.star-rating .star');
+        const ratingInput = document.getElementById('rating');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 리뷰 목록의 별점 처리
-            const starRatingsStatic = document.querySelectorAll('.star-rating-static');
-            starRatingsStatic.forEach(rating => {
-                const ratingValue = parseInt(rating.getAttribute('data-rating'));
-                const stars = rating.querySelectorAll('.star');
-                stars.forEach((star, index) => {
-                    if (index < ratingValue) {
-                        star.textContent = '★';
-                    } else {
-                        star.textContent = '☆';
-                    }
+        stars.forEach((star, index) => {
+            star.addEventListener('click', function () {
+                const rating = index + 1;
+                ratingInput.value = rating;
+
+                stars.forEach(s => {
+                    s.classList.remove('filled');
+                    s.classList.add('empty');
+                    s.textContent = '☆';
                 });
+
+                for (let i = 0; i < rating; i++) {
+                    stars[i].classList.remove('empty');
+                    stars[i].classList.add('filled');
+                    stars[i].textContent = '★';
+                }
             });
 
-            // 리뷰 작성 별점 처리
-            const stars = document.querySelectorAll('.star-rating .star');
-            const ratingInput = document.getElementById('rating');
+            star.addEventListener('mouseover', function () {
+                stars.forEach(s => s.textContent = '☆');
 
-            stars.forEach((star, index) => {
-                star.addEventListener('click', function () {
-                    const rating = index + 1;
-                    ratingInput.value = rating;
+                for (let i = 0; i <= index; i++) {
+                    stars[i].textContent = '★';
+                }
+            });
 
-                    stars.forEach(s => {
-                        s.classList.remove('filled');
-                        s.classList.add('empty');
-                        s.textContent = '☆';
-                    });
-
-                    for (let i = 0; i < rating; i++) {
-                        stars[i].classList.remove('empty');
-                        stars[i].classList.add('filled');
-                        stars[i].textContent = '★';
-                    }
-                });
-
-                star.addEventListener('mouseover', function () {
-                    stars.forEach(s => s.textContent = '☆');
-
-                    for (let i = 0; i <= index; i++) {
-                        stars[i].textContent = '★';
-                    }
-                });
-
-                star.addEventListener('mouseout', function () {
-                    stars.forEach(s => {
-                        s.textContent = s.classList.contains('filled') ? '★' : '☆';
-                    });
+            star.addEventListener('mouseout', function () {
+                stars.forEach(s => {
+                    s.textContent = s.classList.contains('filled') ? '★' : '☆';
                 });
             });
         });
-    </script>
+    });
+</script>
 </body>
 </html>
