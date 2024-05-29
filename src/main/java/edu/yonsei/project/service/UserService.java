@@ -65,7 +65,7 @@ public class UserService {
         return true;
     }
     @Transactional
-    public void updateUserPreference(String loginId, String preference) {
+    public void updateUserPreference(String loginId, int preference) {
         UserEntity user = userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new RuntimeException("User not found with login ID: " + loginId));
         user.setPreference(preference);

@@ -78,10 +78,10 @@ public class CrawlerController {
 
     private String getKeywordByNumber(int key_num) {
         switch (key_num) {
-            case 1: return "원화/실물 전시회";
-            case 2: return "미디어 아트";
-            case 3: return "몰입형 체험 전시";
-            case 4: return "뮤지엄";
+            case 0: return "원화/실물 전시회";
+            case 1: return "미디어 아트";
+            case 2: return "몰입형 체험 전시";
+            case 3: return "뮤지엄";
             default: throw new IllegalArgumentException("Invalid key number: " + key_num);
         }
     }
