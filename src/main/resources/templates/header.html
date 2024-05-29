@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <body>
-        <div th:fragment="header">
-            <div id="header">
-                <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-                <ul id="page_list">
-                    <li><a href="/home/test" target="_blank">취향 테스트</a></li>
-                    <li><a href="/exhibition">전시회</a></li>
-                    <li><a href="/home/login">로그인</a></li>
-                    <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-                </ul>
-            </div>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Fragment</title>
+</head>
+<body>
+<div th:fragment="header">
+    <div id="header">
+        <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
+        <ul id="page_list">
+            <li><a href="/home/test" target="_blank">취향 테스트</a></li>
+            <li><a href="/exhibition">전시회</a></li>
+            <li th:if="${isLoggedIn}">
+                <a th:href="@{/home_auth/mypage}">마이페이지</a>
+            </li>
+            <li th:if="${isLoggedIn}">
+                <a th:href="@{/logout}">로그아웃</a>
+            </li>
+            <li th:unless="${isLoggedIn}">
+                <a href="/home/login">로그인</a>
+            </li>
+            <li th:unless="${isLoggedIn}">
+                <a href="/register">회원가입</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
 </html>
