@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 완료</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        * {
+            font-family: "Noto Sans KR", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            overflow: hidden;
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 30px;
+            color: #333;
+        }
+
+        .welcome-message h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+<div class="welcome-message">
+    <h1 th:text="${nickname} + '님, WETE에 오신 걸 환영합니다!'"></h1>
+</div>
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+    const canvas = document.getElementById('confetti-canvas');
+    const context = canvas.getContext('2d');
+    const confettiElements = [];
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function randomRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function ConfettiParticle() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height - canvas.height;
+        this.r = randomRange(2, 6);
+        this.d = Math.random() * 2 + 1;
+        this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        this.tilt = Math.random() * 10 - 10;
+
+        this.update = function() {
+            this.y += this.d;
+            this.tilt += this.d / 3;
+
+            if (this.y > canvas.height) {
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.x = Math.random() * canvas.width;
+                this.tilt = Math.random() * 10 - 10;
+            }
+        };
+
+        this.draw = function() {
+            context.beginPath();
+            context.lineWidth = this.r;
+            context.strokeStyle = this.color;
+            context.moveTo(this.x + this.tilt + this.r, this.y);
+            context.lineTo(this.x + this.tilt, this.y + this.r * 2);
+            context.stroke();
+        };
+    }
+
+    function createConfetti() {
+        for (let i = 0; i < 200; i++) {
+            confettiElements.push(new ConfettiParticle());
+        }
+    }
+
+    function render() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        confettiElements.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+
+        requestAnimationFrame(render);
+    }
+
+    createConfetti();
+    render();
+</script>
+</body>
+</html>

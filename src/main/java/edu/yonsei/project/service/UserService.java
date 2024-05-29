@@ -4,8 +4,8 @@ import edu.yonsei.project.dto.UserDto;
 import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -26,11 +26,6 @@ public class UserService {
         return inputPassword.equals(storedPassword);
     }
 
-    /*@Transactional(readOnly = true)
-    public UserEntity getUserByLoginId(String loginId) throws Exception {
-        return userRepository.findByLoginId(loginId)
-                .orElseThrow(() -> new Exception("User not found with loginId: " + loginId));
-    }*/
     @Transactional(readOnly = true)
     public String getNickname(String loginId) {
         return userRepository.findByLoginId(loginId)
@@ -90,5 +85,20 @@ public class UserService {
 
     public boolean existsByNickname(String nickname) {
         return userRepository.existsByNickname(nickname);
+    }
+
+    public Optional<UserEntity> findByNameAndPhone(String name, String phone) {
+        return userRepository.findByNameAndPhone(name, phone);
+    }
+
+    public Optional<UserEntity> findByNameAndLoginIdAndPhone(String name, String loginId, String phone) {
+        return userRepository.findByNameAndLoginIdAndPhone(name, loginId, phone);
+    }
+
+    public void updatePassword(String loginId, String newPassword) {
+        UserEntity user = userRepository.findByLoginId(loginId)
+                .orElseThrow(() -> new RuntimeException("User not found with login ID: " + loginId));
+        user.setPassword(newPassword);
+        userRepository.save(user);
     }
 }

@@ -55,8 +55,8 @@
             #page_banner{
                 width: 100%;
                 height: 200px;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("./img/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-                background-size: 900px 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("./img/banner_orange.png");
+                background-size: 1600px 200px;
             }
             #page_banner p{
                 padding: 60px 80px;
@@ -191,7 +191,6 @@
             <div id="exh_box_list">
                 <div id="exh_box" th:each="exhibition : ${exhibitions}">
                     <a th:href="@{'/exhibition/' + ${exhibition.id}}">
-                    <!--<a th:href="@{/exhibition/{id}(id=${exhibition.id})}">-->
                         <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
                          <p th:text="${exhibition.title}">전시회 이름</p>
                          <p th:text="${exhibition.date}">날짜</p>

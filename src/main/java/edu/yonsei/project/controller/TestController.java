@@ -40,9 +40,12 @@ public class TestController {
     @GetMapping("/home")
     public String showHomePage(Model model) {
         List<CrawledData> activeExhibitions = crawlerService.getActiveExhibitions();
+        List<ReviewEntity> recentReviews = reviewService.getRecentReviews();
         model.addAttribute("exhibitions", activeExhibitions);
+        model.addAttribute("reviews", recentReviews);
         return "main_page";
     }
+
 
     //로그인된 메인 페이지
     @GetMapping("/home_auth")

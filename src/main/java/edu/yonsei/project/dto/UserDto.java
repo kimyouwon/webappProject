@@ -27,6 +27,8 @@ public class UserDto {
 
     @Email(message = "유효한 이메일 주소를 입력해야 합니다.")
     private String email; //사용자의 이메일
+
+    @NotEmpty(message = "비밀번호는 필수입니다.")
     private String phone; //사용자의 전화번호
 
     private Integer age;  // Integer 객체 사용

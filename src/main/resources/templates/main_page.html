@@ -240,14 +240,14 @@
             }
 
             .fade-wrap{
-                background-image: url("./img/ricardo-gomez-angel-B4zK-epGgW0-unsplash.jpg");
-                background-size: 950PX 400PX;
+                background-image: url("./img/main-banner.png");
+                background-size: 1000px 400px;
                 width: 65%;
             }
 
             .fade-wrap {
             /* 나타나는 효과가 1초동안 발생 */
-            transition: 2s;
+            transition: 1.5s;
 
             /* 투명도 0 (안보임) */
             opacity: 0;
@@ -473,7 +473,7 @@
         <!-- 취향 테스트 -->
         <div id="test_box">
             <div class="fade-wrap" style="display: flex; flex-direction: column;"></div>
-            <a href="/home/test">
+            <a href="https://exhibition-test.netlify.app/">
                 <div style="display: flex; flex-direction: column;
                 align-items: top;
                 padding-top: 50px; padding-left:50px;">
@@ -505,57 +505,23 @@
         <div id="review">
             <p class="exh_review">전시회 후기</p>
             <div id="review_content">
-                <div class="review_box">
+                <div th:each="review : ${reviews}" class="review_box">
                     <div class="rv_cont">
-                        <p>전시회 이름</p>
+                        <p th:text="${review.exhibitionName}">전시회 이름</p>
                         <div class="star-rating">
-                            <input type="radio" class="star" value="1">
-                            <input type="radio" class="star" value="2">
-                            <input type="radio" class="star" value="3">
-                            <input type="radio" class="star" value="4">
-                            <input type="radio" class="star" value="5">
+                            <input type="radio" class="star" th:checked="${review.rating >= 1}" value="1">
+                            <input type="radio" class="star" th:checked="${review.rating >= 2}" value="2">
+                            <input type="radio" class="star" th:checked="${review.rating >= 3}" value="3">
+                            <input type="radio" class="star" th:checked="${review.rating >= 4}" value="4">
+                            <input type="radio" class="star" th:checked="${review.rating >= 5}" value="5">
                         </div>
                     </div>
                     <hr class="und_line"/>
-                    <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                        후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                        후기후기</p>
-                </div>
-
-                <div class="review_box">
-                        <div class="rv_cont">
-                            <p>전시회 이름</p>
-                            <div class="star-rating">
-                                <input type="radio" class="star" value="1">
-                                <input type="radio" class="star" value="2">
-                                <input type="radio" class="star" value="3">
-                                <input type="radio" class="star" value="4">
-                                <input type="radio" class="star" value="5">
-                            </div>
-                        </div>
-                        <hr class="und_line"/>
-                        <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                            후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                            후기후기</p>
-                    </div>
-                <div class="review_box">
-                        <div class="rv_cont">
-                            <p>전시회 이름</p>
-                            <div class="star-rating">
-                                <input type="radio" class="star" value="1">
-                                <input type="radio" class="star" value="2">
-                                <input type="radio" class="star" value="3">
-                                <input type="radio" class="star" value="4">
-                                <input type="radio" class="star" value="5">
-                            </div>
-                        </div>
-                        <hr class="und_line"/>
-                        <p>후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                            후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기후기
-                            후기후기</p>
+                    <p th:text="${review.content}">후기내용</p>
                 </div>
             </div>
         </div>
+
 
         <!-- 푸터 -->
         <div th:replace="footer :: footer"></div>
