@@ -12,11 +12,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.regex.Pattern;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,23 +39,32 @@ public class RegisterController {
     }
 
     @PostMapping("/home/register")
-    public String registerUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, RedirectAttributes redirectAttributes, Model model) {
+    public String registerUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "createacc_page";
         }
-
         // 비밀번호 검증
         Pattern passwordPattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,15}$");
         if (!passwordPattern.matcher(userDto.getPassword()).matches()) {
             model.addAttribute("error", "비밀번호는 8자 이상 15자 이하의 영문, 숫자, 특수문자를 포함해야 합니다.");
             return "createacc_page";
         }
-
         // 닉네임 검증
-        Pattern nicknamePattern = Pattern.compile("^[가-힣a-zA-Z0-9]{3,10}$");
-        if (!nicknamePattern.matcher(userDto.getNickname()).matches()) {
-            model.addAttribute("error", "닉네임은 영문/한글, 숫자로 이루어져야 하며 3자 이상 10자 이하이어야 합니다.");
+        Pattern lengthPattern = Pattern.compile("^.{3,10}$");
+        Pattern characterPattern = Pattern.compile("^[가-힣a-zA-Z0-9]+$"); // 숫자 허용
+        String nickname = userDto.getNickname();
+        if (!lengthPattern.matcher(nickname).matches()) {
+            model.addAttribute("errorNickname", "닉네임은 3자 이상 10자 이하이어야 합니다.");
             return "createacc_page";
+        }
+        if (!characterPattern.matcher(nickname).matches()) {
+            model.addAttribute("errorNickname", "닉네임은 영문/한글, 숫자로 이루어져야 합니다.");
+            return "createacc_page";
+        }
+
+        // 나이 검증 (null 허용, 기본 값 설정)
+        if (userDto.getAge() == null) {
+            userDto.setAge(0);  // 기본 값을 0으로 설정하거나 다른 적절한 값을 설정
         }
 
         // DB 중복 체크
@@ -65,15 +76,23 @@ public class RegisterController {
             model.addAttribute("errorNickname", "이미 사용중인 닉네임입니다. 다른 닉네임을 선택해 주세요.");
             return "createacc_page";
         }
-
         try {
             userService.postUser(userDto);
         } catch (DataIntegrityViolationException e) {
             model.addAttribute("error", "회원가입 중 오류가 발생했습니다.");
             return "createacc_page";
         }
-        redirectAttributes.addAttribute("nickname", userDto.getNickname());
-        return "redirect:/home/welcome";  // 회원가입 완료 후 환영 페이지로 리다이렉트
+
+        // 닉네임 인코딩
+        String encodedNickname;
+        try {
+            encodedNickname = URLEncoder.encode(userDto.getNickname(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            model.addAttribute("error", "회원가입 중 오류가 발생했습니다.");
+            return "createacc_page";
+        }
+
+        return "redirect:/home/welcome?nickname=" + encodedNickname;  // 환영 페이지로 닉네임 전달
     }
 
     @GetMapping("/home/welcome")
