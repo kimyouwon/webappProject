@@ -13,10 +13,14 @@ import lombok.RequiredArgsConstructor;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import edu.yonsei.project.service.CrawlerService;
 
@@ -39,6 +43,9 @@ public class TestController {
     //메인 페이지
     @GetMapping("/home")
     public String showHomePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoggedIn = authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken);
+        model.addAttribute("isLoggedIn", isLoggedIn);
         List<CrawledData> activeExhibitions = crawlerService.getActiveExhibitions();
         List<ReviewEntity> recentReviews = reviewService.getRecentReviews();
         model.addAttribute("exhibitions", activeExhibitions);
@@ -50,6 +57,9 @@ public class TestController {
     //로그인된 메인 페이지
     @GetMapping("/home_auth")
     public String showHomeAuthPage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoggedIn = authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken);
+        model.addAttribute("isLoggedIn", isLoggedIn);
         List<CrawledData> activeExhibitions = crawlerService.getActiveExhibitions();
         model.addAttribute("exhibitions", activeExhibitions);
         return "main_page_auth";
@@ -79,7 +89,7 @@ public class TestController {
             return "redirect:/error";  // 설정 페이지로 리다이렉션
         }
 
-        return "redirect:/home";  // 홈 페이지 또는 로그인 페이지로 리다이렉션
+        return "redirect:/home_auth";  // 홈 페이지 또는 로그인 페이지로 리다이렉션
     }
 
 }

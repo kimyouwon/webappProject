@@ -4,17 +4,38 @@ import edu.yonsei.project.dto.UserDto;
 import edu.yonsei.project.entity.UserEntity;
 import edu.yonsei.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<UserEntity> userOpt = userRepository.findByLoginId(username);
+        if (!userOpt.isPresent()) {
+            throw new UsernameNotFoundException("User not found with loginId: " + username);
+        }
+        UserEntity user = userOpt.get();
+        return new org.springframework.security.core.userdetails.User(
+                user.getLoginId(),
+                user.getPassword(),
+                Collections.emptyList()
+        );
+    }
+
 
     public Optional<UserEntity> getUserByLoginId(String loginId) {
         return userRepository.findByLoginId(loginId);
@@ -23,7 +44,7 @@ public class UserService {
     public boolean checkPassword(String inputPassword, String storedPassword) {
         // 여기서 저장된 비밀번호와 입력된 비밀번호를 비교하는 로직을 구현합니다.
         // 예를 들어, 해시된 비밀번호를 비교하는 경우 해시 비교 로직을 여기에 작성합니다.
-        return inputPassword.equals(storedPassword);
+        return passwordEncoder.matches(inputPassword, storedPassword);
     }
 
     @Transactional(readOnly = true)
@@ -35,11 +56,12 @@ public class UserService {
 
     @Transactional
     public UserEntity postUser(UserDto userDto) {
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
         UserEntity entity = UserEntity.builder()
                 .loginId(userDto.getLoginId())
                 .name(userDto.getName())
                 .nickname(userDto.getNickname())
-                .password(userDto.getPassword())
+                .password(encodedPassword)
                 .email(userDto.getEmail())
                 .phone(userDto.getPhone())
                 .age(userDto.getAge())
@@ -58,8 +80,10 @@ public class UserService {
         if (updatedUser.getEmail() != null) user.setEmail(updatedUser.getEmail());
         if (updatedUser.getPhone() != null) user.setPhone(updatedUser.getPhone());
         if (updatedUser.getNickname() != null) user.setNickname(updatedUser.getNickname());
-        if (updatedUser.getPassword() != null) user.setPassword(updatedUser.getPassword());
-        // 다른 필드도 마찬가지로 업데이트
+        if (updatedUser.getPassword() != null) {
+            String encodedPassword = passwordEncoder.encode(updatedUser.getPassword());
+            user.setPassword(encodedPassword);
+        }
 
         UserEntity saveEntity = userRepository.save(user);  // 변경된 엔티티 저장
         return true;
@@ -95,10 +119,17 @@ public class UserService {
         return userRepository.findByNameAndLoginIdAndPhone(name, loginId, phone);
     }
 
-    public void updatePassword(String loginId, String newPassword) {
+    public void updatePassword(String loginId, String currentPassword, String newPassword) {
         UserEntity user = userRepository.findByLoginId(loginId)
-                .orElseThrow(() -> new RuntimeException("User not found with login ID: " + loginId));
-        user.setPassword(newPassword);
+                .orElseThrow(() -> new RuntimeException("로그인 ID에 해당하는 사용자를 찾을 수 없습니다."));
+
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new RuntimeException("현재 비밀번호가 일치하지 않습니다.");
+        }
+
+        String encodedNewPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedNewPassword);
+
         userRepository.save(user);
     }
 }
