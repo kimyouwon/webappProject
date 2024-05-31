@@ -44,4 +44,5 @@ public class LogoutController {
 
         return "redirect:/home";  // 홈 페이지 또는 로그인 페이지로 리다이렉션
     }
+
 }

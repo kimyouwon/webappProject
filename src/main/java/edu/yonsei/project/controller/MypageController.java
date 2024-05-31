@@ -2,6 +2,7 @@ package edu.yonsei.project.controller;
 
 import edu.yonsei.project.dto.UserDto;
 import edu.yonsei.project.entity.UserEntity;
+import edu.yonsei.project.service.AuthService;
 import edu.yonsei.project.service.ReviewService;
 import edu.yonsei.project.service.UserService;
 
@@ -28,12 +29,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MypageController {
 
-    private final AuthService authService;
+
 
     @Autowired
     private CrawlerService crawlerService;
 
     private final UserService userService;
+    private final AuthService authService;
 
     @Autowired
     private ReviewService reviewService;

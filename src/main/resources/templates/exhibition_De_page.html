@@ -188,16 +188,18 @@
             position: relative;
         }
 
+
         #edit {
             margin-top: 10px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end; /* flex-end로 align-items 수정 */
+            width: 100%; /* 가로 길이 조정 */
         }
 
         #edit button {
             margin-top: 0;
-            width: 100px;
+            width: 15%; /* button 가로 길이 조정 */
             height: 40px;
             border: none;
             border-radius: 7px;
@@ -213,7 +215,7 @@
         }
 
         textarea#review_text {
-            width: 80%;
+            width: 85%; /* textarea 가로 길이 조정 */
             height: 100px;
             border-radius: 5px;
             border: 1px solid #FD6F22;
@@ -227,6 +229,14 @@
             max-width: 700px;
             height: auto;
             margin-bottom: 40px;
+        }
+
+        #review_edit {
+            margin-bottom: 30px;
+            width: 100%;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 30px 50px;
         }
 
         #review_box {
@@ -376,8 +386,8 @@
     <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
         <!-- 리뷰 작성란 -->
         <div id="review">
-            <div id="review_edit">
-                <p>평점</p>
+            <div id="review edit">
+                <p style="font-weight: bold;">평점</p>
                 <div class="star-rating">
                     <span class="star empty" data-value="1">☆</span>
                     <span class="star empty" data-value="2">☆</span>
@@ -386,7 +396,7 @@
                     <span class="star empty" data-value="5">☆</span>
                 </div>
                 <input type="hidden" id="rating" name="rating" value="0">
-                <p>후기</p>
+                <p style="font-weight: bold;">후기</p>
                 <div id="edit">
                     <textarea id="review_text" name="content"></textarea>
                     <button type="submit">작성</button>
@@ -397,7 +407,7 @@
 
     <!-- 리뷰 목록 -->
     <div id="review_list">
-        <h2>후기</h2>
+        <h2 style="font-weight: bold;">후기</h2>
         <div id="review_box">
             <th:block th:each="review : ${reviews}">
                 <div class="rv-box">
