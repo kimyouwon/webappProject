@@ -191,30 +191,30 @@
 <div id="acc_box">
     <form th:action="@{/home/register}" th:object="${user}" method="post" onsubmit="return validateForm()">
         <p class="orange">아이디</p>
-        <input class="editbox" type="text" name="loginId" placeholder="아이디를 입력하시오.">
+        <input class="editbox" type="text" name="loginId" placeholder="아이디를 입력하세요.">
         <div th:if="${errorLoginId}" class="error-box">
             <span class="exclamation">❗</span>
             <p th:text="${errorLoginId}"></p>
         </div>
         <p class="orange">비밀번호</p>
-        <input class="editbox" type="password" name="password" placeholder="비밀번호를 8자 이상 입력하시오."/>
+        <input class="editbox" type="password" name="password" placeholder="비밀번호를 8자 이상 입력하세요."/>
         <br>
-        <input class="editbox" type="password" name="passwordcheck" placeholder="비밀번호를 다시 입력하시오.">
+        <input class="editbox" type="password" name="passwordcheck" placeholder="비밀번호를 다시 입력하세요.">
 
         <hr style="margin-top:30px; margin-bottom:30px;">
 
         <p class="orange">이름</p>
-        <input class="editbox" type="text" name="name" placeholder="이름을 입력하시오.">
+        <input class="editbox" type="text" name="name" placeholder="이름을 입력하세요.">
         <p class="orange">생일</p>
-        <input class="editbox" type="text" name="birth" placeholder="생일을 입력하시오.">
+        <input class="editbox" type="text" name="birth" placeholder="생일을 입력하시세요.">
         <p class="orange">나이</p>
-        <input class="editbox" type="text" name="age" placeholder="나이를 입력하시오.">
+        <input class="editbox" type="text" name="age" placeholder="나이를 입력하세요.">
         <div th:if="${error}" class="error-box">
             <span class="exclamation">❗</span>
             <p th:text="${error}"></p>
         </div>
         <p class="orange">닉네임</p>
-        <input class="editbox" type="text" name="nickname" placeholder="닉네임을 입력하시오.">
+        <input class="editbox" type="text" name="nickname" placeholder="닉네임을 입력하세요.">
         <div th:if="${errorNickname}" class="error-box">
             <span class="exclamation">❗</span>
             <p th:text="${errorNickname}"></p>
@@ -228,7 +228,7 @@
         <!--공백 -->
         <div class="blank"></div>
 
-        <input class="editbox" type="text" name="email" placeholder="이메일을 입력하시오.">
+        <input class="editbox" type="text" name="email" placeholder="이메일을 입력하세요.">
 
         <div style="margin-top:20px; margin-bottom:30px; text-align:center;">
             <input type="checkbox" id="myCheckbox" name="myCheckbox">
