@@ -396,30 +396,22 @@
                 font-weight: 600;
             }
 
-
-
-
-            .star-rating {
-                display: flex;
-            }
-
             .star {
-            appearance: none;
-            padding: 1px;
             }
 
             .star-rating-static {
             display: flex;
             flex-direction: row;
             justify-content: center;
-            padding: 0.5rem;
+            padding: 1px;
             align-items: center;
-            gap: 2px; /* 별들 사이의 간격을 줄임 */
+
             }
 
             .star-rating-static .star {
-                font-size: 1.5rem;
+                font-size: 25px;
                 color: #FD6F22;
+
             }
 
             .star-rating-static .star.filled {
@@ -431,7 +423,7 @@
             }
 
             .und_line{
-                width: 80%;
+                width: 90%;
                 margin-top:10px;
             }
 
@@ -555,14 +547,12 @@
                                 <span style="font-weight: 600;" th:text="${review.userNickname}"></span>
                             </div>
                         </div>
-                        <div style="margin-top: 10px; center;">
-                        <span class="star-rating-static" th:data-rating="${review.rating}">
+                        <div class="star-rating-static" th:data-rating="${review.rating}">
                             <span class="star">☆</span>
                             <span class="star">☆</span>
                             <span class="star">☆</span>
                             <span class="star">☆</span>
                             <span class="star">☆</span>
-                        </span>
                         </div>
                     </div>
                     <hr class="und_line">
