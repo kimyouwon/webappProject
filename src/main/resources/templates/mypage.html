@@ -238,7 +238,7 @@
                 </tr>
                 <tr>
                     <td class="table_line">나이</td>
-                    <td><p th:text="${user.age}"></p></td>
+                    <td><p th:text="${#temporals.format(user.birth, 'yyyy-MM-dd')}"></p></td>
                 </tr>
                 <tr class="odd_color">
                     <td class="odd_color">생일</td>
