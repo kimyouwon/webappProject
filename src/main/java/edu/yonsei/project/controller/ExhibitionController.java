@@ -46,21 +46,20 @@ public class ExhibitionController {
     private UserService userService;
 
     @GetMapping("/exhibition/recommend")
-    @ResponseBody
-    public ResponseEntity<String> getExhibitionsByUserPreference(HttpSession session) {
+    public String getExhibitionsByUserPreference(HttpSession session, Model model) {
         String loginId = (String) session.getAttribute("loginId");
         if (loginId != null) {
             Optional<UserEntity> userOpt = userService.getUserByLoginId(loginId);
             if (userOpt.isPresent()) {
                 UserEntity user = userOpt.get();
                 Integer preference = user.getPreference();
-
-                if (preference == null) {
-                    return ResponseEntity.badRequest().body("먼저 취향 테스트를 진행해주세요!");
+                if (preference == null){
+                    return "redirect:/home/test";
                 }
+                return "redirect:/exh_keyword/" + preference;
             }
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        return "redirect:/home/login";
     }
 
     @GetMapping("/exhibition/{id}")
