@@ -199,18 +199,8 @@
                         <li><a th:href="@{/deadline-exhibition}">마감임박 전시회</a></li>
                     </ul>
                 </li>
-                <li><a th:href="@{/exhibition/recommend}">WETE의 추천!</a>
-            <!--
-                    <ul class="sub">
-                        <li><a th:href="@{'/exh_keyword/' + ${preference}}">원화/실물 전시회</a></li>
+                <li><a th:href="@{/exhibition/recommend}">WETE의 추천!</a></li>
 
-                        <li><a th:href="@{'/exh_keyword/' + 1}">원화/실물 전시회</a></li>
-                        <li><a th:href="@{'/exh_keyword/' + 2}">미디어 아트</a></li>
-                        <li><a th:href="@{'/exh_keyword/' + 3}">몰입형 체험 전시</a></li>
-                        <li><a th:href="@{'/exh_keyword/' + 4}">뮤지엄</a></li>
-                    </ul>
-            -->
-                </li>
             </ul>
         </div>
 
@@ -231,22 +221,39 @@
         <!-- 푸터 -->
         <div th:replace="footer :: footer"></div>
         <script>
-        // 버튼 클릭 시 화면을 위로 스크롤하는 함수
-        function scrollToTop() {
-        document.body.scrollTop = 0; // Safari
-        document.documentElement.scrollTop = 0; // Chrome, Firefox, IE, Opera
-        }
+            // 버튼 클릭 시 화면을 위로 스크롤하는 함수
+            function scrollToTop() {
+                document.body.scrollTop = 0; // Safari
+                document.documentElement.scrollTop = 0; // Chrome, Firefox, IE, Opera
+            }
 
-        const fadeInSection = document.querySelector('.fade-wrap');
+            const fadeInSection = document.querySelector('.fade-wrap');
 
-        window.addEventListener('scroll', () => {
-        const sectionPos = fadeInSection.getBoundingClientRect().top;
-        const screenPos = window.innerHeight;
+            window.addEventListener('scroll', () => {
+            const sectionPos = fadeInSection.getBoundingClientRect().top;
+            const screenPos = window.innerHeight;
 
-        if(sectionPos < screenPos) {
-        fadeInSection.classList.add('fade-in');
-        }
-        });
+            if(sectionPos < screenPos) {
+                fadeInSection.classList.add('fade-in');
+            }
+            });
+
+            $(document).ready(function() {
+                $("a[href='/exhibition/recommend']").click(function(event) {
+                    event.preventDefault();
+
+                    $.get("/exhibition/recommend", function(data, status) {
+                    }).fail(function(xhr, status, error) {
+                        if (xhr.status === 400) {
+                            alert("먼저 취향 테스트를 진행해주세요!");
+                        } else if (xhr.status === 401) {
+                            alert("로그인이 필요합니다.");
+                        } else {
+                            alert("서버 오류가 발생했습니다.");
+                        }
+                    });
+                });
+            });
         </script>
     </body>
 
