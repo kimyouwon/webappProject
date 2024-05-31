@@ -138,7 +138,7 @@
 
         /* 리뷰란 */
         #review {
-            width: 90%;
+            width: 100%;
             max-width: 800px;
             border: 1px solid rgb(193, 193, 193);
             border-radius: 10px;
@@ -188,16 +188,28 @@
             position: relative;
         }
 
+        .comt-box {
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            position: relative;
+        }
+
+
         #edit {
             margin-top: 10px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end; /* flex-end로 align-items 수정 */
+            width: 100%; /* 가로 길이 조정 */
         }
 
         #edit button {
             margin-top: 0;
-            width: 100px;
+            width: 20%; /* button 가로 길이 조정 */
             height: 40px;
             border: none;
             border-radius: 7px;
@@ -213,7 +225,7 @@
         }
 
         textarea#review_text {
-            width: 80%;
+            width: 85%; /* textarea 가로 길이 조정 */
             height: 100px;
             border-radius: 5px;
             border: 1px solid #FD6F22;
@@ -221,12 +233,30 @@
             resize: none;
             margin-right: 10px;
         }
+        textarea#comt {
+            width: 85%; /* textarea 가로 길이 조정 */
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #FD6F22;
+            padding: 10px;
+            resize: none;
+            margin-right: 10px;
+            margin-left: 20px;
+        }
 
         #review_list {
             width: 90%;
             max-width: 700px;
             height: auto;
             margin-bottom: 40px;
+        }
+
+        #review_edit {
+            margin-bottom: 30px;
+            width: 100%;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 30px 50px;
         }
 
         #review_box {
@@ -376,8 +406,8 @@
     <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
         <!-- 리뷰 작성란 -->
         <div id="review">
-            <div id="review_edit">
-                <p>평점</p>
+            <div id="review edit">
+                <p style="font-weight: bold;">평점</p>
                 <div class="star-rating">
                     <span class="star empty" data-value="1">☆</span>
                     <span class="star empty" data-value="2">☆</span>
@@ -386,9 +416,9 @@
                     <span class="star empty" data-value="5">☆</span>
                 </div>
                 <input type="hidden" id="rating" name="rating" value="0">
-                <p>후기</p>
+                <p style="font-weight: bold;">후기</p>
                 <div id="edit">
-                    <textarea id="review_text" name="content"></textarea>
+                    <textarea id="review_text" name="content" placeholder="후기를 남겨주세요"></textarea>
                     <button type="submit">작성</button>
                 </div>
             </div>
@@ -397,7 +427,7 @@
 
     <!-- 리뷰 목록 -->
     <div id="review_list">
-        <h2>후기</h2>
+        <h2 style="font-weight: bold; margin-bottom:10px;">전시 후기</h2>
         <div id="review_box">
             <th:block th:each="review : ${reviews}">
                 <div class="rv-box">
@@ -429,19 +459,23 @@
                         <span th:text="${review.likeCount}"></span>
                     </div>
                     <div class="comment-box">
-                        <h3>댓글</h3>
-                        <ul>
+                        <h3 style="font-weight: bold;">댓글</h3>
+
                             <th:block th:each="comment : ${review.comments}">
-                                <li>
-                                    <p>닉네임: <span th:text="${comment.userNickname}"></span></p>
+
+                                    <div class="comt-box">
+                                    <p sytle="font-weight: bold;"><span th:text="${comment.userNickname}"></span></p>
                                     <p>내용: <span th:text="${comment.content}"></span></p>
-                                    <p>작성시간: <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
-                                </li>
+                                    <p class="review-date"><span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
+                                    </div>
+
                             </th:block>
-                        </ul>
+
                         <form th:action="@{/review/{reviewId}/comment(reviewId=${review.id})}" method="post">
-                            <textarea name="content" placeholder="Add a comment"></textarea>
-                            <button type="submit">Submit</button>
+                            <div id="edit">
+                            <textarea id="comt" name="content" placeholder="댓글을 남겨주세요"></textarea>
+                            <button type="submit">작성</button>
+                            </div>
                         </form>
                     </div>
                 </div>

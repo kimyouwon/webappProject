@@ -207,15 +207,7 @@
         <!-- 굳이 웹사이트에 있어야할까 싶어서 뻈습니다 -->
 
         <!-- 헤더 -->
-        <div id="header">
-            <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-            <ul id="page_list">
-                <li><a href="/home/test">취향테스트</a></li>
-                <li><a href="/exhibition">전시회</a></li>
-                <li><a th:href="@{/logout}">로그아웃</a></li>
-                <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-            </ul>
-        </div>
+        <div th:replace="header :: header"></div>
 
         <!-- 페이지 설명 배너 -->
         <div id="page_banner">
@@ -239,7 +231,7 @@
                 </tr>
                 <tr class="odd_color">
                     <td class="odd_color">이름</td>
-                    <td><p th:text="${user.email}"></p></td>
+                    <td><p th:text="${user.name}"></p></td>
                 </tr>
                 <tr>
                     <td class="table_line">나이</td>
@@ -268,13 +260,13 @@
         <!-- 항목들 -->
         <div class="buttons">
             <div class="Container">
-                <form action="/home_auth/mypage/auth" method="get">
+                <form action="/home/mypage/auth" method="get">
                     <button class="edit-button blue-button">수정</button>
                 </form>
-                <form action="/home_auth/mypage/reviews" method="get">
+                <form action="/home/mypage/reviews" method="get">
                     <button class="edit-button blue-button">작성한 전시회 후기 보기</button>
                 </form>
-                <form action="/home_auth/mypage/comments" method="get">
+                <form action="/home/mypage/comments" method="get">
                     <button class="edit-button blue-button">작성한 댓글 보기</button>
                 </form>
             </div>
@@ -283,7 +275,7 @@
                 <form action="/logout" method="get">
                     <button type="submit" class="edit-button red-button">로그아웃</button>
                 </form>
-                <form action="/home_auth/mypage/delete" method="get">
+                <form th:action="@{/home/mypage/delete}" method="get">
                     <button class="edit-button red-button">회원탈퇴</button>
                 </form>
             </div>

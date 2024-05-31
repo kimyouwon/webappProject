@@ -208,17 +208,17 @@
     <div id="leave_text">
         <div id="box">
             <h3>정말로 회원 탈퇴를 하시겠습니까?</h3>
-            <p>탈퇴하시는 경우 아래에 '탈퇴하겠습니다' 적어주시길 바랍니다.</p>
         </div>
-        <input class="input_leave" type = "text">
     </div>
 
     <!-- 항목들 -->
     <div id="buttons">
         <div id="edit-container">
-            <form th:action="@{/home_auth/mypage/delete}" method="post">
+            <form th:action="@{/home/mypage/delete}" method="post">
             <button class="edit-button red-button" type="submit">확인</button>
-            <button class="edit-button blue-button"><a th:href="@{/home_auth/mypage}">취소</a></button>
+            </form>
+            <form th:action="@{/home/mypage}" method="get">
+                <button class="edit-button blue-button" type="submit">취소</button>
             </form>
         </div>
     </div>
