@@ -164,18 +164,20 @@
             margin: 0;
         }
         textarea#input-field{
-        width: 85%; /* textarea 가로 길이 조정 */
+            width: 85%; /* textarea 가로 길이 조정 */
             height: 100px;
             border-radius: 5px;
             border: 1px solid #FD6F22;
             padding: 10px;
             resize: none;
             margin-right: 10px;
+          }
 
+        /* 푸터 */
         /* 푸터 */
             #footer{
                 background-color: black;
-                width: auto;
+                width: 100%;
                 height: 100px;
                 color: white;
                 display: flex;
@@ -184,7 +186,7 @@
                 justify-content: center;
                 margin-top: auto; /* 푸터를 화면 아래에 위치하도록 설정 */
                 font-size:13px;
-
+                padding:10px;
             }
 
     </style>
@@ -199,7 +201,7 @@
 </div>
 
 <div id="sub_header">
-    <p th:text="${nickname} + '님의 전시회 후기 모음'"></p> <!-- 원래 h2인데 p로 바꿨어요-->
+    <p> 전시회 후기 수정 </p> <!-- 원래 h2인데 p로 바꿨어요-->
 </div>
 
 <hr style="margin: 0px 50px;">
@@ -234,6 +236,7 @@
 
 <!-- 푸터 -->
 <div th:replace="footer :: footer"></div>
+
 
 <script>
     document.getElementById('cancelButton').addEventListener('click', function() {
