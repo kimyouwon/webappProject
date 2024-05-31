@@ -132,4 +132,15 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
     }
+
+    public void resetPassword(String loginId, String newPassword) {
+        UserEntity user = userRepository.findByLoginId(loginId)
+                .orElseThrow(() -> new RuntimeException("로그인 ID에 해당하는 사용자를 찾을 수 없습니다."));
+
+        String encodedNewPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedNewPassword);
+
+        userRepository.save(user);
+    }
+
 }

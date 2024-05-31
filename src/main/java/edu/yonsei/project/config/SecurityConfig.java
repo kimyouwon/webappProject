@@ -1,5 +1,6 @@
 package edu.yonsei.project.config;
 
+import edu.yonsei.project.service.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import edu.yonsei.project.service.CustomUserDetailsService;
 
 import edu.yonsei.project.service.UserService;
 import edu.yonsei.project.security.CustomAuthenticationFailureHandler;
@@ -31,6 +31,7 @@ public class SecurityConfig {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private AuthenticationFailureHandler customAuthenticationFailureHandler;
+    private UserSecurityService userSecurityService;
 
     public SecurityConfig(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
@@ -83,4 +84,5 @@ public class SecurityConfig {
     public CustomAuthenticationFailureHandler customAuthenticationFailureHandler() {
         return new CustomAuthenticationFailureHandler();
     }
+
 }

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +28,7 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class RegisterController {
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/home/register")
     public String showRegistrationForm(Model model) {
@@ -81,7 +84,7 @@ public class RegisterController {
         try {
             userService.postUser(userDto);
         } catch (DataIntegrityViolationException e) {
-            model.addAttribute("error", "회원가입 중 오류가 발생했습니다.");
+            model.addAttribute("error", "데이터 오류가 발생했습니다.");
             return "createacc_page";
         }
 
@@ -90,7 +93,7 @@ public class RegisterController {
         try {
             encodedNickname = URLEncoder.encode(userDto.getNickname(), "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            model.addAttribute("error", "회원가입 중 오류가 발생했습니다.");
+            model.addAttribute("error", "닉네임 오류가 발생했습니다.");
             return "createacc_page";
         }
 
@@ -153,7 +156,6 @@ public class RegisterController {
     // 비밀번호 재설정 로직
     @PostMapping("/home/resetPw")
     public String resetPw(@RequestParam("loginId") String loginId,
-                          @RequestParam("currentPassword") String currentPassword,
                           @RequestParam("newPassword") String newPassword,
                           @RequestParam("confirmPassword") String confirmPassword,
                           Model model) {
@@ -175,13 +177,14 @@ public class RegisterController {
 
         // 현재 사용자의 비밀번호를 업데이트합니다.
         try {
-            userService.updatePassword(loginId, currentPassword, newPassword);
+            userService.resetPassword(loginId, newPassword);
             // 비밀번호 업데이트에 성공하면 현재 사용자의 인증 정보를 제거하고 로그인 페이지로 리다이렉트합니다.
             SecurityContextHolder.clearContext(); // 현재 사용자 인증 정보 제거
             return "redirect:/home/login";  // 로그인 페이지로 리다이렉트
-        } catch (Exception e) {
+            }
+         catch (Exception e) {
             // 비밀번호 업데이트에 실패하면 에러 메시지를 반환하고 이전 페이지로 리다이렉트합니다.
-            model.addAttribute("error", "비밀번호 재설정에 실패했습니다. 입력된 현재 비밀번호가 일치하지 않습니다.");
+            model.addAttribute("error", "비밀번호 재설정에 실패했습니다. 시스템 오류가 발생했습니다.");
             model.addAttribute("loginId", loginId);
             return "reset_pw";
         }
