@@ -180,12 +180,14 @@
         }
 
         .rv-box {
+            width:80%;
+            height:auto;
             border: 1px solid rgb(193, 193, 193);
             border-radius: 10px;
             padding: 10px 30px;
             font-size: 15px;
-            margin-bottom: 20px;
             position: relative;
+            margin:20px;
         }
 
         .comt-box {
@@ -449,7 +451,7 @@
                         </span>
                     </div>
                     <hr style="width: 100%; margin: 8px 0px;">
-                    <div>
+                    <div style="white-space: pre-line; width:100%; height:auto;">
                         <span th:text="${review.content}"></span>
                     </div>
                     <div style="display: flex; align-items: center; margin-top: 10px;">

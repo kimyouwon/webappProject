@@ -184,8 +184,8 @@
             .blue-button {
                 background-color: blue;
             }
-            .orange-button {
-                background-color: #FD6F22;
+            .navy-button {
+                background-color: #0028B7;
             }
 
             /* 푸터 */
@@ -254,7 +254,12 @@
                 </tr>
                 <tr>
                     <td class="table_line">취향테스트</td>
-                    <td><p th:text="${user.preference}"></p></td>
+                    <td><p th:if="${user.preference == 0}" th:text="'원화/실물 전시회'"></p>
+                        <p th:if="${user.preference == 1}" th:text="'미디어 아트'"></p>
+                        <p th:if="${user.preference == 2}" th:text="'몰입형 체험 전시'"></p>
+                        <p th:if="${user.preference == 3}" th:text="'뮤지엄'"></p>
+                        <p th:if="${user.preference == null}" th:text="'취향 테스트를 진행해주세요.'"></p>
+                    </td>
                 </tr>
 
             </table>
@@ -264,13 +269,13 @@
         <div class="buttons">
             <div class="Container">
                 <form action="/home/mypage/auth" method="get">
-                    <button class="edit-button orange-button">수정</button>
+                    <button class="edit-button navy-button">수정</button>
                 </form>
                 <form action="/home/mypage/reviews" method="get">
-                    <button class="edit-button orange-button">작성한 전시회 후기 보기</button>
+                    <button class="edit-button navy-button">작성한 전시회 후기 보기</button>
                 </form>
                 <form action="/home/mypage/comments" method="get">
-                    <button class="edit-button orange-button">작성한 댓글 보기</button>
+                    <button class="edit-button navy-button">작성한 댓글 보기</button>
                 </form>
             </div>
 
