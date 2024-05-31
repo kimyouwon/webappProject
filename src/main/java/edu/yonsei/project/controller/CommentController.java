@@ -54,10 +54,28 @@ public class CommentController {
     }
     //댓글 수정 페이지
     @GetMapping("/comment/edit/{id}")
-    public String editComment(@PathVariable("id") Long id, Model model) {
-        CommentEntity comment = commentService.getCommentById(id);
-        model.addAttribute("comment", comment);
-        return "mypage_comment_edit"; // 리뷰 수정 페이지로 이동
+    public String editComment(@PathVariable("id") Long id, Model model, HttpSession session) {
+        String userId = (String) session.getAttribute("loginId");
+        if (userId != null) {
+            try {
+                Optional<UserEntity> userOpt = userService.getUserByLoginId(userId);
+                if (!userOpt.isPresent()) {
+                    model.addAttribute("error", "사용자를 찾을 수 없습니다.");
+                    return "errorPage"; // 사용자를 찾을 수 없는 경우 에러 페이지로 이동
+                }
+
+                UserEntity user = userOpt.get();
+                model.addAttribute("nickname", user.getNickname()); // 닉네임을 모델에 추가
+                CommentEntity comment = commentService.getCommentById(id);
+                model.addAttribute("comment", comment);
+                return "mypage_comment_edit"; // 리뷰 수정 페이지로 이동
+            } catch (Exception e) {
+                model.addAttribute("error", e.getMessage());
+                return "errorPage";
+            }
+        } else {
+            return "redirect:/home/login"; // 세션에 loginId가 없다면 로그인 페이지로 리다이렉트
+        }
     }
 
     //댓글 수정 로직 처리.
