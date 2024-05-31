@@ -199,23 +199,32 @@
             <div id="white">
                 <p>회원정보 수정</p>
                 <input class="editbox" type = "text" th:field="*{nickname}" name="nickname" required>
+                <label>생일</label>
+                <input class="editbox" type = "text" th:field="*{birth}" name="birth" >
+                <label>나이</label>
+                <input class="editbox" type = "text" th:field="*{age}" name="age">
 
                 <p>연락처</p>
-                <input class="editbox" type = "text" th:field="*{phone}" name="phone">
+                <label>전화번호</label>
+                <input class="editbox" type = "text" th:field="*{phone}" name="phone" required>
+                <label>전화번호</label>
                 <input class="editbox" type = "text" th:field="*{email}" name="email">
-
 
                 <p>설정한 비밀번호</p>
                 <input class="editbox" type="password" th:field="*{password}" name="password" required>
 
                 <div id="edit-container">
                     <button class="edit-button" type="submit">저장</button>
-                    <button class="edit-button gray-button"><a href="/home/mypage">취소</a></button>
+                    <button class="edit-button gray-button" id="cancelButton">취소</button>
                 </div>
             </div>
         </form>
-
         <!-- 푸터 -->
         <div th:replace="footer :: footer"></div>
     </body>
+    <script>
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            window.location.href = '/home/mypage';
+        });
+    </script>
 </html>
