@@ -408,10 +408,22 @@
             padding: 1px;
             }
 
-            .star::after {
-            content: '☆';
-            color: #FD6F22;
-            font-size: 20px;
+            .star-rating-static {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: 0.5rem;
+            align-items: center;
+            gap: 2px; /* 별들 사이의 간격을 줄임 */
+            }
+
+            .star-rating-static .star {
+                font-size: 1.5rem;
+                color: #FD6F22;
+            }
+
+            .star-rating-static .star.filled {
+                color: #FD6F22;
             }
 
             #content p{
@@ -520,7 +532,6 @@
             <div id="poster_list">
                 <div id="poster" th:each="exhibition, stat : ${exhibitions}" th:if="${stat.index < 6}">
                     <a th:href="@{'/exhibition/' + ${exhibition.id}}">
-                        <!--<a th:href="@{/exhibition/{id}(id=${exhibition.id})}">-->
                         <img th:src="${exhibition.image}" alt="Exhibition Image" id="exh_info img">
                         <p th:text="${exhibition.title}">전시회 이름</p>
                         <p th:text="${exhibition.date}">날짜</p>
@@ -539,20 +550,26 @@
                 <div th:each="review : ${reviews}" class="review_box">
                     <div class="rv_cont">
                         <p th:text="${review.exhibitionName}">전시회 이름</p>
-                        <div class="star-rating">
-                            <input type="radio" class="star" th:checked="${review.rating >= 1}" value="1">
-                            <input type="radio" class="star" th:checked="${review.rating >= 2}" value="2">
-                            <input type="radio" class="star" th:checked="${review.rating >= 3}" value="3">
-                            <input type="radio" class="star" th:checked="${review.rating >= 4}" value="4">
-                            <input type="radio" class="star" th:checked="${review.rating >= 5}" value="5">
+                        <div style="margin-top: 10px;">
+                            <div class="nickname-label">닉네임 |
+                                <span style="font-weight: 600;" th:text="${review.userNickname}"></span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px; center;">
+                        <span class="star-rating-static" th:data-rating="${review.rating}">
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                            <span class="star">☆</span>
+                        </span>
                         </div>
                     </div>
-                    <hr class="und_line"/>
+                    <hr class="und_line">
                     <p th:text="${review.content}">후기내용</p>
                 </div>
             </div>
         </div>
-
 
         <!-- 푸터 -->
         <div th:replace="footer :: footer"></div>
@@ -638,6 +655,19 @@
                 fadeInSection.classList.add('fade-in');
             }
         });
+            // 리뷰 목록의 별점 처리
+            const starRatingsStatic = document.querySelectorAll('.star-rating-static');
+            starRatingsStatic.forEach(rating => {
+                const ratingValue = parseInt(rating.getAttribute('data-rating'));
+                const stars = rating.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < ratingValue) {
+                        star.textContent = '★';
+                    } else {
+                        star.textContent = '☆';
+                    }
+                });
+            });
         </script>
     </body>
 </html>

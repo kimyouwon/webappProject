@@ -54,18 +54,18 @@ public class TestController {
     }*/
 
     //취향 테스트
-    @GetMapping({"/home/test", "/home_auth/test"})
+    @GetMapping({"/home/test"})
     public String showTestPage() {
         return "index";
     }
 
-    //회원 탈퇴 페이지
-    @GetMapping("/home_auth/mypage/delete")
+    /*//회원 탈퇴 페이지
+    @GetMapping("/home/mypage/delete")
     public String showDelete() {
         return "delete";
-    }
+    }*/
 
-    @PostMapping("/home_auth/mypage/delete")
+    /*@PostMapping("/home/mypage/delete")
     public String deleteUser(HttpSession session, RedirectAttributes redirectAttributes) {
         String loginId = (String) session.getAttribute("loginId"); //세션에서 loginId를 기준으로 불러옴.
         try {
@@ -78,6 +78,6 @@ public class TestController {
         }
 
         return "redirect:/home";  // 홈 페이지 또는 로그인 페이지로 리다이렉션
-    }
+    }*/
 
 }
