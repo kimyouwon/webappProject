@@ -33,13 +33,6 @@ public class UserDto {
 
     private Integer age;  // Integer 객체 사용
 
-    @Min(value = 0, message = "나이는 0 이상이어야 합니다.")
-    public Integer getAge() {
-        return age;
-    }
-
-    private java.util.Date birth; // 사용자의 생일
-
     private Integer preference; //전시회 취향 테스트 결과
 
 
