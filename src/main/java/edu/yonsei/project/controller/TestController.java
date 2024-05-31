@@ -53,18 +53,6 @@ public class TestController {
         return "main_page";
     }
 
-
-    //로그인된 메인 페이지
-    @GetMapping("/home_auth")
-    public String showHomeAuthPage(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isLoggedIn = authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken);
-        model.addAttribute("isLoggedIn", isLoggedIn);
-        List<CrawledData> activeExhibitions = crawlerService.getActiveExhibitions();
-        model.addAttribute("exhibitions", activeExhibitions);
-        return "main_page_auth";
-    }
-
     //취향 테스트
     @GetMapping({"/home/test", "/home_auth/test"})
     public String showTestPage() {
@@ -89,7 +77,7 @@ public class TestController {
             return "redirect:/error";  // 설정 페이지로 리다이렉션
         }
 
-        return "redirect:/home_auth";  // 홈 페이지 또는 로그인 페이지로 리다이렉션
+        return "redirect:/home";  // 홈 페이지 또는 로그인 페이지로 리다이렉션
     }
 
 }

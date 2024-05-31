@@ -32,7 +32,7 @@ public class LoginController {
                               HttpSession session) {
         if (authService.authenticate(loginId, password)) {
             session.setAttribute("loginId", loginId);
-            return "redirect:/home_auth";
+            return "redirect:/home";
         }
         return "redirect:/home/login?error=true";
     }
