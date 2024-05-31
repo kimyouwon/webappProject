@@ -69,6 +69,7 @@
         #page_list a {
             color: #FD6F22;
             margin-right: 10px;
+            text-decoration:none;
         }
 
         /* 페이지배너 */
@@ -190,7 +191,7 @@
 <div id="acc_box">
     <form th:action="@{/home/register}" th:object="${user}" method="post" onsubmit="return validateForm()">
         <p class="orange">아이디</p>
-        <input class="editbox" type="text" name="loginId" placeholder="아이디를 입력하시오">
+        <input class="editbox" type="text" name="loginId" placeholder="아이디를 입력하시오.">
         <div th:if="${errorLoginId}" class="error-box">
             <span class="exclamation">❗</span>
             <p th:text="${errorLoginId}"></p>
@@ -213,7 +214,7 @@
             <p th:text="${error}"></p>
         </div>
         <p class="orange">닉네임</p>
-        <input class="editbox" type="text" name="nickname" placeholder="닉네임을 입력하시오">
+        <input class="editbox" type="text" name="nickname" placeholder="닉네임을 입력하시오.">
         <div th:if="${errorNickname}" class="error-box">
             <span class="exclamation">❗</span>
             <p th:text="${errorNickname}"></p>
@@ -222,7 +223,7 @@
         <hr style="margin-top:30px; margin-bottom:30px;">
 
         <p class="orange">연락처</p>
-        <input class="editbox" type="text" name="phone" placeholder="전화번호룰 입력하시오." required>
+        <input class="editbox" type="text" name="phone" placeholder="전화번호를 입력하시오." required>
 
         <!--공백 -->
         <div class="blank"></div>
