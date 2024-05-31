@@ -41,7 +41,7 @@ public class TestController {
     private ReviewService reviewService;
 
     //메인 페이지
-    @GetMapping("/home")
+    /*@GetMapping("/home")
     public String showHomePage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isLoggedIn = authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken);
@@ -51,7 +51,7 @@ public class TestController {
         model.addAttribute("exhibitions", activeExhibitions);
         model.addAttribute("reviews", recentReviews);
         return "main_page";
-    }
+    }*/
 
     //취향 테스트
     @GetMapping({"/home/test", "/home_auth/test"})
