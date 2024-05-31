@@ -6,6 +6,8 @@ import edu.yonsei.project.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -120,6 +122,7 @@ public class RegisterController {
             return "find_id";
         }
     }
+
     // 비밀번호 찾기 폼 표시
     @GetMapping("/home/findPw")
     public String showFindPwForm() {
@@ -145,16 +148,37 @@ public class RegisterController {
     // 비밀번호 재설정 로직
     @PostMapping("/home/resetPw")
     public String resetPw(@RequestParam("loginId") String loginId,
+                          @RequestParam("currentPassword") String currentPassword,
                           @RequestParam("newPassword") String newPassword,
                           @RequestParam("confirmPassword") String confirmPassword,
                           Model model) {
         if (!newPassword.equals(confirmPassword)) {
-            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            model.addAttribute("error", "새 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
             model.addAttribute("loginId", loginId);
             return "reset_pw";
         }
 
-        userService.updatePassword(loginId, newPassword);
-        return "redirect:/home/login";  // 로그인 페이지로 리다이렉트
+        // 현재 사용자의 인증 정보를 가져옵니다.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentLoginId = authentication.getName(); // 현재 로그인된 사용자의 로그인 ID
+
+        // 현재 사용자의 로그인 ID와 입력된 로그인 ID가 일치하는지 확인합니다.
+        if (!currentLoginId.equals(loginId)) {
+            model.addAttribute("error", "비밀번호를 재설정할 수 있는 권한이 없습니다.");
+            return "reset_pw";
+        }
+
+        // 현재 사용자의 비밀번호를 업데이트합니다.
+        try {
+            userService.updatePassword(loginId, currentPassword, newPassword);
+            // 비밀번호 업데이트에 성공하면 현재 사용자의 인증 정보를 제거하고 로그인 페이지로 리다이렉트합니다.
+            SecurityContextHolder.clearContext(); // 현재 사용자 인증 정보 제거
+            return "redirect:/home/login";  // 로그인 페이지로 리다이렉트
+        } catch (Exception e) {
+            // 비밀번호 업데이트에 실패하면 에러 메시지를 반환하고 이전 페이지로 리다이렉트합니다.
+            model.addAttribute("error", "비밀번호 재설정에 실패했습니다. 입력된 현재 비밀번호가 일치하지 않습니다.");
+            model.addAttribute("loginId", loginId);
+            return "reset_pw";
+        }
     }
 }
