@@ -466,8 +466,8 @@
                             <th:block th:each="comment : ${review.comments}">
 
                                     <div class="comt-box">
-                                    <p sytle="font-weight: bold;"><span th:text="${comment.userNickname}"></span></p>
-                                    <p>내용: <span th:text="${comment.content}"></span></p>
+                                    <p sytle="font-weight: bold;"><span style="font-weight: bold;" th:text="${comment.userNickname}"></span></p>
+                                    <p><span th:text="${comment.content}"></span></p>
                                     <p class="review-date"><span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
                                     </div>
 

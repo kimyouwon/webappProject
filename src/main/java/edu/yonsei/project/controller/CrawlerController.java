@@ -69,7 +69,7 @@ public class CrawlerController {
 
     // 키워드로 전시회 목록 가져오기
     @GetMapping("/exh_keyword/{key_num}")
-    public String getExhibitionsByKeyNumber(@PathVariable int key_num, Model model) {
+    public String getExhibitionsByKeyNumber(@PathVariable("key_num") int key_num, Model model) {
         String keyword = getKeywordByNumber(key_num);
         List<CrawledData> keywordExhibitions = crawlerService.getExhibitionsByKeyword(keyword);
         model.addAttribute("exhibitions", keywordExhibitions);
