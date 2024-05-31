@@ -188,8 +188,8 @@
 
 <div id="white">
     <div id="review_list">
-        <p th:if="${noComments}" style="color: red;">작성한 댓글이 없습니다.</p>
-        <div th:if="${!noComments}" th:each="comment : ${comments}" class="review_box" th:id="'review-box-' + ${comment.id}">
+
+        <div th:each="comment : ${comments}" class="review_box" th:id="'review-box-' + ${comment.id}">
             <div id="box_top">
                 <div style="display: flex;">
                     <form th:action="@{/comment/edit/{id}(id=${comment.id})}" method="get">
