@@ -96,6 +96,11 @@ public class RegisterController {
 
         return "redirect:/home/welcome?nickname=" + encodedNickname;  // 환영 페이지로 닉네임 전달
     }
+    //사용자 약관
+    @GetMapping("/rule")
+    public String showRulePage(){
+        return "rules";
+    }
 
     @GetMapping("/home/welcome")
     public String showWelcomePage(@RequestParam("nickname") String nickname, Model model) {

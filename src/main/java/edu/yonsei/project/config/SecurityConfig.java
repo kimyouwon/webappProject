@@ -54,13 +54,13 @@ public class SecurityConfig {
                 .authorizeRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(
                                 new AntPathRequestMatcher("/review/**"),
-                                new AntPathRequestMatcher("/home_auth/mypage/**")
+                                new AntPathRequestMatcher("/home/mypage/**")
                         ).authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/home/login")
-                        .defaultSuccessUrl("/home_auth", true)
+                        .defaultSuccessUrl("/home", true)
                         .usernameParameter("loginId")
                         .failureHandler(customAuthenticationFailureHandler)
                         .successHandler(new CustomAuthenticationSuccessHandler())
@@ -68,7 +68,7 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/home/logout"))
-                        .logoutSuccessUrl("/home_auth")
+                        .logoutSuccessUrl("/home")
                         .invalidateHttpSession(true)
                 );
 

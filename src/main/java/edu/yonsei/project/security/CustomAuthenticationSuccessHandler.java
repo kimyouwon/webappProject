@@ -16,6 +16,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         // 로그인 성공 후 세션에 loginId 설정
         String loginId = authentication.getName(); // 기본적으로 username을 반환
         request.getSession().setAttribute("loginId", loginId);
-        response.sendRedirect("/home_auth"); // 기본 성공 URL로 리디렉트
+        response.sendRedirect("/home"); // 기본 성공 URL로 리디렉트
     }
 }

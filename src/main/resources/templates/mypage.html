@@ -207,15 +207,7 @@
         <!-- 굳이 웹사이트에 있어야할까 싶어서 뻈습니다 -->
 
         <!-- 헤더 -->
-        <div id="header">
-            <a href="/home"><img id='title' src="/img/logo.png" style="width: 90px;"/></a>
-            <ul id="page_list">
-                <li><a href="/home/test">취향테스트</a></li>
-                <li><a href="/exhibition">전시회</a></li>
-                <li><a th:href="@{/logout}">로그아웃</a></li>
-                <li><a th:href="@{/home_auth/mypage}">마이페이지</a></li>
-            </ul>
-        </div>
+        <div th:replace="header :: header"></div>
 
         <!-- 페이지 설명 배너 -->
         <div id="page_banner">
