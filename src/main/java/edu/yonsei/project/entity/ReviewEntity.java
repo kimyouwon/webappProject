@@ -39,7 +39,7 @@ public class ReviewEntity {
     @Column(nullable = true)
     private String exhibitionName; // 전시회 이름
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<CommentEntity> comments; // 댓글 리스트
 
     private long likeCount; // 좋아요 개수

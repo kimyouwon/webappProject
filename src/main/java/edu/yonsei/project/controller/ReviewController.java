@@ -64,13 +64,13 @@ public class ReviewController {
     @PostMapping("/review/edit/{id}")
     public String updateReview(@PathVariable("id") Long id, @RequestParam("content") String content) {
         reviewService.updateReview(id, content);
-        return "redirect:/home_auth/mypage/reviews"; // 리뷰 목록 페이지로 리다이렉트
+        return "redirect:/home/mypage/reviews"; // 리뷰 목록 페이지로 리다이렉트
     }
 
     //리뷰 삭제 로직 처리.
     @PostMapping("/review/delete/{id}")
     public String deleteReview(@PathVariable("id") Long id) {
         reviewService.deleteReview(id);
-        return "redirect:/home_auth/mypage/reviews"; // 리뷰 목록 페이지로 리다이렉트
+        return "redirect:/home/mypage/reviews"; // 리뷰 목록 페이지로 리다이렉트
     }
 }
