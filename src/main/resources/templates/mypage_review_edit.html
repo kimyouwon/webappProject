@@ -5,60 +5,60 @@
     <title>리뷰 수정</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-            @font-face {
-                font-family: 'Freesentation-9Black';
-                src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
-                font-weight: 800;
-                font-style: normal;
-            }
+        @font-face {
+            font-family: 'Freesentation-9Black';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
 
-            *{
-                font-family: "Noto Sans KR", sans-serif;
-                font-optical-sizing: auto;
-                font-weight: 400;
-                font-style: normal;
-                margin: 0;
-                padding: 0;
-                text-decoration: none;
+        *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
 
-            }
-            /* 헤더 */
-            #header{
-                position: relative;
-                width: auto;
-                height: 50px;
-                color: #FD6F22;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+        }
+        /* 헤더 */
+        #header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: #FD6F22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-            #title{
-                filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
-            }
+        #title{
+            filter: invert(58%) sepia(59%) saturate(3923%) hue-rotate(345deg) brightness(100%) contrast(99%);
+        }
 
-            #page_list{
-                margin-left: 20px;
-            }
+        #page_list{
+            margin-left: 20px;
+        }
 
-            #page_list{
-                display: flex;
-                flex-direction: row;
-                list-style:none;
-                margin-left: 20px;
-            }
+        #page_list{
+            display: flex;
+            flex-direction: row;
+            list-style:none;
+            margin-left: 20px;
+        }
 
-            #page_list a{
-                color: #FD6F22;
-                margin-right: 10px;
-            }
+        #page_list a{
+            color: #FD6F22;
+            margin-right: 10px;
+        }
 
             /* 페이지 배너 */
             #page_banner{
                 width: 100%;
                 height: 200px;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("../content/elimende-inagella-8rtptLrG5Q8-unsplash.jpg");
-                background-size: 900px 200px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),url("/img/banner_black.png");
+                background-size: 1600px 200px;
             }
             #page_banner p{
                 padding: 60px 80px;
@@ -67,27 +67,112 @@
                 font-family: 'Freesentation-9Black';
             }
 
+        /* 내용부분 */
+        #sub_header{
+            position: relative;
+            width: auto;
+            height: 50px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px;
+            flex-direction: column;
+
+        }
+
+        #white{
+            width: auto;
+            height: auto;
+            margin: 50px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            flex-direction: column;
 
         #edit_form {
             padding: 20px;
+            margin:50px 30px;
         }
 
-        .input-field {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            box-sizing: border-box;
+
+        #edit-container {
+            margin-top: 10px;
         }
 
-        .submit-button {
-            padding: 10px 20px;
-            background-color: blue;
-            color: white;
+        .edit-button {
+            width: 70px;
+            height: 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 7px;
+            background-color: #FD6F22;
+            color: white;
+            /*box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);*/
             cursor: pointer;
+            transition: 0.5s;
         }
 
+        /* 회색 버튼 스타일 */
+        .gray-button {
+            background-color: gray;
+        }
+        #review_list{
+            height: auto;
+            margin: 40px 0px;
+
+        }
+
+        .review_box{
+            margin-bottom: 30px;
+            width: 700px;
+            border: 1px solid rgb(193, 193, 193);
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        #box_top{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .star-rating {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .star {
+        font-size: 20px;
+        color: #FD6F22;
+        cursor: pointer;
+    }
+
+    .filled {
+        content: '★';
+    }
+
+        .review_title{
+            font-size: 16;
+            font-weight: 600;
+        }
+
+        /* 커서 포인터 스타일 */
+        .clickable {
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        textarea#input-field{
+        width: 85%; /* textarea 가로 길이 조정 */
+            height: 100px;
+            border-radius: 5px;
+            border: 1px solid #FD6F22;
+            padding: 10px;
+            resize: none;
+            margin-right: 10px;
+    }
+        /* 푸터 */
         /* 푸터 */
             #footer{
                 background-color: black;
@@ -106,22 +191,69 @@
     </style>
 </head>
 <body>
-    <!-- 헤더 -->
-    <div th:replace="header :: header"></div>
-    <!-- 페이지 설명 배너 -->
-    <div id="page_banner">
-        <p>마이페이지</p>
-    </div>
+<!-- 헤더 -->
+<div th:replace="header :: header"></div>
 
-    <!--html수정하실 때 여기만 살려주세요-->
-    <div id="edit_form">
+<!-- 페이지 설명 배너 -->
+<div id="page_banner">
+    <p>마이페이지</p>
+</div>
+
+<div id="sub_header">
+    <p th:text="${nickname} + '님의 전시회 후기 수정'"></p> <!-- 원래 h2인데 p로 바꿨어요-->
+</div>
+
+<hr style="margin: 0px 50px;">
+
+<div id="white">
+    <div id="review_list">
+        <div class="review_box">
         <form th:action="@{/review/edit/{id}(id=${review.id})}" method="post">
-            <input type="hidden" th:value="${review.id}" name="id"/>
-            <textarea class="input-field" name="content" th:text="${review.content}"></textarea>
-            <button type="submit" class="submit-button">수정 완료</button>
+            <div id="box_top">
+                <p class="review_title" th:text="${review.exhibitionName}">전시회 이름</p>
+                <div style="display: flex;">
+                </div>
+            </div>
+            <div class="star-rating" th:data-rating="${review.rating}">
+                <span class="star empty">☆</span>
+                <span class="star empty">☆</span>
+                <span class="star empty">☆</span>
+                <span class="star empty">☆</span>
+                <span class="star empty">☆</span>
+            </div>
+            <br>
+            <div id="edit_form">
+                    <input type="hidden" th:value="${review.id}" name="id"/>
+                    <textarea id="input-field" name="content" th:text="${review.content}"></textarea>
+                    <button type="submit" class="edit-button">수정 완료</button>
+                    <button type="submit" class="edit-button" id="cancelButton">취소</button>
+            </div>
         </form>
+        </div>
     </div>
-    <!-- 푸터 -->
-    <div th:replace="footer :: footer"></div>
+</div>
+
+<!-- 푸터 -->
+<div th:replace="footer :: footer"></div>
+
+<script>
+    document.getElementById('cancelButton').addEventListener('click', function() {
+            window.location.href = '/home/mypage';
+        });
+    document.addEventListener('DOMContentLoaded', function() {
+        const starRatings = document.querySelectorAll('.star-rating');
+        starRatings.forEach(rating => {
+            const ratingValue = rating.getAttribute('data-rating');
+            const stars = rating.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < ratingValue) {
+                    star.textContent = '★';
+                } else {
+                    star.textContent = '☆';
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

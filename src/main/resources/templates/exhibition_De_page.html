@@ -138,12 +138,18 @@
 
         /* 리뷰란 */
         #review {
-            width: 100%;
-            max-width: 800px;
+            width:100%;
+        }
+
+        #review_edit{
+            width:50%;
             border: 1px solid rgb(193, 193, 193);
             border-radius: 10px;
+            margin:0px auto;
             margin-bottom: 90px;
             padding: 30px 50px;
+
+
         }
 
         .star-rating {
@@ -184,7 +190,7 @@
             height:auto;
             border: 1px solid rgb(193, 193, 193);
             border-radius: 10px;
-            padding: 10px 30px;
+            padding: 20px 30px;
             font-size: 15px;
             position: relative;
             margin:20px;
@@ -253,20 +259,10 @@
             margin-bottom: 40px;
         }
 
-        #review_edit {
-            margin-bottom: 30px;
-            width: 100%;
-            border: 1px solid rgb(193, 193, 193);
-            border-radius: 10px;
-            padding: 30px 50px;
-        }
 
         #review_box {
-            margin-bottom: 30px;
+            margin: 30px 0px;
             width: 100%;
-            border: 1px solid rgb(193, 193, 193);
-            border-radius: 10px;
-            padding: 30px 50px;
         }
 
         .comment-box {
@@ -302,29 +298,7 @@
             padding: 10px;
         }
 
-        @media screen and (max-width: 768px) {
-            #review, #review_box, #review_list {
-                width: 100%;
-                padding: 20px;
-            }
 
-            #exh_info table {
-                width: 100%;
-            }
-
-            #exh_detail {
-                width: 90%;
-            }
-
-            #exh_info img {
-                width: 100%;
-                height: auto;
-            }
-
-            .star-rating .star, .star-rating-static .star {
-                font-size: 1.5rem;
-            }
-        }
 
         .nickname-container {
             display: flex;
@@ -405,10 +379,10 @@
     <hr style="width: 80%; margin-bottom: 70px;">
 
     <!-- 전시 후기 -->
-    <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
+    <div id="review">
+        <form th:action="@{'/exhibition/' + ${exhibition.id} + '/review'}" method="post">
         <!-- 리뷰 작성란 -->
-        <div id="review">
-            <div id="review edit">
+            <div id="review_edit">
                 <p style="font-weight: bold;">평점</p>
                 <div class="star-rating">
                     <span class="star empty" data-value="1">☆</span>
@@ -418,14 +392,15 @@
                     <span class="star empty" data-value="5">☆</span>
                 </div>
                 <input type="hidden" id="rating" name="rating" value="0">
+                <hr style="width: 100%; margin: 8px 0px;">
                 <p style="font-weight: bold;">후기</p>
                 <div id="edit">
                     <textarea id="review_text" name="content" placeholder="후기를 남겨주세요"></textarea>
                     <button type="submit">작성</button>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
     <!-- 리뷰 목록 -->
     <div id="review_list">

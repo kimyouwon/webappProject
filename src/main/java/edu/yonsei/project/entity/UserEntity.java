@@ -28,9 +28,6 @@ public class UserEntity {
     private String email; //사용자의 이메일
     @Column(unique = true)
     private String phone; //사용자의 전화번호
-    private Integer age; //사용자의 나이
-
-    private java.util.Date birth; // 사용자의 생일
 
     @ColumnDefault("NULL")
     private Integer preference; //전시회 취향 테스트 결과

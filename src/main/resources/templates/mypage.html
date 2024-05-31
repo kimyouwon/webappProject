@@ -226,7 +226,6 @@
             <p>
                 내 기본정보
             </p>
-
             <table>
                 <tr>
                     <td class="table_line">아이디</td>
@@ -235,14 +234,6 @@
                 <tr class="odd_color">
                     <td class="odd_color">이름</td>
                     <td><p th:text="${user.name}"></p></td>
-                </tr>
-                <tr>
-                    <td class="table_line">나이</td>
-                    <td><p th:text="${#temporals.format(user.birth, 'yyyy-MM-dd')}"></p></td>
-                </tr>
-                <tr class="odd_color">
-                    <td class="odd_color">생일</td>
-                    <td><p th:text="${user.birth}"></p></td>
                 </tr>
                 <tr>
                     <td class="table_line">전화번호</td>

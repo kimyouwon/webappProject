@@ -64,8 +64,6 @@ public class UserService implements UserDetailsService {
                 .password(encodedPassword)
                 .email(userDto.getEmail())
                 .phone(userDto.getPhone())
-                .age(userDto.getAge())
-                .birth(userDto.getBirth())
                 .preference(userDto.getPreference())
                 .build();
 
