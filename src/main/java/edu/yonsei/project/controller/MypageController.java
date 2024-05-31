@@ -2,6 +2,7 @@ package edu.yonsei.project.controller;
 
 import edu.yonsei.project.dto.UserDto;
 import edu.yonsei.project.entity.UserEntity;
+import edu.yonsei.project.service.AuthService;
 import edu.yonsei.project.service.ReviewService;
 import edu.yonsei.project.service.UserService;
 
@@ -25,6 +26,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MypageController {
 
+    private final AuthService authService;
+
     @Autowired
     private CrawlerService crawlerService;
 
@@ -34,13 +37,13 @@ public class MypageController {
     private ReviewService reviewService;
 
     //마이페이지 수정 전 디테일 페이지
-    @GetMapping("home_auth/mypage/auth/edit_detail")
+    @GetMapping("home/mypage/auth/edit_detail")
     public String showMypageEditDetail() {
         return "mypage_edit_detail";
     }
 
     // 마이페이지 수정 페이지
-    @GetMapping("/home_auth/mypage/auth/edit")
+    @GetMapping("/home/mypage/auth/edit")
     public String showMypageEditPage(HttpSession session, Model model) {
         String loginId = (String) session.getAttribute("loginId");
         if (loginId == null) {
@@ -62,17 +65,12 @@ public class MypageController {
         }
     }
 
-    @PostMapping("/home_auth/mypage/auth/edit")
+    @PostMapping("/home/mypage/auth/edit")
     public String updateUser(@ModelAttribute UserEntity user, HttpSession session, Model model) {
         String loginId = (String) session.getAttribute("loginId");
-
-        /*if (loginId == null || !loginId.equals(user.getLoginId())) {
-            model.addAttribute("error", "세션 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
-            return "redirect:/home/login";
-        }*/ //이 코드 넣으니깐 계속 login 페이지로만 가짐
         try {
             userService.updateUser(loginId, user); // 사용자 정보 업데이트
-            return "redirect:/home_auth/mypage"; // 업데이트 후 마이페이지로 리디렉션
+            return "redirect:/home/mypage"; // 업데이트 후 마이페이지로 리디렉션
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "errorPage"; // 에러 발생 시 에러 페이지로 이동
@@ -80,7 +78,7 @@ public class MypageController {
     }
 
     //마이페이지
-    @GetMapping("/home_auth/mypage")
+    @GetMapping("/home/mypage")
     public String getUserInfo(HttpSession session, Model model) {
         String loginId = (String) session.getAttribute("loginId"); //세션에서 loginId를 기준으로 불러옴.
 
@@ -104,7 +102,7 @@ public class MypageController {
     }
 
     // 취향 테스트 결과 추가
-    @PostMapping("/home_auth/mypage/save-result")
+    @PostMapping("/home/mypage/save-result")
     @ResponseBody
     public ResponseEntity<?> saveUserPreference(@RequestBody UserDto userDto, HttpSession session) {
         String loginId = (String) session.getAttribute("loginId");
@@ -124,6 +122,31 @@ public class MypageController {
             }
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"message\": \"먼저 WETE에 로그인해주세요.\"}");
+        }
+    }
+    // 마이페이지 수정하기 위한 인증페이지
+    @GetMapping("/home/mypage/auth")
+    public String showMypageAuth(Model model, @RequestParam(value = "error", required = false) String error) {
+        if (error != null) {
+            model.addAttribute("error", error);
+        }
+        return "mypage_auth";
+    }
+
+    @PostMapping("/home/mypage/auth/verify")
+    public String verifyPassword(@RequestParam("password") String password, HttpSession session, Model model) {
+        String loginId = (String) session.getAttribute("loginId");
+        if (loginId == null) {
+            return "redirect:/home/login"; // 세션에 loginId가 없을 경우 로그인 페이지로 리다이렉션
+        }
+
+        // AuthService를 사용하여 비밀번호 검증
+        boolean isValid = authService.authenticate(loginId, password);
+        if (isValid) {
+            return "redirect:/home/mypage/auth/edit"; // 비밀번호가 맞을 경우, 수정 페이지로 리다이렉션
+        } else {
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다");
+            return "mypage_auth"; // 비밀번호가 틀릴 경우, 다시 인증 페이지로 리다이렉션
         }
     }
 }

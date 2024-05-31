@@ -38,36 +38,12 @@ public class LoginController {
 
         if (authService.authenticate(loginId, password)) {
             session.setAttribute("loginId", loginId);
-            return "redirect:/home_auth";
+            return "redirect:/home";
         } else {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다");
             return "login_page";
         }
     }
 
-    // 마이페이지 수정하기 위한 인증페이지
-    @GetMapping("/home_auth/mypage/auth")
-    public String showMypageAuth(Model model, @RequestParam(value = "error", required = false) String error) {
-        if (error != null) {
-            model.addAttribute("error", error);
-        }
-        return "mypage_auth";
-    }
 
-    @PostMapping("/home_auth/mypage/auth/verify")
-    public String verifyPassword(@RequestParam("password") String password, HttpSession session, Model model) {
-        String loginId = (String) session.getAttribute("loginId");
-        if (loginId == null) {
-            return "redirect:/home/login"; // 세션에 loginId가 없을 경우 로그인 페이지로 리다이렉션
-        }
-
-        // AuthService를 사용하여 비밀번호 검증
-        boolean isValid = authService.authenticate(loginId, password);
-        if (isValid) {
-            return "redirect:/home_auth/mypage/auth/edit"; // 비밀번호가 맞을 경우, 수정 페이지로 리다이렉션
-        } else {
-            model.addAttribute("error", "비밀번호가 일치하지 않습니다");
-            return "mypage_auth"; // 비밀번호가 틀릴 경우, 다시 인증 페이지로 리다이렉션
-        }
-    }
 }

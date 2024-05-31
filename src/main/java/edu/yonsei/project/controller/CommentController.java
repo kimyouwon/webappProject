@@ -27,7 +27,7 @@ public class CommentController {
 
     private final UserService userService;
 
-    @GetMapping("/home_auth/mypage/comments")
+    @GetMapping("/home/mypage/comments")
     public String getUserComments(Model model, HttpSession session) {
         String userId = (String) session.getAttribute("loginId");
         if (userId != null) {
@@ -64,13 +64,13 @@ public class CommentController {
     @PostMapping("/comment/edit/{id}")
     public String updateComment(@PathVariable("id") Long id, @RequestParam("content") String content) {
         commentService.updateComment(id, content);
-        return "redirect:/home_auth/mypage/comments"; // 댓글 목록 페이지로 리다이렉트
+        return "redirect:/home/mypage/comments"; // 댓글 목록 페이지로 리다이렉트
     }
 
     //댓글 삭제 로직 처리.
     @PostMapping("/comment/delete/{id}")
     public String deleteComment(@PathVariable("id") Long id) {
         commentService.deleteComment(id);
-        return "redirect:/home_auth/mypage/comments"; // 댓글 목록 페이지로 리다이렉트
+        return "redirect:/home/mypage/comments"; // 댓글 목록 페이지로 리다이렉트
     }
 }

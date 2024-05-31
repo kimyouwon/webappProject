@@ -13,7 +13,7 @@
             <li><a href="/home/test" target="_blank">취향 테스트</a></li>
             <li><a href="/exhibition">전시회</a></li>
             <li th:if="${isLoggedIn}">
-                <a th:href="@{/home_auth/mypage}">마이페이지</a>
+                <a th:href="@{/home/mypage}">마이페이지</a>
             </li>
             <li th:if="${isLoggedIn}">
                 <a th:href="@{/logout}">로그아웃</a>

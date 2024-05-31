@@ -25,7 +25,7 @@ public class ReviewController {
     private final UserService userService;
 
     //마이페이지에서 작성한 전시회 후기 보여줌.
-   @GetMapping("/home_auth/mypage/reviews")
+   @GetMapping("/home/mypage/reviews")
    public String showMypageReviews(HttpSession session, Model model) {
        String userId = (String) session.getAttribute("loginId");
        if (userId != null) {
