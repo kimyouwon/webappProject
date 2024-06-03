@@ -28,15 +28,6 @@ public class LikeService {
         return false;
     }
 
-    public boolean removeLike(ReviewEntity review, String userId) {
-        LikeEntity like = likeRepository.findByReviewAndUserId(review, userId);
-        if (like != null) {
-            likeRepository.delete(like);
-            return true;
-        }
-        return false;
-    }
-
     public boolean isReviewLikedByUser(ReviewEntity review, String userId) {
         return likeRepository.existsByReviewAndUserId(review, userId);
     }

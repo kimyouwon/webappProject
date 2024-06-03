@@ -41,12 +41,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findByLoginId(loginId);
     }
 
-    public boolean checkPassword(String inputPassword, String storedPassword) {
-        // 여기서 저장된 비밀번호와 입력된 비밀번호를 비교하는 로직을 구현합니다.
-        // 예를 들어, 해시된 비밀번호를 비교하는 경우 해시 비교 로직을 여기에 작성합니다.
-        return passwordEncoder.matches(inputPassword, storedPassword);
-    }
-
     @Transactional(readOnly = true)
     public String getNickname(String loginId) {
         return userRepository.findByLoginId(loginId)
@@ -115,20 +109,6 @@ public class UserService implements UserDetailsService {
 
     public Optional<UserEntity> findByNameAndLoginIdAndPhone(String name, String loginId, String phone) {
         return userRepository.findByNameAndLoginIdAndPhone(name, loginId, phone);
-    }
-
-    public void updatePassword(String loginId, String currentPassword, String newPassword) {
-        UserEntity user = userRepository.findByLoginId(loginId)
-                .orElseThrow(() -> new RuntimeException("로그인 ID에 해당하는 사용자를 찾을 수 없습니다."));
-
-        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
-            throw new RuntimeException("현재 비밀번호가 일치하지 않습니다.");
-        }
-
-        String encodedNewPassword = passwordEncoder.encode(newPassword);
-        user.setPassword(encodedNewPassword);
-
-        userRepository.save(user);
     }
 
     public void resetPassword(String loginId, String newPassword) {

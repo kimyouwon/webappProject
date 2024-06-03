@@ -40,10 +40,10 @@ public class MypageController {
     @Autowired
     private ReviewService reviewService;
 
-    private boolean isAuthenticated() {
+    /*private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication != null && authentication.isAuthenticated() && !(authentication instanceof AnonymousAuthenticationToken);
-    }
+    }*/
 
     //마이페이지 수정 전 디테일 페이지
     @GetMapping("home/mypage/auth/edit_detail")
@@ -54,7 +54,7 @@ public class MypageController {
     // 마이페이지 수정 페이지
     @GetMapping("/home/mypage/auth/edit")
     public String showMypageEditPage(HttpSession session, Model model) {
-        if (!isAuthenticated()) {
+        if (!authService.isAuthenticated(session)) {
             model.addAttribute("error", "로그인이 필요합니다.");
             return "redirect:/home/login"; // 로그인 안 되어 있으면 로그인 페이지로 리디렉션
         }
@@ -80,15 +80,15 @@ public class MypageController {
 
     @PostMapping("/home/mypage/auth/edit")
     public String updateUser(@ModelAttribute UserEntity user, HttpSession session, Model model) {
-        if (!isAuthenticated()) {
-            model.addAttribute("error", "로그인이 필요합니다.");
-            return "redirect:/home/login"; // 로그인 안 되어 있으면 로그인 페이지로 리디렉션
-        }
+//        if (!authService.isAuthenticated(session)) {
+//            model.addAttribute("error", "로그인이 필요합니다.");
+//            return "redirect:/home/login"; // 로그인 안 되어 있으면 로그인 페이지로 리디렉션
+//        }
         String loginId = (String) session.getAttribute("loginId");
-        if (loginId == null || !loginId.equals(user.getLoginId())) {
-            model.addAttribute("error", "세션 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
-            return "redirect:/home/login";
-        }
+//        if (loginId == null || !loginId.equals(user.getLoginId())) {
+//            model.addAttribute("error", "세션 정보가 유효하지 않습니다. 다시 로그인 해주세요.");
+//            return "redirect:/home/login";
+//        }
         try {
             userService.updateUser(loginId, user); // 사용자 정보 업데이트
             return "redirect:/home/mypage"; // 업데이트 후 마이페이지로 리디렉션
@@ -101,7 +101,7 @@ public class MypageController {
     //마이페이지
     @GetMapping("/home/mypage")
     public String getUserInfo(HttpSession session, Model model) {
-        if (!isAuthenticated()) {
+        if (!authService.isAuthenticated(session)) {
             return "redirect:/home/login"; // 로그인 안 되어 있으면 로그인 페이지로 리디렉션
         }
         String loginId = (String) session.getAttribute("loginId");
@@ -129,7 +129,7 @@ public class MypageController {
     @PostMapping("/home/mypage/save-result")
     @ResponseBody
     public ResponseEntity<?> saveUserPreference(@RequestBody UserDto userDto, HttpSession session, Model model) {
-        if (!isAuthenticated()) {
+        if (!authService.isAuthenticated(session)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"message\": \"먼저 WETE에 로그인해주세요.\"}");
         }
         String loginId = (String) session.getAttribute("loginId");

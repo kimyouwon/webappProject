@@ -1,6 +1,7 @@
 package edu.yonsei.project.service;
 
 import edu.yonsei.project.entity.UserEntity;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,5 +41,9 @@ public class AuthService {
     public boolean doesUserExist(String loginId) {
         // 사용자의 존재 여부를 Spring Security를 통해 확인
         return userService.existsByLoginId(loginId);
+    }
+    public boolean isAuthenticated(HttpSession session) {
+        String loginId = (String) session.getAttribute("loginId");
+        return loginId != null;
     }
 }
